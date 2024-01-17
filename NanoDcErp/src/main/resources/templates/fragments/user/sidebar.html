@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		<nav class="navbar navbar-vertical navbar-expand-lg" th:fragment="SideBar">
+        <script>
+          var navbarStyle = window.config.config.phoenixNavbarStyle;
+          if (navbarStyle && navbarStyle !== 'transparent') {
+            document.querySelector('body').classList.add(`navbar-${navbarStyle}`);
+          }
+        </script>
+        <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+          <!-- scrollbar removed-->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+                      <li class="nav-item"><a class="nav-link active" href="/index" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">대시 보드</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link" href="/index" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">내 투자 정보</span>
+                          </div>
+                        </a>
+                      </li>
+		                <div class="nav-item-wrapper"><a class="nav-link active label-1" href="/notifications" role="button" data-bs-toggle="" aria-expanded="false">
+		                    <div class="d-flex align-items-center"><span class="nav-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span><span class="nav-link-text-wrapper"><span class="nav-link-text">공지사항</span></span>
+		                    </div>
+		                  </a>
+		                </div>
+                      <li class="nav-item"><a class="nav-link" href="/index" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">메뉴1</span><span class="badge ms-2 badge badge-phoenix badge-phoenix-info ">New</span>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link" href="/index" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">메뉴2</span>
+                          </div>
+                        </a>
+                </div>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-vertical-footer">
+          <button class="btn navbar-vertical-toggle border-0 fw-semibold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-8"></span><span class="uil uil-arrow-from-right fs-8"></span><span class="navbar-vertical-footer-text ms-2">Collapsed View</span></button>
+        </div>
+      </nav>
+</html>
