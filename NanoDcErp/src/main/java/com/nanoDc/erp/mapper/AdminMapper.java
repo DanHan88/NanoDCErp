@@ -11,7 +11,6 @@ import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.InvestmentVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.MemoVO;
-import com.nanoDc.erp.vo.RequestFilVO;
 import com.nanoDc.erp.vo.TokenPaidDetailVO;
 import com.nanoDc.erp.vo.TokenPaidVO;
 import com.nanoDc.erp.vo.UserInfoVO;
@@ -21,7 +20,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface InvestmentMapper {
+public interface AdminMapper {
     public List<InvestmentVO> selectInvestmentList();
     
     public List<TokenPaidVO> selectTokenPaidVOList();
@@ -62,6 +61,10 @@ public interface InvestmentMapper {
     
     public void updateTokenPaidDetailInfo(TokenPaidVO tokenPaidVO);
     
+    public void updatePersonalTokenPaidDetailInfo(TokenPaidVO tokenPaidVO);
+    
+    public String getCategoryNameByTokenPaidVO(TokenPaidVO tokenPaidVO);
+    
     public void addNewTokenPaidDetailInfo(TokenPaidDetailVO tokenPaidDetailVO);
     
     public double selectLastTokenPaidInfo();
@@ -85,5 +88,9 @@ public interface InvestmentMapper {
 	public List<EventsAnnouncementVO> selectAnnouncements();
 	
 	public void insertAnnouncement (EventsAnnouncementVO eventsAnnouncementVO);
+	
+	public void updateAnnouncement (EventsAnnouncementVO eventsAnnouncementVO);
+	
+	public void deleteAnnouncement (EventsAnnouncementVO eventsAnnouncementVO);
 }
 
