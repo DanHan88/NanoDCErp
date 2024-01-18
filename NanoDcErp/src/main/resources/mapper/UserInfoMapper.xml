@@ -14,7 +14,7 @@
 		FROM 
 		    user_info u	
 		WHERE 
-		    u.user_status != 'inacti	1ve'
+		    u.user_status != 'inactive'
 		GROUP BY 
 		    u.user_email
 	</select>

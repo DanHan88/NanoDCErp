@@ -81,12 +81,12 @@
                           <input class="form-check-input" id="checkbox-bulk-order-select" type="checkbox" data-bulk-select="{&quot;body&quot;:&quot;order-table-body&quot;}">
                         </div>
                       </th>
-                      <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:5%;">가입일시</th>
-                      <th class="sort align-middle text-end" scope="col" data-sort="total" style="width:6%;">회원명</th>
-                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:28%; min-width: 250px;">이메일</th>
+                      <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:10%;">가입일시</th>
+                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">회원명</th>
+                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">이메일</th>
                       <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">휴대폰번호</th>
-                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:12%; min-width: 200px;">투자상품</th>
-                      <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:30%;">상태</th>
+                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">투자상품</th>
+                      <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:50%;">상태</th>
                       <th class="sort align-middle text-end pe-0" scope="col" data-sort="date"></th>
                     </tr>
                   </thead>
@@ -98,11 +98,11 @@
                         </div>
                       </td>
                       <td th:text="${#dates.format(userInfo.user_reg_date, 'yyyy-MM-dd HH:mm:ss')}" class="order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${userInfo.user_name}" class="total align-middle text-end fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_email}" class="total align-middle text-end fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.phone_number}" class="total align-middle text-end fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle text-end fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_status}" class="total align-middle text-end fw-semibold text-body-highlight"  
+                      <td th:text="${userInfo.user_name}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.phone_number}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.user_status}" class="total align-middle fw-semibold text-body-highlight"  
                       	  th:style="${userInfo.user_status == '정상' ? 'color: green;' : 'color: red;'}"
 					      th:attr="data-user-id=${userInfo.user_id}"></td>
                       <td class="m-1 p-1">
