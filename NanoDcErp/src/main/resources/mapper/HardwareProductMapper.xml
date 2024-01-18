@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanoDc.erp.mapper.HardwareProductMapper">
-
-
-	
+	<select id="getProductList" resultType="com.nanoDc.erp.vo.HardwareProductVO">
+		SELECT hw_product_id, 
+			   hw_product_name, 
+			   hw_product_status, 
+			   recruitment_start_date, 
+			   preparation_start_date, 
+			   service_start_date, 
+			   service_end_date, 
+			   total_budget_fil
+		FROM filmountain.hw_product
+		 where hw_product_status = 'active'
+	</select>
 </mapper>

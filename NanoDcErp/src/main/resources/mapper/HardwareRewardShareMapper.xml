@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanoDc.erp.mapper.HardwareRewardSharingMapper">
+	<select id="getRewardSharingList" resultType="com.nanoDc.erp.vo.HardwareRewardSharingVO">
+		SELECT reward_sharing_id, 
+			   hw_product_id, 
+			   regdate, 
+			   fil_paid_per_tb, 
+			   status
+		FROM filmountain.hw_reward_sharing
+		WHERE status='active'
+	</select>
+</mapper>

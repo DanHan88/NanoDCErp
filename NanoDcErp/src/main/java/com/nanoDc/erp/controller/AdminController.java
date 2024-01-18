@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nanoDc.erp.service.AdminService;
+import com.nanoDc.erp.vo.HardwareInvestmentVO;
+import com.nanoDc.erp.vo.HardwareProductVO;
+import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.UserInfoVO;
@@ -58,6 +61,48 @@ public class AdminController {
 	        mav.addObject("userInfoList", userInfoList);
 	        //mav.addObject("loginVO", loginVO);
 	        mav.setViewName("views/admin/userManager");
+	        return mav;
+	    }
+	 @GetMapping(value={"/transactionManager"})
+	    public ModelAndView transactionManager(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();
+	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
+	        mav.addObject("userInfoList", userInfoList);
+	        mav.setViewName("views/admin/transactionManager");
+	        return mav;
+	    }
+	 @GetMapping(value={"/rewardManager"})
+	    public ModelAndView rewardManager(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();
+	        List<HardwareRewardSharingVO> rewardList = this.adminService.getRewardSharingList();
+	        mav.addObject("rewardList", rewardList);
+	        mav.setViewName("views/admin/rewardManager");
+	        return mav;
+	    }
+	 @GetMapping(value={"/investmentManager"})
+	    public ModelAndView investmentManager(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();        
+	        List<HardwareProductVO> productList = this.adminService.getProductList();
+	        List<HardwareInvestmentVO> investmentList = this.adminService.getInvestmentList();
+	        mav.addObject("productList", productList);
+	        mav.addObject("investmentList", investmentList);
+	        mav.setViewName("views/admin/investmentManager");
+	        return mav;
+	    }
+	 @GetMapping(value={"/announcementManager"})
+	    public ModelAndView announcementManager(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();
+	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
+	        mav.addObject("userInfoList", userInfoList);
+	        mav.setViewName("views/admin/announcementManager");
+	        return mav;
+	    }
+	 @GetMapping(value={"/eventManager"})
+	    public ModelAndView eventManager(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();
+	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
+	        mav.addObject("userInfoList", userInfoList);
+	        mav.setViewName("views/admin/eventManager");
 	        return mav;
 	    }
 }
