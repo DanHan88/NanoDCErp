@@ -2,7 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanoDc.erp.mapper.UserInfoMapper">
-
-
-	
+	<select id="selectUserInfoList"  resultType="com.nanoDc.erp.vo.UserInfoVO">
+		SELECT 
+		    u.user_id,
+		    u.phone_number,
+		    u.user_status,
+		    u.user_reg_date,
+		    u.user_name,
+		    u.user_email,
+		    u.profile_picture_url
+		FROM 
+		    user_info u	
+		WHERE 
+		    u.user_status != 'inacti	1ve'
+		GROUP BY 
+		    u.user_email
+	</select>
 </mapper>

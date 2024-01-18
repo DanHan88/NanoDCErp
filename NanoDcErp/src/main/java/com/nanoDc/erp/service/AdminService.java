@@ -7,16 +7,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.nanoDc.erp.mapper.AdminMapper;
+import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.UserInfoVO;
 
 @Service
 public class AdminService {
+	
 	@Autowired
-    AdminMapper adminMapper;
+	UserInfoMapper userInfoMapper;
 
 	 public boolean checkSession(HttpServletRequest request,boolean isAdmin) {
 	    	HttpSession session = request.getSession();
@@ -31,13 +31,7 @@ public class AdminService {
 	    }	
 	
 	 public List<UserInfoVO> selectUserInfoList() {
-	        return this.adminMapper.selectUserInfoList();
+	        return this.userInfoMapper.selectUserInfoList();
 	    }
-	 public List<InvestmentCategoryVO> getInvestmentCategoryList() {
-	        return this.adminMapper.selectInvestmentCategoryList();
-	    }
-	
-	
-	
 	
 }

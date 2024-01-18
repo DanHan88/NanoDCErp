@@ -39,24 +39,25 @@ public class AdminController {
     }
 	
 	 @GetMapping(value={"/userManager"})
-	    public ModelAndView userManager(HttpServletRequest request,String sb,Integer init_page) {
+	    public ModelAndView userManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
 	        
-	        if(!adminService.checkSession(request,true)) {
+	        /*if(!adminService.checkSession(request,true)) {
 	        	mav.setViewName("redirect:/");
 	            return mav;
 	        }
 	        HttpSession session = request.getSession();
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        */
+	        
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
-	        List<InvestmentCategoryVO> listInvestmentCategory = this.adminService.getInvestmentCategoryList();
-	        int page = (init_page != null) ? init_page : 0;
-	        mav.addObject("page",page);
-	        mav.addObject("sb", sb);
-	        mav.addObject("listInvestmentCategory", listInvestmentCategory);
+	        //List<InvestmentCategoryVO> listInvestmentCategory = this.adminService.getInvestmentCategoryList();
+	        //int page = (init_page != null) ? init_page : 0;
+	        //mav.addObject("page",page);
+	        //mav.addObject("listInvestmentCategory", listInvestmentCategory);
 	        mav.addObject("userInfoList", userInfoList);
-	        mav.addObject("loginVO", loginVO);
-	        mav.setViewName("views/userManager");
+	        //mav.addObject("loginVO", loginVO);
+	        mav.setViewName("views/admin/userManager");
 	        return mav;
 	    }
 }

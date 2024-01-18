@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class UserInfoVO {
 	private int user_id;
 	private String wallet_addr;
-	private String user_phone;
+	private String phone_number;
 	private String user_status;
     private Date user_reg_date;
     private String user_investment_date;
@@ -87,11 +87,12 @@ public class UserInfoVO {
 	public void setWallet_addr(String wallet_addr) {
 		this.wallet_addr = wallet_addr;
 	}
-	public String getUser_phone() {
-		return user_phone;
+
+	public String getPhone_number() {
+		return phone_number;
 	}
-	public void setUser_phone(String user_phone) {
-		this.user_phone = user_phone;
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 	public String getUser_status() {
 		return user_status;
@@ -142,9 +143,5 @@ public class UserInfoVO {
 		this.user_email = user_email;
 	}
 	
-	public String memoCreate(String title) {
-    	String memo = "Title:" + title + ",name:" +user_name+",email:"+user_email+",tel:"+user_phone+",status:"+user_status;
-    	return memo;
-    }
 }
 
