@@ -29,7 +29,9 @@ public class AdminController {
 	 @Autowired
 	    private AdminService adminService;
 	
-	
+	 /*----------------------------------*/
+	 /* -----------GetMapping----------*/
+	 /* ---------------------------------*/
 	
 	@GetMapping(value={"/"})
     public ModelAndView adminMain(HttpServletRequest request) {
@@ -43,6 +45,7 @@ public class AdminController {
         mav.setViewName("views/admin/login/sign-in");
         return mav;
     }
+	
 	
 	 @GetMapping(value={"/userManager"})
 	    public ModelAndView userManager(HttpServletRequest request,Integer init_page) {

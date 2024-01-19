@@ -59,6 +59,7 @@ public class AdminService {
 	        return this.rewardSharingMapper.getRewardSharingList();
 	    }
 	 
+	 /*새로운 유저 추가*/
 	 public String addNewUser(UserInfoVO userInfoVO, HttpServletRequest request) {
 	    /*	UserInfoVO overlappingUserInfoVO = investmentMapper.verifyUserInfoVO(userInfoVO);
 	    	if(overlappingUserInfoVO!=null) {

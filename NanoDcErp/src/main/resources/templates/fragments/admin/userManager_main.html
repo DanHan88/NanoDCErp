@@ -4,11 +4,13 @@
 			<div class="modal fade" id="detail_user_modal" tabindex="-1" role="dialog">
 				 <div class="modal-dialog modal-lg" >
 					<div class="modal-content">
-						<div class="modal-header">
-							<h6 class="modal-title"></script>회원 관리</h6>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
+						<div class="modal-header bg-info">
+							<h5 class="modal-title text-white dark__text-gray-1100" >회원 관리</h5>
+							<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
 						</div>
 						<div class="modal-body">
 							<div class="row mb-3">
@@ -42,12 +44,20 @@
 							<div class="row">
 								<div class="col-md-12">								
 									<ul class="nav nav-tabs" id="myTab" role="tablist">
-										<li class="nav-item" id="member_tab_li"><a class="nav-link active" data-toggle="tab" href="#member_tab" role="tab" aria-controls="member_tab" aria-expanded="true">회원 정보</a></li>
-										<li class="nav-item" id="investment_tab_li"><a class="nav-link" data-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-expanded="false">투자내역</a></li>									
-										<li class="nav-item" id="memo_tab_li"><a class="nav-link" data-toggle="tab" href="#memo_tab" role="tab" aria-controls="memo_tab" aria-expanded="false">메모</a></li>
-										<li class="nav-item" id="sendFil_tab_li"><a class="nav-link" data-toggle="tab" href="#sendFil_tab" role="tab" aria-controls="sendFil_tab" aria-expanded="false">Fil 전송</a></li>	
-										<li class="nav-item" id="minusFil_tab_li"><a class="nav-link" data-toggle="tab" href="#minusFil_tab" role="tab" aria-controls="minusFil_tab" aria-expanded="false">Fil 차감</a></li>									
-									</ul>
+								    <li class="nav-item" id="member_tab_li">
+								        <a class="nav-link active" id="member_tab_link" data-bs-toggle="tab" href="#member_tab" role="tab" aria-controls="member_tab" aria-selected="true">회원 정보</a>
+								    </li>
+								    <li class="nav-item" id="investment_tab_li">
+								        <a class="nav-link" id="investment_tab_link" data-bs-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-selected="false">투자내역</a>
+								    </li>
+								    <li class="nav-item" id="sendFil_tab_li">
+								        <a class="nav-link" id="sendFil_tab_link" data-bs-toggle="tab" href="#sendFil_tab" role="tab" aria-controls="sendFil_tab" aria-selected="false">Fil 전송</a>
+								    </li>
+								    <li class="nav-item" id="minusFil_tab_li">
+								        <a class="nav-link" id="minusFil_tab_link" data-bs-toggle="tab" href="#minusFil_tab" role="tab" aria-controls="minusFil_tab" aria-selected="false">Fil 차감</a>
+								    </li>
+								</ul>
+
 									<div class="tab-content p-5" >
 										<div class="tab-pane" id="sendFil_tab" role="tabpanel" aria-expanded="true">
 											<form id="uploadForm" method="post" enctype="multipart/form-data">
@@ -118,61 +128,65 @@
 											</form>
 										</div>
 										<div class="tab-pane active" id="member_tab" role="tabpanel" aria-expanded="true">
-											<form id="uploadForm" method="post" enctype="multipart/form-data">
-											<div class="form-group row">
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b>회원명</b></label>
-												<div class="col-md-4">
-													<input id="user_name" class="form-control" type="text">
-												</div>
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b>이메일</b></label>
-												<div class="col-md-4">
-													<input id="user_email" class="form-control" type="text">
-												</div>								
-											</div>
-											<div class="form-group row">
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b>상태</b></label>
-												<div class="col-md-4 mt-1 mb-1">
-													<label>
-													    <input type="radio"  name="user_status" value="정상">
-													   	정상
-													 </label>
-													 <label>
-													    <input type="radio"   name="user_status" value="중지">
-													    탈퇴
-													 </label>
-												</div>												
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b>휴대폰번호</b></label>
-												<div class="col-md-4">
-													<input id="user_phone" class="form-control" type="text">
-												</div>								
-											</div>
-											<div id="wallet_address_div" class="form-group row">
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b id="wallet_address_a">FIL 보유</b></label>
-												<div class="col-md-4 mt-1">
-													<b id="wallet_address_balance_a">0 FIL</b>
-												</div>
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b>회원사진</b></label>
-												<div class="col-md-4">
-													   <input type="file" id='fileInput'  name="file" accept="image/*">
-												</div>		
-											</div>
-											<div id="user_address_div" class="form-group row" style="display: none;">
-												<label class="col-md-2 form-control-label" style="margin-top:5px;"><b id="user_address_b"></b></label>
-												<div class="col-md-10">
-													<div class="input-group">
-														<input id="user_address" class="form-control" type="text" disabled="">
-														<span class="input-group-btn"><button type="button" class="btn btn-secondary"><i class="fa fa-copy"></i></button></span>
-													</div>
-												</div>
-											</div>
-											<div class="form-group row">
-												<div class="col-md-12">
-													<button id="user_edit_1_btn" type="button" class="btn btn-primary float-right" >회원 정보 수정</button>
-													<button id="user_pw_reset_btn" type="button" class="btn btn-danger float-right mr-3" >비밀번호 초기화</button>
-												</div>
-											</div>
-											</form>
-										</div>
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <div class="form-group row mb-3">
+            <label class="col-md-2 form-control-label"><b>회원명</b></label>
+            <div class="col-md-4">
+                <input id="user_name" class="form-control" type="text">
+            </div>
+            <label class="col-md-2 form-control-label"><b>이메일</b></label>
+            <div class="col-md-4">
+                <input id="user_email" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label class="col-md-2 form-control-label"><b>상태</b></label>
+            <div class="col-md-4 mt-1 mb-1">
+                <label>
+                    <input type="radio" name="user_status" value="정상"> 정상
+                </label>
+                <label>
+                    <input type="radio" name="user_status" value="중지"> 탈퇴
+                </label>
+            </div>
+            <label class="col-md-2 form-control-label"><b>휴대폰번호</b></label>
+            <div class="col-md-4">
+                <input id="user_phone" class="form-control" type="text">
+            </div>
+        </div>
+        <div id="wallet_address_div" class="form-group row mb-3">
+            <label class="col-md-2 form-control-label"><b id="wallet_address_a">FIL 보유</b></label>
+            <div class="col-md-4 mt-1">
+                <b id="wallet_address_balance_a">0 FIL</b>
+            </div>
+            <label class="col-md-2 form-control-label"><b>회원사진</b></label>
+            <div class="col-md-4">
+                <input type="file" id='fileInput' name="file" accept="image/*">
+            </div>
+        </div>
+        <div id="user_address_div" class="form-group row mb-3" style="display: none;">
+            <label class="col-md-2 form-control-label"><b id="user_address_b"></b></label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <input id="user_address" class="form-control" type="text" disabled="">
+                    <span class="input-group-btn"><button type="button" class="btn btn-secondary"><i class="fa fa-copy"></i></button></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+    <div class="d-flex justify-content-end">
+        <button id="user_edit_1_btn" type="button" class="btn btn-primary">회원 정보 수정</button>
+        <button id="user_pw_reset_btn" type="button" class="btn btn-danger ms-3">비밀번호 초기화</button>
+    </div>
+</div>
+
+
+
+        </div>
+    </form>
+</div>
+
 										<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
 											<div class="row">
 												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -203,39 +217,7 @@
 												</div>
 											</div>
 										</div>										
-										<div class="tab-pane" id="memo_tab" role="tabpanel" aria-expanded="false">
-											<div class="form-group row">
-												<div class="col-md-10">
-													<textarea id="user_memo" class="form-control" rows="3"></textarea>
-													<small class="text-danger"><b>* 메모/변경 내역은 최종 관리자 및 다른 대리점 계정도 확인가능하니, 신중히 작성해주세요.</b></small>
-												</div>	
-												<div class="col-md-2">
-													<button type="button" id="reg_memo_button" class="btn btn-primary float-right">메모등록</button>
-												</div>																								
-											</div>
-											<div class="form-group row">
-												<div class="table-responsive">
-													<div class="table-responsive">
-                                <table class="table table-bordered " id="dataTable_memo" width="100%" cellspacing="0">
-									<colgroup><col width="20%">
-																<col width="60%">
-																<col width="20%">				
-									</colgroup>
-                                    <thead>
-                                        <tr>
-											<th scope="col">일시</th>
-										    <th scope="col">내용</th>
-										    <th scope="col">관리자</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>         
-							</div>	
-												</div>
-											</div>
-										</div>																				
+																													
 									</div>
 								</div>
 							</div>
@@ -347,11 +329,11 @@
                       </td>
                       <td th:utext="${#dates.format(userInfo.user_reg_date, 'yyyy년 MM월 dd일 a h시 m분')}" class="order align-middle white-space-nowrap py-0"></td>
 
-                      <td th:text="${userInfo.user_name}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.phone_number}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.user_name}" class="user_name total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.user_email}" class="user_email total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.phone_number}" class="user_phone total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_status}" class="total align-middle fw-semibold text-body-highlight"  
+                      <td th:text="${userInfo.user_status}" class="user_status total align-middle fw-semibold text-body-highlight"  
                       	  th:style="${userInfo.user_status == 'active' ? 'color: green;' : 'color: red;'}"
 					      th:attr="data-user-id=${userInfo.user_id}"></td>
                       <td class=" ps-10 total align-middle position-relative">
