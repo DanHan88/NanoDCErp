@@ -72,7 +72,7 @@
 		<!--TOPBAR  -->
       <div th:replace="~{fragments/admin/topbar :: TopBar}"></div>
       <!--MainContent-->
-      <div th:replace="~{fragments/admin/investmentManager_main :: MainContent}"></div>   
+      <div th:replace="~{fragments/admin/productManager_main :: MainContent}"></div>   
       <div th:replace="~{fragments/admin/bottombar :: BottomBar}"></div> 
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
@@ -86,7 +86,7 @@
           navbarVertical.setAttribute('data-navbar-appearance', 'darker');
         }
       </script>
-      <div th:replace="~{fragments/user/support_chat :: SupportChat}"></div> 
+
     </main>
     <!-- ===============================================-->
     <!--    End of Main Content-->
