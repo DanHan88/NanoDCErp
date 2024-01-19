@@ -1,27 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content" th:fragment="MainContent">
-        <nav class="mb-2" aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#!">Page 1</a></li>
-            <li class="breadcrumb-item"><a href="#!">Page 2</a></li>
-            <li class="breadcrumb-item active">Default</li>
-          </ol>
-        </nav>
         <div class="mb-9">
           <div class="row g-3 mb-4">
             <div class="col-auto">
               <h2 class="mb-0">Orders</h2>
             </div>
           </div>
-          <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><span>All </span><span class="text-body-tertiary fw-semibold">(68817)</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span>Pending payment </span><span class="text-body-tertiary fw-semibold">(6)</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span>Unfulfilled </span><span class="text-body-tertiary fw-semibold">(17)</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span>Completed</span><span class="text-body-tertiary fw-semibold">(6,810)</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span>Refunded</span><span class="text-body-tertiary fw-semibold">(8)</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#"><span>Failed</span><span class="text-body-tertiary fw-semibold">(2)</span></a></li>
-          </ul>
           <div id="orderTable" data-list="{&quot;valueNames&quot;:[&quot;order&quot;,&quot;total&quot;,&quot;customer&quot;,&quot;payment_status&quot;,&quot;fulfilment_status&quot;,&quot;delivery_type&quot;,&quot;date&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
             <div class="mb-4">
               <div class="row g-3">
@@ -56,11 +41,12 @@
                 <table class="table table-sm fs-9 mb-0">
                   <thead>
                     <tr>
-                      <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:10%;">투자일시</th>
+                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">투자일시</th>
                       <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">회원명</th>
                       <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">이메일</th>
                       <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">투자상품</th>
                       <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">투자FIL</th>
+                      <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
                     </tr>
                   </thead>
                   <tbody class="list" id="order-table-body">
@@ -70,6 +56,11 @@
                       <td th:text="${investment.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${investment.hw_product_name}" class="total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${investment.hw_invest_fil}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td class=" ps-10 total align-middle position-relative">
+    					<!-- "상세" 버튼 -->
+					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_user" type="button" id="button-addon2" th:value="${investment.hw_id}">상세
+					    </button>
+					</td>
                     </tr></tbody>
                 </table>
               </div>
