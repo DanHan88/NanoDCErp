@@ -76,50 +76,20 @@
                 <table class="table table-sm fs-9 mb-0">
                   <thead>
                     <tr>
-                      <th class="white-space-nowrap fs-9 align-middle ps-0" style="width:26px;">
-                        <div class="form-check mb-0 fs-8">
-                          <input class="form-check-input" id="checkbox-bulk-order-select" type="checkbox" data-bulk-select="{&quot;body&quot;:&quot;order-table-body&quot;}">
-                        </div>
-                      </th>
-                      <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:10%;">가입일시</th>
-                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">회원명</th>
-                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">이메일</th>
-                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">휴대폰번호</th>
-                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">투자상품</th>
-                      <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:50%;">상태</th>
-                      <th class="sort align-middle text-end pe-0" scope="col" data-sort="date"></th>
+                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">배분날짜</th>
+                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">FIL/TB</th>
+                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">FIL총배분</th>
+                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">지급상품</th>
+                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">상태</th>
                     </tr>
                   </thead>
                   <tbody class="list" id="order-table-body">
-					 <tr th:each="userInfo : ${userInfoList}" th:attr="data-picture=${userInfo.profile_picture_url}" class="hover-actions-trigger btn-reveal-trigger position-static">
-                      <td class="fs-9 align-middle px-0 py-3">
-                        <div class="form-check mb-0 fs-8">
-                          <input class="form-check-input" type="checkbox" data-bulk-select-row="{&quot;order&quot;:2453,&quot;total&quot;:87,&quot;customer&quot;:{&quot;avatar&quot;:&quot;/team/32.webp&quot;,&quot;name&quot;:&quot;Carry Anna&quot;},&quot;payment_status&quot;:{&quot;label&quot;:&quot;Complete&quot;,&quot;type&quot;:&quot;badge-phoenix-success&quot;,&quot;icon&quot;:&quot;check&quot;},&quot;fulfilment_status&quot;:{&quot;label&quot;:&quot;Cancelled&quot;,&quot;type&quot;:&quot;badge-phoenix-secondary&quot;,&quot;icon&quot;:&quot;x&quot;},&quot;delivery_type&quot;:&quot;Cash on delivery&quot;,&quot;date&quot;:&quot;Dec 12, 12:56 PM&quot;}">
-                        </div>
-                      </td>
-                      <td th:text="${#dates.format(userInfo.user_reg_date, 'yyyy-MM-dd HH:mm:ss')}" class="order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${userInfo.user_name}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.phone_number}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_status}" class="total align-middle fw-semibold text-body-highlight"  
-                      	  th:style="${userInfo.user_status == '정상' ? 'color: green;' : 'color: red;'}"
-					      th:attr="data-user-id=${userInfo.user_id}"></td>
-                      <td class="m-1 p-1">
-									            <!-- "상세" 버튼 -->
-									            <button th:if="${userInfo.user_status == '정상' || userInfo.user_status == '중지'}"
-									                    class="btn btn-secondary mr-2 mt-0 mb-0 detail_user" type="button" id="button-addon2"
-									                    th:attr="data-filAmount=${#numbers.formatDecimal(userInfo.fil_amount, 0, 'COMMA', userInfo.fil_amount.scale(), 'POINT')}" th:value="${userInfo.user_id}">상세
-									            </button>
-									            <!-- "승인" 버튼 -->
-									            <button th:if="${userInfo.user_status == '가입대기'}" class="btn btn-success mr-2 mt-0 mb-0 approve_user"
-									                    type="button" id="button-addon4" data-toggle="modal" data-target="#confirmModal" th:value="${userInfo.user_id}" th:data-user-id="${userInfo.user_id}">승인
-									            </button>
-									            <!-- "거절" 버튼 -->
-									            <button th:if="${userInfo.user_status == '가입대기'}" class="btn btn-danger mr-2 mt-0 mb-0 reject_user"
-									                    type="button" id="button-addon3" data-toggle="modal" data-target="#denyModal" th:value="${userInfo.user_id}" th:data-user-id="${userInfo.user_id}">거절
-									            </button>
-									        </td>
+					  <tr th:each="reward : ${rewardList}" class="hover-actions-trigger btn-reveal-trigger position-static">
+                      <td th:text="${#dates.format(reward.regdate, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+                      <td th:text="${reward.fil_paid_per_tb}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${reward.fil_paid_per_tb}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${reward.hardwareProductVO.hw_product_name}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${reward.status}" class="total align-middle fw-semibold text-body-highlight"></td>
                     </tr></tbody>
                 </table>
               </div>

@@ -8,7 +8,14 @@ public class HardwareRewardSharingVO {
 	private int hw_product_id;
 	private Date regdate;
 	private double fil_paid_per_tb;
-	private String status;
+	private String status;	
+	private HardwareProductVO hardwareProductVO;
+	public HardwareProductVO getHardwareProductVO() {
+		return hardwareProductVO;
+	}
+	public void setHardwareProductVO(HardwareProductVO hardwareProductVO) {
+		this.hardwareProductVO = hardwareProductVO;
+	}
 	public int getReward_sharing_id() {
 		return reward_sharing_id;
 	}
