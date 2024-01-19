@@ -97,6 +97,15 @@ public class AdminController {
 	        mav.setViewName("views/admin/eventManager");
 	        return mav;
 	    }
+	 
+	 @GetMapping(value={"/productManager"})
+	    public ModelAndView productManager(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();
+	        List<HardwareProductVO> productList = this.adminService.getProductList();
+	        mav.addObject("productList", productList);
+	        mav.setViewName("views/admin/productManager");
+	        return mav;
+	    }
 	 /*----------------------------------*/
 	 /* -----------ResponseBody----------*/
 	 /* ---------------------------------*/
