@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nanoDc.erp.mapper.HardwareInvestmentMapper;
@@ -21,7 +22,8 @@ import com.nanoDc.erp.vo.UserInfoVO;
 
 @Service
 public class AdminService {
-	
+	@Autowired
+    private PasswordEncoder pwEncoder;
 	@Autowired
 	UserInfoMapper userInfoMapper;
 	@Autowired
@@ -55,5 +57,25 @@ public class AdminService {
 	 
 	 public List<HardwareRewardSharingVO> getRewardSharingList() {
 	        return this.rewardSharingMapper.getRewardSharingList();
+	    }
+	 
+	 public String addNewUser(UserInfoVO userInfoVO, HttpServletRequest request) {
+	    /*	UserInfoVO overlappingUserInfoVO = investmentMapper.verifyUserInfoVO(userInfoVO);
+	    	if(overlappingUserInfoVO!=null) {
+	    		return "error1";
+	    	} */
+	    	userInfoVO.setProfile_picture_url("/profile/default_profile.jpg");	
+	    	userInfoMapper.addNewUser(userInfoVO);
+	    	
+	    	int userId = userInfoMapper.get_last_useriId();
+	    	userInfoVO.setUser_id(userId);
+	    	String value = pwEncoder.encode(userInfoVO.getPassword());
+	    	userInfoVO.setPassword(value);
+	    	userInfoMapper.addNewUser_pwd(userInfoVO);
+	    	//UserInfoVO newUserInfoVO = investmentMapper.verifyUserInfoVO(userInfoVO);
+	    	//memoVO.setUser_id(newUserInfoVO.getUser_id());
+	    	//memoVO.setMemo(newUserInfoVO.memoCreate("유저등록"));
+	    	//regMemo(memoVO, request);
+	    	return "success";
 	    }
 }
