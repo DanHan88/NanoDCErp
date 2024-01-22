@@ -35,8 +35,8 @@ $(document).ready(function() {
 						$('#wallet_address_balance_a').text(clickedButton.attr('data-filAmount')+" FIL");
 						$('#wallet_address_balance_b').text(clickedButton.attr('data-filAmount')+" FIL");
 						$('#wallet_address_balance_c').text(clickedButton.attr('data-filAmount')+" FIL");
-						
-							if(clickedButton.parent().parent().find('.user_status').text()=='acticve'){
+
+							if(clickedButton.parent().parent().find('.user_status').text()=='active'){
 								$('input[name="user_status"][value="active"]').prop('checked', true);
 							}else{
 								$('input[name="user_status"][value="inactive"]').prop('checked', true);
