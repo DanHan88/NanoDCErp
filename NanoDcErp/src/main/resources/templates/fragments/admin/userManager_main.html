@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content" th:fragment="MainContent">
+<!--유저 상세 정보 모달 -->
 			<div class="modal fade" id="detail_user_modal" tabindex="-1" role="dialog">
 				 <div class="modal-dialog modal-lg" >
 					<div class="modal-content">
@@ -47,9 +48,7 @@
 								    <li class="nav-item" id="member_tab_li">
 								        <a class="nav-link active" id="member_tab_link" data-bs-toggle="tab" href="#member_tab" role="tab" aria-controls="member_tab" aria-selected="true">회원 정보</a>
 								    </li>
-								    <li class="nav-item" id="investment_tab_li">
-								        <a class="nav-link" id="investment_tab_link" data-bs-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-selected="false">투자내역</a>
-								    </li>
+								    
 								    <li class="nav-item" id="sendFil_tab_li">
 								        <a class="nav-link" id="sendFil_tab_link" data-bs-toggle="tab" href="#sendFil_tab" role="tab" aria-controls="sendFil_tab" aria-selected="false">Fil 전송</a>
 								    </li>
@@ -96,7 +95,7 @@
 										<div class="tab-pane" id="minusFil_tab" role="tabpanel" aria-expanded="true">
 											<form id="uploadForm" method="post" enctype="multipart/form-data">
 											<div class="form-group row">
-												<label class="col-md-3 form-control-label" style="margin-top:5px;"><b>차감 토큰 수량</b></label>
+												<label class="col-md-3 form-control-label" style="margin-top:5px;"><b>차감 수량</b></label>
 												<div class="col-md-6">
 													<input id="minus_token_amt" class="form-control" type="number"step="any" min="0" oninput="validity.valid||(value='');">
 
@@ -104,7 +103,7 @@
 											</div>
 									
 											<div id="wallet_address_div" class="form-group row">
-												<label class="col-md-3 form-control-label" style="margin-top:5px;"><b id="wallet_address_c">FIL 토큰 보유량</b></label>
+												<label class="col-md-3 form-control-label" style="margin-top:5px;"><b id="wallet_address_c">FIL 보유량</b></label>
 												<div class="col-md-6 mt-1">
 													<b id="wallet_address_balance_c">0 FIL</b>
 												</div>
@@ -143,10 +142,10 @@
             <label class="col-md-2 form-control-label"><b>상태</b></label>
             <div class="col-md-4 mt-1 mb-1">
                 <label>
-                    <input type="radio" name="user_status" value="정상"> 정상
+                    <input type="radio" name="user_status" value="active"> 정상
                 </label>
                 <label>
-                    <input type="radio" name="user_status" value="중지"> 탈퇴
+                    <input type="radio" name="user_status" value="inactive"> 탈퇴
                 </label>
             </div>
             <label class="col-md-2 form-control-label"><b>휴대폰번호</b></label>
@@ -225,6 +224,7 @@
 					</div>
 				</div>
 			</div>
+<!--유저 등록 모달 -->
 			<div class="modal fade" id="upload_user" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -240,15 +240,19 @@
                 <form id="memberForm">
                     <div class="mb-3">
                         <label for="name" class="form-label fs-8 ps-0">회원명</label>
-                        <input type="text" class="form-control" id="user_name" required>
+                        <input type="text" class="form-control" id="user_name_a" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label fs-8 ps-0">이메일</label>
-                        <input type="email" class="form-control" id="user_email" required>
+                        <input type="email" class="form-control" id="user_email_a" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label fs-8 ps-0">휴대폰번호</label>
-                        <input type="tel" class="form-control" id="user_phone" required>
+                        <input type="tel" class="form-control" id="user_phone_a" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label fs-8 ps-0">비밀번호</label>
+                        <input type="password" class="form-control" id="user_password" required>
                     </div>
                 </form>
             </div>
@@ -259,22 +263,43 @@
         </div>
     </div>
 </div>
+<!--업데이트 성공 통보 모달 -->
+<div class="modal fade" id="alert_modal_user_update" tabindex="-1" role="dialog">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header bg-primary" id="alert_header_user_update">
+				        <h5 class="modal-title text-white " id="alert_title_user_update">회원정보 수정 하시겠습니까?</h5>
+				        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-primary" data-dismiss="modal" id="user_update_confirm">확인</button>
+				      </div>
+				    </div>
+				  </div>
+			</div>
+<!--확인 통보 모달 -->
 <div class="modal fade" id="alert_modal_user" tabindex="-1" role="dialog">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header bg-success" id="alert_header_user">
 				        <h5 class="modal-title text-white " id="alert_title_user">회원등록 성공</h5>
-				        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
+				        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="receipt_update">확인</button>
 				      </div>
 				    </div>
 				  </div>
 			</div>
-        
+<!-- 회원 관리 테이블-->
         <div class="mb-9">
           <div class="row g-3 mb-4">
             <div class="col-auto">

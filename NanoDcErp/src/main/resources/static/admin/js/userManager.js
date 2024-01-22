@@ -1,8 +1,9 @@
 $(document).ready(function() {
 	
-	 var user_name; 
+	 	var user_name; 
         var user_email; 
         var user_phone_number; 
+        var user_password; 
     // jQuery code executes after the document is fully loaded
     
     // Click event for the button with id 'create_user'
@@ -16,7 +17,7 @@ $(document).ready(function() {
        
     });
     
-  $('.detail_user').on('click', function() {
+  	$('.detail_user').on('click', function() {
 							var clickedButton = $(this);
 							$('#join_date_p').text(clickedButton.parent().parent().find('.user_reg_date').text());
 							$('#user_name_span').text(clickedButton.parent().parent().find('.user_name').text());
@@ -65,28 +66,65 @@ $(document).ready(function() {
 			                    }
 			                });*/ 
 							$('#detail_user_modal').modal('show');
+							
 					    });
-					    $('#add_user_investment_button').on('click', function() {
-					       $('#add_user_investment').modal('show');
+					     $('#user_update_confirm').on('click', function() {     
+							   var user_name = $("#user_name").val();
+						       var user_email = $('#user_email').val();
+						       var user_phone = $('#user_phone').val();
+						       var user_status = $('input[name="user_status"]:checked').val();
+						       
+						       var user_id = $('#user_edit_1_btn').val(); 
+						       //var fileInput = $('#fileInput')[0].files[0];
+	
+						       var formData = new FormData();
+						      
+								formData.append('user_email', user_email);
+								formData.append('phone_number', user_phone);
+								formData.append('user_name', user_name);
+								formData.append('user_status', user_status);
+								formData.append('user_id', user_id); 
+								/*if(fileInput!=undefined){
+									formData.append('file', fileInput);
+								}else{
+									formData.append('file', 'no_change');
+								}*/
+								
+					       $.ajax({
+								type: "POST",
+							    url: "/admin/updateUser",
+							    data: formData,
+							    contentType: false,
+							    processData: false,
+							    success: function (data) {
+									$('#detail_user_modal').modal('hide');
+									if(data=='success'){
+										if ($('#alert_header_user').hasClass("bg-danger")) 
+											{
+							            		$('#alert_header_user').removeClass("bg-danger").addClass("bg-success");
+							       		 	} 
+										$('#alert_title_user').text("회원 정보 수정 완료");
+										$('#alert_modal_user').modal('show');
+
+			                        }
+			                       /* else if(data='failed:session_closed'){
+										
+										$('#session_alert_user').modal('show');
+									}*/
+			                        else{
+										if ($('#alert_header_user').hasClass("bg-success")) 
+										{
+								            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
+							       		} 			
+							       		 $('#alert_title_user').text("회원 정보 수정 실패");
+								            $('#alert_modal_user').modal('show');
+									}
+			                    }
+			                });
 					    });
-					    $('#add_user_button').on('click', function() {
-					       $('#add_user_modal').modal('show');
-					    });
-					    $(document).on('click', '.delete_user_investment_button', function() {
-							$('#investment_delete').val($(this).val());
-						    $('#delete_user_investment').modal('show'); 
-						});
-						$(document).on('click', '.update_user_investment_button', function() {
-							var superParent = $(this).parent().parent();
-							$('#datepicker_update').val(superParent.find('#update_purchase_date').text());
-							$('#selectBox_product_update').val(superParent.find('#update_product_name').data('user_id'));
-							$('#node_tib_update').val(superParent.find('#update_purchase_size').text());
-							$('#node_fil_update').val(superParent.find('#update_fil_invested').text());
-							$('#user_investment_add').val($(this).val());
-						    $('#update_user_investment').modal('show');
-						    $('#user_investment_update').val($(this).val());
-				    
-						});
+					   
+					   
+						
 						
 						 $('#user_pw_reset_btn').on('click', function() {
 							 $('#alert_modal_user_pw_reset').modal('show'); 
@@ -134,9 +172,10 @@ $(document).ready(function() {
      // Click event for the button with id 'register_user' inside the 'create_user' click event
         $('#register_user').click(function(){
 
-			 user_name = $('#user_name').val(); 
-        user_email = $('#user_email').val(); 
-        user_phone_number = $('#user_phone').val(); 
+			user_name = $('#user_name_a').val(); 
+       		user_email = $('#user_email_a').val(); 
+        	user_phone_number = $('#user_phone_a').val(); 
+        	user_password = $('#user_password').val();
             // AJAX request
             $.ajax({
                 type: "POST",
@@ -147,7 +186,7 @@ $(document).ready(function() {
                     user_email: user_email,
                     phone_number: user_phone_number,
                     user_status: "active",
-                    password: "123123"
+                    password: user_password
                 }),
                 success: function (data) {
                     // Hide the 'upload_user' modal
@@ -172,4 +211,7 @@ $(document).ready(function() {
                 }
             });
         });
+        $('#receipt_update').on('click', function() {
+    location.reload();
+});
 });

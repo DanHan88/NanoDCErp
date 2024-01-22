@@ -79,4 +79,10 @@ public class AdminService {
 	    	//regMemo(memoVO, request);
 	    	return "success";
 	    }
+	 /* 유저 정보 수정 */
+	 
+	 public String updateUser(UserInfoVO userInfoVO, HttpServletRequest request) {
+		 	userInfoMapper.updateUser(userInfoVO);
+	    	return "success";
+	    }
 }

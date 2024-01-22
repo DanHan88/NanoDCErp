@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.api.client.util.StringUtils;
 import com.nanoDc.erp.service.AdminService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
@@ -117,5 +120,31 @@ public class AdminController {
 	    
 	    return adminService.addNewUser(userInfoVO,request);
 	    }   
-	  
-	  }
+	 
+	 @ResponseBody
+	 @PostMapping(value={ "/updateUser" })
+	 public String updateUser(MultipartHttpServletRequest request) {
+		   
+		   String user_email = request.getParameter("user_email");
+		   String user_phone = request.getParameter("phone_number");
+		   String user_name = request.getParameter("user_name");
+		   String user_status = request.getParameter("user_status");
+		   int user_id = Integer.parseInt(request.getParameter("user_id"));
+		   
+		   
+		   
+		   UserInfoVO userInfoVO = new UserInfoVO();
+		   userInfoVO.setUser_email(user_email);
+		   userInfoVO.setPhone_number(user_phone);
+		   userInfoVO.setUser_name(user_name);
+		   userInfoVO.setUser_status(user_status);
+		   userInfoVO.setUser_id(user_id);
+		   
+		   return adminService.updateUser(userInfoVO, request);
+	 }
+}
+
+	 
+		
+
+

@@ -25,7 +25,31 @@
 		FROM user_info;
 
 	</select>
+	
+	<!-- Update -->
+	
+	<update id="updateUser" parameterType="com.nanoDc.erp.vo.UserInfoVO">
+		  UPDATE user_info
+		  <set>
+		    <if test="phone_number != null">phone_number = #{phone_number},</if>
+		    <if test="user_status != null">
+		      user_status = #{user_status},
+		      <if test="user_status eq 'inactive'">user_email = '',</if>
+		    </if>
+		    <if test="user_name != null">user_name = #{user_name},</if>
+		    <if test="user_email != null">
+		      <if test="user_status neq 'inactive'">user_email = #{user_email},</if>
+		    </if>
+		    <if test="profile_picture_url != 'no_change'">
+		      profile_picture_url = #{profile_picture_url}
+		    </if>
+		  </set>
+		  WHERE user_id = #{user_id}
+
+	</update>
+	
 	<!-- INSERT -->
+	
 	<insert id="addNewUser" parameterType="com.nanoDc.erp.vo.UserInfoVO">
 		INSERT INTO filmountain.user_info
 		(phone_number,

@@ -11,4 +11,5 @@ public interface UserInfoMapper {
 	public void addNewUser(UserInfoVO userInfoVO);
 	public void addNewUser_pwd(UserInfoVO userInfoVO);
 	public int get_last_useriId();
+	public void updateUser(UserInfoVO userInfoVO);
 }
