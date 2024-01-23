@@ -127,56 +127,82 @@
 											</form>
 										</div>
 										<div class="tab-pane active" id="member_tab" role="tabpanel" aria-expanded="true">
-    <form id="uploadForm" method="post" enctype="multipart/form-data">
-        <div class="form-group row mb-3">
-            <label class="col-md-2 form-control-label"><b>회원명</b></label>
-            <div class="col-md-4">
-                <input id="user_name" class="form-control" type="text">
-            </div>
-            <label class="col-md-2 form-control-label"><b>이메일</b></label>
-            <div class="col-md-4">
-                <input id="user_email" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group row mb-3">
-            <label class="col-md-2 form-control-label"><b>상태</b></label>
-            <div class="col-md-4 mt-1 mb-1">
-                <label>
-                    <input type="radio" name="user_status" value="active"> 정상
-                </label>
-                <label>
-                    <input type="radio" name="user_status" value="inactive"> 탈퇴
-                </label>
-            </div>
-            <label class="col-md-2 form-control-label"><b>휴대폰번호</b></label>
-            <div class="col-md-4">
-                <input id="user_phone" class="form-control" type="text">
-            </div>
-        </div>
-        <div id="wallet_address_div" class="form-group row mb-3">
-            <label class="col-md-2 form-control-label"><b id="wallet_address_a">FIL 보유</b></label>
-            <div class="col-md-4 mt-1">
-                <b id="wallet_address_balance_a">0 FIL</b>
-            </div>
-            <label class="col-md-2 form-control-label"><b>회원사진</b></label>
-            <div class="col-md-4">
-                <input type="file" id='fileInput' name="file" accept="image/*">
-            </div>
-        </div>
-        <div id="user_address_div" class="form-group row mb-3" style="display: none;">
-            <label class="col-md-2 form-control-label"><b id="user_address_b"></b></label>
-            <div class="col-md-10">
-                <div class="input-group">
-                    <input id="user_address" class="form-control" type="text" disabled="">
-                    <span class="input-group-btn"><button type="button" class="btn btn-secondary"><i class="fa fa-copy"></i></button></span>
-                </div>
-            </div>
-        </div>
+									    <form id="uploadForm" method="post" enctype="multipart/form-data">
+									        <div class="form-group row mb-3">
+									            <label class="col-md-2 form-control-label"><b>회원명</b></label>
+									            <div class="col-md-4">
+									                <input id="user_name" class="form-control" type="text">
+									            </div>
+									            <label class="col-md-2 form-control-label"><b>이메일</b></label>
+									            <div class="col-md-4">
+									                <input id="user_email" class="form-control" type="text">
+									            </div>
+									        </div>
+									        <div class="form-group row mb-3">
+									            <label class="col-md-2 form-control-label"><b>상태</b></label>
+									            <div class="col-md-4 mt-1 mb-1">
+									                <label>
+									                    <input type="radio" name="user_status" value="active"> 정상
+									                </label>
+									                <label>
+									                    <input type="radio" name="user_status" value="inactive"> 탈퇴
+									                </label>
+									            </div>
+									            <label class="col-md-2 form-control-label"><b>휴대폰번호</b></label>
+									            <div class="col-md-4">
+									                <input id="user_phone" class="form-control" type="text">
+									            </div>
+									        </div>
+									        <div id="wallet_address_div" class="form-group row mb-3">
+									            <label class="col-md-2 form-control-label"><b id="wallet_address_a">FIL 보유</b></label>
+									            <div class="col-md-4 mt-1">
+									                <b id="wallet_address_balance_a">0 FIL</b>
+									            </div>
+									            <label class="col-md-2 form-control-label"><b>회원사진</b></label>
+									            <div class="col-md-4">
+									                <input type="file" id='fileInput' name="file" accept="image/*">
+									            </div>
+									        </div>
+									        <div id="user_address_div" class="form-group row mb-3" style="display: none;">
+									            <label class="col-md-2 form-control-label"><b id="user_address_b"></b></label>
+									            <div class="col-md-10">
+									                <div class="input-group">
+									                    <input id="user_address" class="form-control" type="text" disabled="">
+									                    <span class="input-group-btn"><button type="button" class="btn btn-secondary"><i class="fa fa-copy"></i></button></span>
+									                </div>
+									            </div>
+									        </div>
         <div class="form-group row">
             <div class="col-md-12">
     <div class="d-flex justify-content-end">
         <button id="user_edit_1_btn" type="button" class="btn btn-primary">회원 정보 수정</button>
         <button id="user_pw_reset_btn" type="button" class="btn btn-danger ms-3">비밀번호 초기화</button>
+    </div>
+</div>
+
+<div class="modal fade" id="alert_modal_user_pw_reset" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger" id="alert_header_user_pw_reset">
+                <h5 class="modal-title text-white" id="alert_title_user_pw_reset">비밀번호 초기화 하시겠습니까?</h5>
+                <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- 비밀번호 입력 필드 추가 -->
+                <label for="new_password">새로운 비밀번호:</label>
+                <input type="password" class="form-control" id="new_password" name="new_password" required>
+            </div>
+            <div class="modal-footer">
+				
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="user_pw_reset_cancel">취소</button>
+                <!-- 확인 버튼을 누를 때 비밀번호 변경 동작을 수행하는 JavaScript 함수 호출 추가 -->
+                <button type="button" class="btn btn-danger" id="user_pw_reset_confirm" onclick="performPasswordReset()">확인</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -186,7 +212,7 @@
     </form>
 </div>
 
-										<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
+<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
 											<div class="row">
 												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 													<div class="card">

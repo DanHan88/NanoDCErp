@@ -85,4 +85,13 @@ public class AdminService {
 		 	userInfoMapper.updateUser(userInfoVO);
 	    	return "success";
 	    }
+	 
+	 /* 유저 비밀번호 초기화 */
+	 public String userPwReset(UserInfoVO userInfoVO, HttpServletRequest request) {
+		 	userInfoMapper.userPwReset(userInfoVO);
+		 	String value = pwEncoder.encode(userInfoVO.getPassword());
+	    	userInfoVO.setPassword(value);
+	    	userInfoMapper.userPwReset(userInfoVO);
+	    	return "success";
+	    }
 }

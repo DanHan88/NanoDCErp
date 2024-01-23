@@ -47,6 +47,12 @@
 		  WHERE user_id = #{user_id}
 
 	</update>
+	<update id="userPwReset" parameterType="com.nanoDc.erp.vo.UserInfoVO">
+		  UPDATE password
+		  set password=#{password}
+		  WHERE user_id = #{user_id}
+
+	</update>
 	
 	<!-- INSERT -->
 	

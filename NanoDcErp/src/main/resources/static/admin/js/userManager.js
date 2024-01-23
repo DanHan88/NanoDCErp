@@ -134,12 +134,17 @@ $(document).ready(function() {
 						});
 						 $('#user_pw_reset_confirm').on('click', function() {
 							 var user_id = $('#user_edit_1_btn').val(); 
+							 var user_password = $('#new_password').val();
+							 debugger;
+			
+							 
 							  $.ajax({
 								type: "POST",
-							    url: "/userPwReset",
+							    url: "/admin/userPwReset",
 							    contentType: "application/json",
 			                    data: JSON.stringify({
 							        user_id: user_id,
+							        password: user_password
 							    }),
 							    success: function (data) {
 									$('#detail_user_modal').modal('hide');
@@ -151,10 +156,10 @@ $(document).ready(function() {
 										$('#alert_title_user').text("회원 비밀번호 초기화 완료");
 										$('#alert_modal_user').modal('show');
 			                        }
-			                        else if(data='failed:session_closed'){
+			                       /* else if(data='failed:session_closed'){
 										
 										$('#session_alert_user').modal('show');
-									}
+									}*/
 			                        else{
 										if ($('#alert_header_user').hasClass("bg-success")) 
 										{

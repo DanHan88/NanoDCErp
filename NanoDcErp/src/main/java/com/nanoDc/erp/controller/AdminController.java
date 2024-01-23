@@ -42,6 +42,7 @@ public class AdminController {
         mav.setViewName("views/admin/userManager");
         return mav;
     }
+	/*로그인 페이지*/ 
 	@GetMapping(value={"/login"})
     public ModelAndView adminLogin(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
@@ -49,7 +50,7 @@ public class AdminController {
         return mav;
     }
 	
-	
+	/*회원 관리 페이지*/ 
 	 @GetMapping(value={"/userManager"})
 	    public ModelAndView userManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView(); 
@@ -58,6 +59,8 @@ public class AdminController {
 	        mav.setViewName("views/admin/userManager");
 	        return mav;
 	    }
+	 
+	 /*송금 관리 페이지*/ 
 	 @GetMapping(value={"/transactionManager"})
 	    public ModelAndView transactionManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
@@ -66,6 +69,7 @@ public class AdminController {
 	        mav.setViewName("views/admin/transactionManager");
 	        return mav;
 	    }
+	 /*수익 관리 페이지*/ 
 	 @GetMapping(value={"/rewardManager"})
 	    public ModelAndView rewardManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
@@ -74,6 +78,8 @@ public class AdminController {
 	        mav.setViewName("views/admin/rewardManager");
 	        return mav;
 	    }
+	 
+	 /*투자 배분 관리 페이지*/ 
 	 @GetMapping(value={"/investmentManager"})
 	    public ModelAndView investmentManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();        
@@ -84,6 +90,7 @@ public class AdminController {
 	        mav.setViewName("views/admin/investmentManager");
 	        return mav;
 	    }
+	 /*공지 사항 페이지*/ 
 	 @GetMapping(value={"/announcementManager"})
 	    public ModelAndView announcementManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
@@ -92,6 +99,7 @@ public class AdminController {
 	        mav.setViewName("views/admin/announcementManager");
 	        return mav;
 	    }
+	 /*이벤트  페이지*/ 
 	 @GetMapping(value={"/eventManager"})
 	    public ModelAndView eventManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
@@ -100,7 +108,7 @@ public class AdminController {
 	        mav.setViewName("views/admin/eventManager");
 	        return mav;
 	    }
-	 
+	 /*상품 관리 페이지*/ 
 	 @GetMapping(value={"/productManager"})
 	    public ModelAndView productManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
@@ -113,7 +121,11 @@ public class AdminController {
 	 /* -----------ResponseBody----------*/
 	 /* ---------------------------------*/
 	 
+	 /*----------------------------------*/
+	 /* -----------userManager기능 ----------*/
+	 /* ---------------------------------*/
 	 
+	 /* 유저 추가 */
 	 @ResponseBody
 	 @PostMapping(value={"/addNewUser"})
 	 public String addNewUser(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
@@ -121,6 +133,7 @@ public class AdminController {
 	    return adminService.addNewUser(userInfoVO,request);
 	    }   
 	 
+	 /* 유저 정보 수정 */
 	 @ResponseBody
 	 @PostMapping(value={ "/updateUser" })
 	 public String updateUser(MultipartHttpServletRequest request) {
@@ -142,6 +155,15 @@ public class AdminController {
 		   
 		   return adminService.updateUser(userInfoVO, request);
 	 }
+	 
+	 /* 유저 비밀번호 초기화 */
+	 @ResponseBody
+	    @PostMapping(value = { "/userPwReset" })
+	    public String userPwReset(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
+	        
+
+	        return adminService.userPwReset(userInfoVO, request);
+	    }
 }
 
 	 
