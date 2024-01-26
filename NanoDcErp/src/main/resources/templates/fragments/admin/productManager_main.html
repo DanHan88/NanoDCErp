@@ -12,7 +12,7 @@
                     </svg>
                 </button>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body" style="max-height: 800px; overflow-y: auto;">
 							<div class="row">
 								<div class="col-md-12">								
 									<ul class="nav nav-underline" id="myTab" role="tablist">
@@ -94,39 +94,75 @@
 											</form>
 										</div>
 										<div class="tab-pane active" id="member_tab" role="tabpanel" aria-expanded="true">
-					    <form id="uploadForm" method="post" enctype="multipart/form-data">
-					  <div class="mb-3">
+					  <div class="mb-2">
+					    <label class="form-label fs-9" for="basic-form-name">상품명</label>
 					
-					    <label class="form-label" for="basic-form-name">상품명</label>
-					
-					    <input class="form-control" id="basic-form-name" type="text" placeholder="ex) NanoDC 001" />
+					    <input class="form-control" id="hw_product_name" type="text" placeholder="ex) NanoDC 001" />
 					  </div>
-					  <div class="mb-3">
+					  <div class="mb-2">
 					
-					    <label class="form-label" for="basic-form-name">도시</label>
+					    <label class="form-label fs-9" for="basic-form-name">도시</label>
 					
-					    <input class="form-control" id="basic-form-name" type="text" placeholder="ex) 서울" />
+					    <input class="form-control" id="city" type="text" placeholder="ex) 서울" />
 					  </div>
-					  <div class="mb-3">
+					  <div class="mb-2">
 					
-					    <label class="form-label" for="basic-form-name">예산</label>
-					
-					    <input class="form-control" id="basic-form-name" type="text" placeholder="ex) 1000" />
+					    <label class="form-label fs-9" for="basic-form-name">예산</label>
+					    <input class="form-control" id="total_budget_fil" type="number" placeholder="ex) 1000" />
 					  </div>
-					  <div class="mb-3">
+					  <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateA" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateA">투자모집 시작일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_A" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+                        <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateB" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateB">설치 시작일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_B" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+                         <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateC" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateC">운영 시작일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_C" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+                         <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateD" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateD">서비스 종료일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_D" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+					  <div class="mb-2">
 					
-					    <label class="form-label">사진 업로드</label>
+					    <label class="form-label fs-9">사진 업로드</label>
 					
-					    <input class="form-control" type="file" />
+					    <input id="fileInput_update" class="form-control" type="file" />
 					  </div>
-					  <div class="mb-3">
-					
-					    <label class="form-label" for="basic-form-textarea">상세 설명</label>
-					
-					    <textarea class="form-control" id="basic-form-textarea" rows="3" placeholder="Description"></textarea>
-					  </div>
-					  <button class="btn btn-primary" type="submit">수정</button>
-					</form>
+					 <div class="mb-2">
+
+                          <label class="form-label fs-9" for="hw_product_status">서버상태</label>
+
+                          <select class="form-select" id="hw_product_status" aria-label="Default select example">
+                            <option value="투자모집중" selected="selected">투자모집중</option>
+                            <option value="설치중">설치중</option>
+                            <option value="운영중">운영중</option>
+                            <option value="추가모집중">추가모집중</option>
+                            <option value="운영종료">운영종료</option>
+                          </select>
+                        </div>
+                        
+                         <div class="mb-2" id="update_details">
+
+							    <label class="form-label fs-9" for="basic-form-textarea">상세 설명</label>
+							    <textarea class="tinymce" name="content" data-tinymce="{}"></textarea>
+							  </div>
+					  <button class="btn btn-primary" id="update_product_confirm" >수정</button>
 					</div>
 
 										<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
@@ -343,9 +379,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="add_product_modal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+			<div class="modal fade" id="add_product_modal" tabindex="-1" role="dialog">
+				 <div class="modal-dialog modal-lg" >
+					<div class="modal-content">
             <div class="modal-header bg-primary">
                 <h5 class="modal-title text-white dark__text-gray-1100" >상품 등록</h5>
                 <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
@@ -354,49 +390,76 @@
                     </svg>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 800px; overflow-y: auto;">
                 <form>
-  <div class="mb-3">
+  <div class="mb-2">
+					    <label class="form-label fs-9" for="basic-form-name">상품명</label>
+					
+					    <input class="form-control" id="hw_product_name" type="text" placeholder="ex) NanoDC 001" />
+					  </div>
+					  <div class="mb-2">
+					
+					    <label class="form-label fs-9" for="basic-form-name">도시</label>
+					
+					    <input class="form-control" id="city" type="text" placeholder="ex) 서울" />
+					  </div>
+					  <div class="mb-2">
+					
+					    <label class="form-label fs-9" for="basic-form-name">예산</label>
+					    <input class="form-control" id="total_budget_fil" type="number" placeholder="ex) 1000" />
+					  </div>
+					  <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewA" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckNewA">투자모집 시작일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_A" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+                        <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewB" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckNewB">설치 시작일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_B" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+                         <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewC" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckNewC">운영 시작일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_C" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+                         <div class="mb-1">					  
+						  <div class="form-check form-switch">
+                        	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewD" type="checkbox">
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckNewE">서비스 종료일</label>
+                        	</div>
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_E" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+					  <div class="mb-2">
+					
+					    <label class="form-label fs-9">사진 업로드</label>
+					
+					    <input class="form-control" type="file" />
+					  </div>
+					 <div class="mb-2">
 
-    <label class="form-label" for="basic-form-name">상품명</label>
+                          <label class="form-label fs-9" for="hw_product_status">서버상태</label>
 
-    <input class="form-control" id="basic-form-name" type="text" placeholder="ex) NanoDC 001" />
-  </div>
-  <div class="mb-3">
-
-    <label class="form-label" for="basic-form-name">도시</label>
-
-    <input class="form-control" id="basic-form-name" type="text" placeholder="ex) 서울" />
-  </div>
-  <div class="mb-3">
-
-    <label class="form-label" for="basic-form-name">예산</label>
-
-    <input class="form-control" id="basic-form-name" type="text" placeholder="ex) 1000" />
-  </div>
-  <div class="mb-3">
-
-    <label class="form-label">사진 업로드</label>
-
-    <input class="form-control" type="file" />
-  </div>
-  <div class="mb-3">
-
-                          <label class="form-label" for="basic-form-gender">서버상태</label>
-
-                          <select class="form-select" id="basic-form-gender" aria-label="Default select example">
-                            <option selected="selected">투자모집중</option>
-                            <option value="male">설치중</option>
-                            <option value="female">운영중</option>
-                            <option value="other">추가모집중</option>
-                            <option value="other">운영종료</option>
+                          <select class="form-select" id="hw_product_status" aria-label="Default select example">
+                            <option value="투자모집중" selected="selected">투자모집중</option>
+                            <option value="설치중">설치중</option>
+                            <option value="운영중">운영중</option>
+                            <option value="추가모집중">추가모집중</option>
+                            <option value="운영종료">운영종료</option>
                           </select>
                         </div>
-  <div class="mb-3">
+                        
+                         <div class="mb-2">
 
-    <label class="form-label" for="basic-form-textarea">상세 설명</label>
-	<textarea class="tinymce" name="content" data-tinymce="{}"></textarea>
-  </div>
+							    <label class="form-label fs-9" for="basic-form-textarea">상세 설명</label>
+							    <textarea class="tinymce" name="content" data-tinymce="{}"></textarea>
+							  </div>
   <button class="btn btn-primary" type="submit">Submit</button>
 </form>
             </div>
@@ -447,28 +510,29 @@
                   <thead>
                     <tr>
                       <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">상품 등록일</th>
-                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">상품명</th>
-                      <th class="sort align-middle pe-3" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">상태</th>
+                      <th class="sort align-middle" scope="col" data-sort="total" style="width:8%;">상품명</th>
+                      <th class="sort align-middle pe-3" scope="col" data-sort="customer" style="width:7%;">상태</th>
                       <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">투자 마감일</th>
                       <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">서비스 시작일</th>
                       <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">서비스 종료일</th>
-                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">투자FIL</th>
-                      <th class="sort align-middle text-end pe-3" scope="col" data-sort="date" style="width:5%;">상품수정</th>
+                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="total_budget_fil" style="width:10%; min-width: 200px;">투자FIL</th>
+                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="date" style="width:5%;">도시</th>
+                      <th class="sort align-middle text-end pe-3" scope="col" data-sort="date" style="width:5%;">상품수정</th>    
                     </tr>
                   </thead>
                   <tbody class="list" id="order-table-body">
 					 <tr th:each="product : ${productList}"  class="hover-actions-trigger btn-reveal-trigger position-static">
-                      <td th:text="${#dates.format(product.recruitment_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${product.hw_product_name}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${product.hw_product_status}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${#dates.format(product.preparation_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-					  <td th:text="${#dates.format(product.service_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-					  <td th:text="${#dates.format(product.service_end_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${product.total_budget_fil}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${#dates.format(product.recruitment_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="recruitment_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+                      <td th:text="${product.hw_product_name}" class="hw_product_name total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${product.hw_product_status}" class="hw_product_status total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${#dates.format(product.preparation_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="preparation_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+					  <td th:text="${#dates.format(product.service_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="service_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+					  <td th:text="${#dates.format(product.service_end_date, 'yyyy-MM-dd HH:mm:ss')}" class="service_end_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+                      <td th:text="${product.total_budget_fil}" class="total_budget_fil total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${product.city}" class="city total align-middle fw-semibold text-body-highlight"></td>
                       <td class=" ps-10 total align-middle position-relative">
-		
     					<!-- "상세" 버튼 -->
-					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_product" type="button" id="button-addon2" th:value="${product.hw_product_id}">상세
+					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_product" type="button" th:value="${product.hw_product_id}" th:data-details="${product.details}">상세
 					    </button>
 					</td>
                     </tr></tbody>
