@@ -12,7 +12,17 @@ public class HardwareProductVO {
 	private Date service_end_date;
 	private double total_budget_fil;
 	private String city;
+	private String details;
 	
+	
+	
+	
+	public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
+	}
 	public String getCity() {
 		return city;
 	}

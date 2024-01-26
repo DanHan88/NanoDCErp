@@ -11,7 +11,12 @@ $(document).ready(function() {
 			$('#total_budget_fil').val(clickedButton.find('.total_budget_fil').text());
 			$('#user_investment_update').val($(this).val());
 			$('#update_product_confirm').val(clickedButton.find('.total_budget_fil').val())
-			window.tinymce.get(0).setContent(htmlContent);
+			if($(this).attr('data-details') !=undefined){
+				window.tinymce.get(0).setContent($(this).attr('data-details'));	
+			}else{
+				window.tinymce.get(0).setContent('');	
+			}
+			
 			if(clickedButton.find('.recruitment_start_date').text()==""){
 				$('#flexSwitchCheckUpdateA').prop("checked", true);
 			}else{

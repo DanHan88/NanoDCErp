@@ -162,7 +162,7 @@
 							    <label class="form-label fs-9" for="basic-form-textarea">상세 설명</label>
 							    <textarea class="tinymce" name="content" data-tinymce="{}"></textarea>
 							  </div>
-					  <button class="btn btn-primary" id="update_product_confirm">수정</button>
+					  <button class="btn btn-primary" id="update_product_confirm" >수정</button>
 					</div>
 
 										<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
@@ -532,7 +532,7 @@
                       <td th:text="${product.city}" class="city total align-middle fw-semibold text-body-highlight"></td>
                       <td class=" ps-10 total align-middle position-relative">
     					<!-- "상세" 버튼 -->
-					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_product" type="button" th:value="${product.hw_product_id}">상세
+					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_product" type="button" th:value="${product.hw_product_id}" th:data-details="${product.details}">상세
 					    </button>
 					</td>
                     </tr></tbody>

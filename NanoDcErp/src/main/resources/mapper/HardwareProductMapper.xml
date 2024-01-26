@@ -11,7 +11,8 @@
 			   service_start_date, 
 			   service_end_date, 
 			   total_budget_fil,
-			   city
+			   city,
+			   details
 		FROM filmountain.hw_product
 	</select>
 </mapper>
