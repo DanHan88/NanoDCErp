@@ -11,6 +11,14 @@ public class HardwareProductVO {
 	private Date service_start_date;
 	private Date service_end_date;
 	private double total_budget_fil;
+	private String city;
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public int getHw_product_id() {
 		return hw_product_id;
 	}

@@ -64,4 +64,11 @@ public class UserController {
         mav.setViewName("views/user/investment");
         return mav;
     }
+	 @GetMapping(value={"/test"})
+	    public ModelAndView test(HttpServletRequest request,Integer init_page) {
+	        ModelAndView mav = new ModelAndView();
+	        mav.setViewName("views/user/test");
+	        return mav;
+	    }
+	
 }
