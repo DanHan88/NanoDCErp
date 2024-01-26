@@ -30,6 +30,7 @@ public class UserInfoVO {
 	private double available_balance;
 	private double total_balance;
 	private long total_tb;
+	private String level;
 	
 	
     
@@ -141,6 +142,12 @@ public class UserInfoVO {
 	}
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
 	}
 	
 }

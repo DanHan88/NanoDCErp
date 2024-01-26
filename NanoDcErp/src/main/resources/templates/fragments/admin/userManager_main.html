@@ -17,7 +17,7 @@
 							<div class="row mb-3">
 								<div class="col-md-12 mb-3">
 									<div class="float-right">
-										<b>가입일시</b>
+										<b>아이콘</b>
 										<span id="join_date_p"></span>
 									</div>
 								</div>
@@ -26,21 +26,7 @@
 										<img id="profilePicture" alt="Profile Picture" class="img-thumbnail">
 									</div>								
 								</div>
-								<div class="col-md-3">
-									<div class="card">
-										<div class="card-header"><b>회원명</b><br><span id="user_name_span"></span></div>
-									</div>								
-								</div>
-								<div class="col-md-3">
-									<div class="card">
-										<div class="card-header"><b>이메일</b><br><span id="user_email_span"></span></div>
-									</div>								
-								</div>
-								<div class="col-md-3">
-									<div class="card">
-										<div id="user_phone_div" class="card-header"><b>휴대폰번호</b><br><span id="user_phone_span"></span></div>
-									</div>								
-								</div>																														
+																																				
 							</div>
 							<div class="row">
 								<div class="col-md-12">								
@@ -148,6 +134,7 @@
 									                    <input type="radio" name="user_status" value="inactive"> 탈퇴
 									                </label>
 									            </div>
+									         
 									            <label class="col-md-2 form-control-label"><b>휴대폰번호</b></label>
 									            <div class="col-md-4">
 									                <input id="user_phone" class="form-control" type="text">
@@ -158,11 +145,20 @@
 									            <div class="col-md-4 mt-1">
 									                <b id="wallet_address_balance_a">0 FIL</b>
 									            </div>
-									            <label class="col-md-2 form-control-label"><b>회원사진</b></label>
+									            <label class="col-md-2 form-control-label"><b>회원아이콘</b></label>
 									            <div class="col-md-4">
 									                <input type="file" id='fileInput' name="file" accept="image/*">
 									            </div>
 									        </div>
+									        
+									       	<div class="form-group row mb-3">
+											    <label class="col-md-2 form-control-label"><b>Level</b></label>
+											    <!-- 폭을 조절한 input 엘리먼트 -->
+											    <div class="col-md-4">
+											    <input id="level" class="form-control" type="number" style="width: 100px;" min="0">
+											    </div>
+											</div>
+
 									        <div id="user_address_div" class="form-group row mb-3" style="display: none;">
 									            <label class="col-md-2 form-control-label"><b id="user_address_b"></b></label>
 									            <div class="col-md-10">
@@ -357,19 +353,22 @@
                 <table class="table table-sm fs-9 mb-0">
                   <thead>
                     <tr>
-                      <th class="white-space-nowrap fs-9 align-middle ps-0" style="width:26px;">
-                        <div class="form-check mb-0 fs-8">
-                          <input class="form-check-input" id="checkbox-bulk-order-select" type="checkbox" data-bulk-select="{&quot;body&quot;:&quot;order-table-body&quot;}">
-                        </div>
-                      </th>
-                      <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:15%;">가입일시</th>
-                      <th class="sort align-middle" scope="col" data-sort="total" style="width:15%;">회원명</th>
-                      <th class="sort align-middle ps-3" scope="col" data-sort="customer" style="width:15%; min-width: 250px;">이메일</th>
-                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:15%;">휴대폰번호</th>
-                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">투자상품</th>
-                      <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:15%;">상태</th>
-                      <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
-                    </tr>
+    <th class="white-space-nowrap fs-9 align-middle ps-0" style="width:26px;">
+        <div class="form-check mb-0 fs-8">
+            <input class="form-check-input" id="checkbox-bulk-order-select" type="checkbox" data-bulk-select="{&quot;body&quot;:&quot;order-table-body&quot;}">
+        </div>
+    </th>
+    <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:15%;">가입일시</th>
+    <th class="sort align-middle" scope="col" data-sort="total" style="width:15%;">회원명</th>
+    <th class="sort align-middle ps-3" scope="col" data-sort="customer" style="width:15%; min-width: 250px;">이메일</th>
+    <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:15%;">휴대폰번호</th>
+    <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">투자상품</th>
+    <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:10%;">상태</th>
+    <th class="sort align-middle text-start ps-4" scope="col" style="width:5%;">레벨</th> <!-- 수정된 "레벨" 열 -->
+    <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
+</tr>
+
+
                   </thead>
                   <tbody class="list" id="order-table-body">
 					 <tr th:each="userInfo : ${userInfoList}" th:attr="data-picture=${userInfo.profile_picture_url}" class="hover-actions-trigger btn-reveal-trigger position-static">
@@ -387,6 +386,7 @@
                       <td th:text="${userInfo.user_status}" class="user_status total align-middle fw-semibold text-body-highlight"  
                       	  th:style="${userInfo.user_status == 'active' ? 'color: green;' : 'color: red;'}"
 					      th:attr="data-user-id=${userInfo.user_id}"></td>
+					  <td th:text="${userInfo.level}" class="level total align-middle fw-semibold text-body-highlight" style="text-align: center;"></td>
                       <td class=" ps-10 total align-middle position-relative">
     <!-- "상세" 버튼 -->
 					    <button th:if="${userInfo.user_status == 'active' || userInfo.user_status == 'inactive'}"

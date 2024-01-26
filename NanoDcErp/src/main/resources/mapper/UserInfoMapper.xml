@@ -11,7 +11,8 @@
 		    u.user_reg_date,
 		    u.user_name,
 		    u.user_email,
-		    u.profile_picture_url
+		    u.profile_picture_url,
+		    u.level
 		FROM 
 		    user_info u	
 		WHERE 
@@ -41,8 +42,9 @@
 		      <if test="user_status neq 'inactive'">user_email = #{user_email},</if>
 		    </if>
 		    <if test="profile_picture_url != 'no_change'">
-		      profile_picture_url = #{profile_picture_url}
+		      profile_picture_url = #{profile_picture_url},
 		    </if>
+		    <if test="level != null">level = #{level}</if>
 		  </set>
 		  WHERE user_id = #{user_id}
 

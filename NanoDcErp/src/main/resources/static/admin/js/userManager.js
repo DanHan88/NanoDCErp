@@ -26,6 +26,7 @@ $(document).ready(function() {
 							$('#user_name').val(clickedButton.parent().parent().find('.user_name').text());
 							$('#user_email').val(clickedButton.parent().parent().find('.user_email').text());
 							$('#user_phone').val(clickedButton.parent().parent().find('.user_phone').text());
+							$('#level').val(clickedButton.parent().parent().find('.level').text())
 							$('#profilePicture').attr('src', '/uploads'+clickedButton.parent().parent().attr('data-picture'));
 							var user_id = clickedButton.parent().parent().find('.detail_user').val();
 							$('#user_edit_1_btn').val(user_id);
@@ -73,10 +74,10 @@ $(document).ready(function() {
 						       var user_email = $('#user_email').val();
 						       var user_phone = $('#user_phone').val();
 						       var user_status = $('input[name="user_status"]:checked').val();
-						       
+						       var level = $("#level").val();
 						       var user_id = $('#user_edit_1_btn').val(); 
 						       //var fileInput = $('#fileInput')[0].files[0];
-	
+							   debugger;
 						       var formData = new FormData();
 						      
 								formData.append('user_email', user_email);
@@ -84,6 +85,7 @@ $(document).ready(function() {
 								formData.append('user_name', user_name);
 								formData.append('user_status', user_status);
 								formData.append('user_id', user_id); 
+								formData.append('level', level); 
 								/*if(fileInput!=undefined){
 									formData.append('file', fileInput);
 								}else{

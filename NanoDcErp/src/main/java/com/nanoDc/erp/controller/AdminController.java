@@ -142,6 +142,7 @@ public class AdminController {
 		   String user_phone = request.getParameter("phone_number");
 		   String user_name = request.getParameter("user_name");
 		   String user_status = request.getParameter("user_status");
+		   String level = request.getParameter("level");
 		   int user_id = Integer.parseInt(request.getParameter("user_id"));
 		   
 		   
@@ -152,6 +153,8 @@ public class AdminController {
 		   userInfoVO.setUser_name(user_name);
 		   userInfoVO.setUser_status(user_status);
 		   userInfoVO.setUser_id(user_id);
+		   userInfoVO.setLevel(level);
+		   
 		   
 		   return adminService.updateUser(userInfoVO, request);
 	 }
