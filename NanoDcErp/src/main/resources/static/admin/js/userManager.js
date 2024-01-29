@@ -42,7 +42,7 @@ $(document).ready(function() {
 							}else{
 								$('input[name="user_status"][value="inactive"]').prop('checked', true);
 							}				
-							/* $.ajax({
+							 $.ajax({
 			                    type: "POST",
 			                    url: "/selectInvestmentListForUser",
 			                    contentType: "application/json",
@@ -50,22 +50,22 @@ $(document).ready(function() {
 			                    success: function (data) {
 									$("#investment_user_table").find('tbody').empty();
 									data.forEach(function(item) {
-										var date = new Date(item.purchase_date);
+										var date = new Date(item.hw_reg_date);
 									    var formattedDate = date.getFullYear() + '-' +
 									                        ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
 									                        ('0' + date.getDate()).slice(-2);
 									    var newRow = '<tr>' +
 									        '<td align="center" id="update_purchase_date">' + formattedDate + '</td>' +
-									        '<td align="center" id="update_product_name" data-user_id="'+  item.investment_category_id + '">' + item.product_name + '</td>' +
-									        '<<td align="center" id="update_purchase_size">' + item.purchase_size + '</td>' +
-									        '<td align="center" id="update_fil_invested">' + item.fil_invested + '</td>' +
-									        '<td align="center"><button type="button" class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.investment_id + '">수정</button>'+
-									        '<button type="button" class="btn btn-secondary btn-sm m-1 delete_user_investment_button" value="'+ item.investment_id + '">삭제</button></td></tr>';
+									        '<td align="center" id="update_product_name" data-user_id="'+  item.hw_product_id+ '">' + item.hw_product_name + '</td>' +
+									     
+									        '<td align="center" id="update_fil_invested">' + item.hw_invest_fil + '</td>' +
+									        '<td align="center"><button type="button" class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.hw_id + '">수정</button>'+
+									        '<button type="button" class="btn btn-secondary btn-sm m-1 delete_user_investment_button" value="'+ item.hw_id + '">삭제</button></td></tr>';
 									    $("#investment_user_table").append(newRow);
 									});
 									
 			                    }
-			                });*/ 
+			                });
 							$('#detail_user_modal').modal('show');
 							
 					    });

@@ -4,7 +4,7 @@
         <div class="mb-9">
           <div class="row g-3 mb-4">
             <div class="col-auto">
-              <h2 class="mb-0">Orders</h2>
+              <h2 class="mb-0">배분 내역</h2>
             </div>
           </div>
           <div id="orderTable" data-list="{&quot;valueNames&quot;:[&quot;order&quot;,&quot;total&quot;,&quot;customer&quot;,&quot;payment_status&quot;,&quot;fulfilment_status&quot;,&quot;delivery_type&quot;,&quot;date&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
@@ -32,10 +32,10 @@
                 <table class="table table-sm fs-9 mb-0">
                   <thead>
                     <tr>
-                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">배분날짜</th>
-                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">FIL/TB</th>
-                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">FIL총배분</th>
-                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">지급상품</th>
+                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:20%;">배분날짜</th>
+                      <th class="sort align-middle" scope="col" data-sort="total" style="width:20%;">FIL/TB</th>
+                      <th class="sort align-middle ps-0" scope="col" data-sort="customer" style="width:20%;">FIL총배분</th>
+                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:20%;">지급상품</th>
                       <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">상태</th>
                       <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
                     </tr>
@@ -43,11 +43,11 @@
                   <tbody class="list" id="order-table-body">
 					  <tr th:each="reward : ${rewardList}" class="hover-actions-trigger btn-reveal-trigger position-static">
                       <td th:text="${#dates.format(reward.regdate, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${reward.fil_paid_per_tb}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${reward.fil_paid_per_tb}" class="total align-middle fw-semibold text-body-highlight ps-2"></td>
                       <td th:text="${reward.fil_paid_per_tb}" class="total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${reward.hardwareProductVO.hw_product_name}" class="total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${reward.status}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td>
+                      <td class="ps-10 total align-middle position-relative">
                       <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_user" type="button" id="button-addon2" th:value="${reward.reward_sharing_id}">상세
 					    </button>
 					    </td>
@@ -67,15 +67,6 @@
             </div>
           </div>
         </div>
-        <footer class="footer position-absolute">
-          <div class="row g-0 justify-content-between align-items-center h-100">
-            <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 mt-2 mt-sm-0 text-body">Thank you for creating with Phoenix<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none">2023 ©<a class="mx-1" href="https://themewagon.com">Themewagon</a></p>
-            </div>
-            <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v1.14.0</p>
-            </div>
-          </div>
-        </footer>
+        
       </div>
         </html>
