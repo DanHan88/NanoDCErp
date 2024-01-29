@@ -15,4 +15,25 @@
 			   details
 		FROM filmountain.hw_product
 	</select>
+	<update id="updateProduct" parameterType="com.nanoDc.erp.vo.HardwareProductVO">
+		  UPDATE hw_product
+		  <set>
+		    <if test="hw_product_name != null">hw_product_name = #{hw_product_name},</if>
+		    <if test="hw_product_status != null">hw_product_status = #{hw_product_status},</if>
+  			<if test="total_budget_fil != null">total_budget_fil = #{total_budget_fil},</if>
+  			<if test="city != null">city = #{city},</if>
+  			<if test="details != null">details = #{details},</if>
+		    <if test="picture_url != 'no_change'">
+		      picture_url = #{picture_url},
+		    </if>
+		    recruitment_start_date = #{recruitment_start_date},
+			preparation_start_date = #{preparation_start_date},
+			service_start_date = #{service_start_date},
+			service_end_date = #{service_end_date}
+		  </set>
+		  WHERE hw_product_id = #{hw_product_id}
+
+	</update>
+	
+	
 </mapper>

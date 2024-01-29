@@ -13,10 +13,17 @@ public class HardwareProductVO {
 	private double total_budget_fil;
 	private String city;
 	private String details;
+	private String picture_url;
 	
 	
 	
 	
+	public String getPicture_url() {
+		return picture_url;
+	}
+	public void setPicture_url(String picture_url) {
+		this.picture_url = picture_url;
+	}
 	public String getDetails() {
 		return details;
 	}

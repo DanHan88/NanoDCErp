@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content" th:fragment="MainContent">
+			
+			<div class="modal fade" id="success_alert" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header bg-primary">
+			        <h5 class="modal-title text-white dark__text-gray-1100" id="staticBackdropLabel">Modal title</h5>
+			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
+			      </div>
+			      <div class="modal-body">
+			       <span class="fas fa-check-circle text-success fs-5 me-3"></span>
+			  		<p class="mb-0 flex-1">제품 수정 성공!</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button class="btn btn-primary" type="button">Okay</button>
+			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
 			<div class="modal fade" id="detail_product_modal" tabindex="-1" role="dialog">
 				 <div class="modal-dialog modal-lg" >
 					<div class="modal-content">

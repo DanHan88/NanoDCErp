@@ -94,4 +94,11 @@ public class AdminService {
 	    	userInfoMapper.userPwReset(userInfoVO);
 	    	return "success";
 	    }
+	 
+	 
+	 public String updateProduct(HardwareProductVO hardwareProductVO, HttpServletRequest request) {
+		 	productMapper.updateProduct(hardwareProductVO);
+	    	return "success";
+	    }
+	 
 }

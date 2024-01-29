@@ -1,12 +1,17 @@
 package com.nanoDc.erp.controller;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.google.api.client.util.StringUtils;
+import java.util.Date;
 import com.nanoDc.erp.service.AdminService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
@@ -28,6 +32,8 @@ import com.nanoDc.erp.vo.UserInfoVO;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	 @Value("${upload.directory}")
+	    private String uploadDirectory;
 	
 	 @Autowired
 	    private AdminService adminService;
@@ -157,6 +163,69 @@ public class AdminController {
 		   
 		   
 		   return adminService.updateUser(userInfoVO, request);
+	 }
+	 
+	 /* 유저 정보 수정 */
+	 @ResponseBody
+	 @PostMapping(value={ "/updateProduct" })
+	 public String updateProduct(MultipartHttpServletRequest request) throws ParseException {
+		   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+		   String hw_product_name = request.getParameter("hw_product_name");
+		   String city = request.getParameter("city");
+		   
+		   String recruitment_start_date_string = request.getParameter("recruitment_start_date");
+		   String preparation_start_date_string = request.getParameter("preparation_start_date");
+		   String service_start_date_string = request.getParameter("service_start_date");
+		   String service_end_date_string = request.getParameter("service_end_date");
+		   String details = request.getParameter("details");
+		   float total_budget_fil = Float.parseFloat(request.getParameter("total_budget_fil"));
+		   String hw_product_status = request.getParameter("hw_product_status");
+		   int hw_product_id = Integer.parseInt(request.getParameter("hw_product_id"));
+		   
+		   MultipartFile file = request.getFile("file");
+	        String filePathString ="";
+	        
+	        if (file != null && !file.isEmpty()) {
+	            try {
+	                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+	                java.nio.file.Path uploadPath = java.nio.file.Paths.get(uploadDirectory);
+	                if (!java.nio.file.Files.exists(uploadPath)) {
+	                    java.nio.file.Files.createDirectories(uploadPath);
+	                }
+
+	                java.nio.file.Path filePath = uploadPath.resolve(hw_product_id+fileName);
+	                file.transferTo(filePath.toFile());
+	                filePathString = "/profile/"+hw_product_id+fileName;
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }else {
+	        	filePathString="no_change";
+	        }
+		   
+		   HardwareProductVO hardwareProductVO = new HardwareProductVO();
+		   hardwareProductVO.setHw_product_id(hw_product_id);
+		   hardwareProductVO.setCity(city);
+		   if(recruitment_start_date_string!=null&&!recruitment_start_date_string.equals("")) {
+			   hardwareProductVO.setRecruitment_start_date(dateFormat.parse(recruitment_start_date_string));
+		   }
+		   if(preparation_start_date_string!=null&&!preparation_start_date_string.equals("")) {
+			   hardwareProductVO.setPreparation_start_date(dateFormat.parse(preparation_start_date_string));
+
+		   }
+		   if(service_start_date_string!=null&&!service_start_date_string.equals("")) {
+			   hardwareProductVO.setService_start_date(dateFormat.parse(service_start_date_string));
+		   }
+		   if(service_end_date_string!=null&&!service_end_date_string.equals("")) {
+			   hardwareProductVO.setService_end_date(dateFormat.parse(service_end_date_string));
+		   }   
+		   hardwareProductVO.setDetails(details);
+		   hardwareProductVO.setTotal_budget_fil(total_budget_fil);
+		   hardwareProductVO.setHw_product_status(hw_product_status);
+		   hardwareProductVO.setPicture_url(filePathString);
+		   
+		   return adminService.updateProduct(hardwareProductVO, request);
 	 }
 	 
 	 /* 유저 비밀번호 초기화 */

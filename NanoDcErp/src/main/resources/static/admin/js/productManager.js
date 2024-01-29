@@ -2,15 +2,14 @@ $(document).ready(function() {
 	
 	 	var user_name; 
         var user_email; 
-        var user_phone_number; 
+        var user_phone_number;
   		$('.detail_product').on('click', function() {
 			 var clickedButton = $(this).parent().parent();
 			$('#hw_product_name').val(clickedButton.find('.hw_product_name').text());
 			$('#city').val(clickedButton.find('.city').text());
 			$('#hw_product_status').val(clickedButton.find('.hw_product_status').text());
 			$('#total_budget_fil').val(clickedButton.find('.total_budget_fil').text());
-			$('#user_investment_update').val($(this).val());
-			$('#update_product_confirm').val(clickedButton.find('.total_budget_fil').val())
+			$('#update_product_confirm').val($(this).val());
 			if($(this).attr('data-details') !=undefined){
 				window.tinymce.get(0).setContent($(this).attr('data-details'));	
 			}else{
@@ -101,9 +100,8 @@ $(document).ready(function() {
 					var preparation_start_date="";
 					var service_start_date ="";
 					var service_end_date ="";
-					var hw_product_id = $('#hw_product_id').val();
+					var hw_product_id = $('#update_product_confirm').val();
 						
-					debugger;
 					var formData = new FormData();
 					if ($("#flexSwitchCheckUpdateA").prop("checked")) {
 			        	recruitment_start_date = $("#datetimepicker_update_A").val();
@@ -136,31 +134,22 @@ $(document).ready(function() {
 					}	
 					       $.ajax({
 								type: "POST",
-							    url: "/updateUser",
+							    url: "/admin/updateProduct",
 							    data: formData,
 							    contentType: false,
 							    processData: false,
 							    success: function (data) {
-									$('#detail_user_modal').modal('hide');
+									$("#detail_product_modal").hide();
+									 $("#success_alert").show();
 									if(data=='success'){
-										if ($('#alert_header_user').hasClass("bg-danger")) 
-											{
-							            		$('#alert_header_user').removeClass("bg-danger").addClass("bg-success");
-							       		 	} 
-										$('#alert_title_user').text("회원 정보 수정 완료");
-										$('#alert_modal_user').modal('show');
+										 $("#success_alert").show();
 			                        }
 			                        else if(data='failed:session_closed'){
 										
-										$('#session_alert_user').modal('show');
+										
 									}
 			                        else{
-										if ($('#alert_header_user').hasClass("bg-success")) 
-										{
-								            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
-							       		} 			
-							       		 $('#alert_title_user').text("회원 정보 수정 실패");
-								            $('#alert_modal_user').modal('show');
+										
 									}
 			                    }
 			                });
