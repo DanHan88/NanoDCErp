@@ -41,14 +41,16 @@ $(document).ready(function() {
 								$('input[name="user_status"][value="active"]').prop('checked', true);
 							}else{
 								$('input[name="user_status"][value="inactive"]').prop('checked', true);
-							}				
+							}	
+							debugger;			
 							 $.ajax({
 			                    type: "POST",
-			                    url: "/selectInvestmentListForUser",
+			                    url: "/admin/selectInvestmentListForUser",
 			                    contentType: "application/json",
 			                    data: user_id,
 			                    success: function (data) {
 									$("#investment_user_table").find('tbody').empty();
+									
 									data.forEach(function(item) {
 										var date = new Date(item.hw_reg_date);
 									    var formattedDate = date.getFullYear() + '-' +

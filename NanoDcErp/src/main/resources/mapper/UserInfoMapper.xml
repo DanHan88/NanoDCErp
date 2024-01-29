@@ -4,7 +4,7 @@
 <mapper namespace="com.nanoDc.erp.mapper.UserInfoMapper">
 	<!-- SELECT -->
 	<select id="selectUserInfoList"  resultType="com.nanoDc.erp.vo.UserInfoVO">
-		SELECT 
+		SELECT
 		    u.user_id,
 		    u.phone_number,
 		    u.user_status,
@@ -12,13 +12,17 @@
 		    u.user_name,
 		    u.user_email,
 		    u.profile_picture_url,
-		    u.level
-		FROM 
-		    user_info u	
-		WHERE 
+		    u.level,
+		    COUNT(i.hw_id) AS investment_count
+		FROM
+		    user_info u
+		LEFT JOIN
+		    hw_investment i ON u.user_id = i.user_id
+		WHERE
 		    u.user_status != 'inactive'
-		GROUP BY 
+		GROUP BY
 		    u.user_email
+
 	</select>
 	
 	<select id="get_last_useriId"  resultType="integer">

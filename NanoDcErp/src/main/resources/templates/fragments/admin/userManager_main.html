@@ -34,7 +34,10 @@
 								    <li class="nav-item" id="member_tab_li">
 								        <a class="nav-link active" id="member_tab_link" data-bs-toggle="tab" href="#member_tab" role="tab" aria-controls="member_tab" aria-selected="true">회원 정보</a>
 								    </li>
-								    <li class="nav-item" id="investment_tab_li"><a class="nav-link" data-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-selected="false">투자내역</a></li>	
+								   <li class="nav-item" id="investment_tab_li">
+									    <a class="nav-link" data-bs-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-selected="false">투자내역</a>
+									</li>
+
 								    <li class="nav-item" id="sendFil_tab_li">
 								        <a class="nav-link" id="sendFil_tab_link" data-bs-toggle="tab" href="#sendFil_tab" role="tab" aria-controls="sendFil_tab" aria-selected="false">Fil 전송</a>
 								    </li>
@@ -239,38 +242,7 @@
 
         </div>
     </form>
-</div>
-
-<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
-											<div class="row">
-												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-													<div class="card">
-														<div class="card-header">
-															<button id="add_user_investment_button" type="button" class="btn btn-primary btn-sm float-right" style="margin-top: 0px;">투자 등록</button>				
-														</div>								
-														<div class="card-block table-responsive">
-															<table id="investment_user_table" class="table table-hover table-bordered table-sm">
-																<colgroup><col width="20%">
-																<col width="30%">
-																<col width="15%">
-																<col width="15%">
-																<col width="25%">					
-																</colgroup><thead>
-																	<tr>
-																		<th>구매일</th>
-																		<th>상품명</th>
-																		<th>투자TB</th>
-																		<th>투자FIL</th>
-																		<th></th>
-																	</tr>
-																</thead>									
-																<tbody></tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>										
+</div>								
 																													
 									</div>
 								</div>
@@ -395,7 +367,7 @@
     <th class="sort align-middle" scope="col" data-sort="total" style="width:15%;">회원명</th>
     <th class="sort align-middle ps-3" scope="col" data-sort="customer" style="width:15%; min-width: 250px;">이메일</th>
     <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:15%;">휴대폰번호</th>
-    <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">투자상품</th>
+    <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">총투자상품</th>
     <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:10%;">상태</th>
     <th class="sort align-middle text-start ps-4" scope="col" style="width:5%;">레벨</th> <!-- 수정된 "레벨" 열 -->
     <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
@@ -415,7 +387,7 @@
                       <td th:text="${userInfo.user_name}" class="user_name total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${userInfo.user_email}" class="user_email total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${userInfo.phone_number}" class="user_phone total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight ps-5"></td>
                       <td th:text="${userInfo.user_status}" class="user_status total align-middle fw-semibold text-body-highlight"  
                       	  th:style="${userInfo.user_status == 'active' ? 'color: green;' : 'color: red;'}"
 					      th:attr="data-user-id=${userInfo.user_id}"></td>
