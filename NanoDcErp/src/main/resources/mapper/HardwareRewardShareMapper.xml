@@ -80,13 +80,44 @@
 		    p.preparation_start_date,
 		    p.service_start_date,
 		    p.service_end_date,
-		    p.total_budget_fil
+		    p.total_budget_fil,
+		    r.regdate
 		FROM hw_reward_sharing_detail d
 		INNER JOIN user_info u ON d.user_id = u.user_id
 		INNER JOIN hw_reward_sharing r ON r.reward_sharing_id = d.hw_reward_sharing_id
 		INNER JOIN hw_product p ON r.hw_product_id = p.hw_product_id
 		WHERE r.status = 'active' AND d.hw_reward_sharing_id= #{hw_reward_sharing_id}
 		</select>
+		<select id="selectRewardSharingDetailListByUser" parameterType = "integer" resultMap="HardwareRewardSharingDetailMap">
+		SELECT
+		    d.reward_sharing_detail_id,
+		    d.hw_reward_sharing_id,
+		    d.user_id,
+		    d.reward_fil,
+		    u.user_name,
+		    u.user_status,
+		    u.level,
+		    u.user_email,
+		    u.phone_number,
+		    p.service_end_date,
+		    p.total_budget_fil,
+		    fil_paid_per_tb,
+		    status,
+		    p.hw_product_name,
+		    p.hw_product_status,
+		    p.recruitment_start_date,
+		    p.preparation_start_date,
+		    p.service_start_date,
+		    p.service_end_date,
+		    p.total_budget_fil,
+		    r.regdate
+		FROM hw_reward_sharing_detail d
+		INNER JOIN user_info u ON d.user_id = u.user_id
+		INNER JOIN hw_reward_sharing r ON r.reward_sharing_id = d.hw_reward_sharing_id
+		INNER JOIN hw_product p ON r.hw_product_id = p.hw_product_id
+		WHERE r.status = 'active' AND u.user_id= #{user_id}
+		</select>
+		
 		
 		
 		

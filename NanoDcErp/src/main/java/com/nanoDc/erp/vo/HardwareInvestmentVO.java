@@ -16,7 +16,14 @@ public class HardwareInvestmentVO {
 	private int user_id;
 	private int hw_product_id;
 	private double hw_invest_fil;
-	   
+	private String hw_product_status;
+	
+	public String getHw_product_status() {
+		return hw_product_status;
+	}
+	public void setHw_product_status(String hw_product_status) {
+		this.hw_product_status = hw_product_status;
+	} 
 	public String getUser_name() {
 		return user_name;
 	}

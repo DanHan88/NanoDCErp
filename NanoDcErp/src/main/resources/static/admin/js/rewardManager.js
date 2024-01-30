@@ -13,13 +13,12 @@ $(document).ready(function() {
 			                    contentType: "application/json",
 			                    data: reward_sharing_id,
 			                    success: function (data) {
-									debugger;
 									$("#reward_detail_table").find('tbody').empty();
 									data.forEach(function(item) {
 									    var newRow = '<tr>' +
 									        '<td align="center" id="update_purchase_date">' + item.userInfoVO.user_email + '</td>' +
 									        '<td align="center" id="update_purchase_size">' + item.userInfoVO.user_name + '</td>' +
-									        '<td align="center" id="update_fil_invested">' + item.reward_fil + '</td>';
+									        '<td align="center" id="update_fil_invested">' + item.reward_fil + '</td></tr>';
 									    $("#reward_detail_table").append(newRow);
 									});
 									

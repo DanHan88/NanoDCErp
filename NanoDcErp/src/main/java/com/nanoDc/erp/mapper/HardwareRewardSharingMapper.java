@@ -11,6 +11,6 @@ import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 public interface HardwareRewardSharingMapper {
 	public List<HardwareRewardSharingVO> getRewardSharingList();
 	public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(int reward_sharing_id);
-	
+	public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListByUser(int user_id);
 	
 }

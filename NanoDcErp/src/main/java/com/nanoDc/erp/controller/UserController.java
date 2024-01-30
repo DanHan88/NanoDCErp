@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nanoDc.erp.service.AdminService;
+import com.nanoDc.erp.service.UserService;
+import com.nanoDc.erp.vo.HardwareInvestmentVO;
+import com.nanoDc.erp.vo.HardwareProductVO;
+import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.UserInfoVO;
@@ -21,7 +25,9 @@ import com.nanoDc.erp.vo.UserInfoVO;
 public class UserController {
 	
 	 @Autowired
-	    private AdminService userService;
+	    private UserService userService;
+	 @Autowired
+	    private AdminService adminService;
 	
 	
 	
@@ -61,13 +67,24 @@ public class UserController {
 	@GetMapping(value={"/investment"})
     public ModelAndView investment(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("views/user/investment");
+        
+        List<HardwareInvestmentVO> investmentList = this.userService.getInvestmentListByUser(1);
+        mav.addObject("investmentList", investmentList);
+        mav.setViewName("views/user/userApp_investment");
         return mav;
     }
-	 @GetMapping(value={"/test"})
+	@GetMapping(value={"/reward"})
+    public ModelAndView reward(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(1);
+        mav.addObject("rewardDetailList", rewardDetailList);
+        mav.setViewName("views/user/reward");
+        return mav;
+    }
+	 @GetMapping(value={"/index"})
 	    public ModelAndView test(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
-	        mav.setViewName("views/user/test");
+	        mav.setViewName("views/user/userApp_index");
 	        return mav;
 	    }
 	

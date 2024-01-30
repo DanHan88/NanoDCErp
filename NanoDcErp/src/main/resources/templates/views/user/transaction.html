@@ -70,10 +70,9 @@
     <!-- ===============================================-->
     <main class="main" id="top">
 		<!--TOPBAR  -->
-      <div th:replace="~{fragments/user/topbar :: TopBar}"></div>
+      <div th:replace="~{fragments/user/userApp_topbar :: TopBar}"></div>
       <!--MainContent-->
-      <div th:replace="~{fragments/user/transaction_main :: MainContent}"></div>   
-      <div th:replace="~{fragments/user/bottombar :: BottomBar}"></div> 
+      <div th:replace="~{fragments/user/transaction_main :: MainContent}"></div>    
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
         var navbarTop = document.querySelector('.navbar-top');
@@ -86,7 +85,6 @@
           navbarVertical.setAttribute('data-navbar-appearance', 'darker');
         }
       </script>
-      <div th:replace="~{fragments/user/support_chat :: SupportChat}"></div> 
     </main>
     <!-- ===============================================-->
     <!--    End of Main Content-->

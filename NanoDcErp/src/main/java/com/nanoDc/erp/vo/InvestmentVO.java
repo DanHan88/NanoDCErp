@@ -26,8 +26,7 @@ public class InvestmentVO {
 	private int cateogry_fil_per_tb;
 	private float fil_invested;
 	
-	
-    
+
 	public float getFil_invested() {
 		return fil_invested;
 	}
