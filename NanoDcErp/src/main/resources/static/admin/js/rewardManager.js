@@ -5,33 +5,27 @@ $(document).ready(function() {
 								 location.reload(true);
 							 } 
 					      });			
-						$('.payout_detail').on('click', function() {
-							var token_paid_id = $(this).val();
-							$('#payout_detail_table').DataTable({
-						        "order": [[0, 'desc']],
-						        "destroy": true,
-						        "ajax": {
-						            "type": "POST",
-						            "url": "/selectTokenDetailList",
-						            "contentType": "application/json",
-						            "data": function (d) {
-						                return JSON.stringify({
-						                    token_paid_id: token_paid_id
-						                });
-						            },
-						            "dataSrc": function (data) {
-						                return data;
-						            }
-						        },
-						        "columns": [
-						            { "data": "user_email" },
-						            { "data": "user_name" },
-						            { "data": "investment_category_name" },
-						            { "data": "paid_fil" },
-						        ]
-						    });
-						    $('.table-responsive').addClass('p-2');
-					       $('#payout_detail_list_modal').modal('show');
+						$('.detail_reward').on('click', function() {
+							var reward_sharing_id = $(this).val();
+							$.ajax({
+			                    type: "POST",
+			                    url: "/admin/selectRewardSharingDetailListById",
+			                    contentType: "application/json",
+			                    data: reward_sharing_id,
+			                    success: function (data) {
+									debugger;
+									$("#reward_detail_table").find('tbody').empty();
+									data.forEach(function(item) {
+									    var newRow = '<tr>' +
+									        '<td align="center" id="update_purchase_date">' + item.userInfoVO.user_email + '</td>' +
+									        '<td align="center" id="update_purchase_size">' + item.userInfoVO.user_name + '</td>' +
+									        '<td align="center" id="update_fil_invested">' + item.reward_fil + '</td>';
+									    $("#reward_detail_table").append(newRow);
+									});
+									
+			                    }
+			                });
+					       $('#reward_detail_list_modal').modal('show');
 					    });	
 					    $('.payout_update').on('click', function() {
 							$("#payout_update_confirm_btn").val($(this).val());

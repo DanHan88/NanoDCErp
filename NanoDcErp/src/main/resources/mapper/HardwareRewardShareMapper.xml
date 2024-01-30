@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanoDc.erp.mapper.HardwareRewardSharingMapper">
-	<resultMap id="hardwareRewardSharingDetailMap" type="com.nanoDc.erp.vo.HardwareProductVO">
+	<resultMap id="hardwareProductMap" type="com.nanoDc.erp.vo.HardwareProductVO">
 	    <id property="hw_product_id" column="hw_product_id"/>
 	    <result property="hw_product_id" column="hw_product_id"/>
 	    <result property="hw_product_name" column="hw_product_name"/>
@@ -20,8 +20,27 @@
 	    <result property="regdate" column="regdate"  javaType="java.util.Date" jdbcType="TIMESTAMP"/>
 	    <result property="fil_paid_per_tb" column="fil_paid_per_tb"/>
 	    <result property="status" column="status"/>
-	    <association property="hardwareProductDetailVO" resultMap="hardwareRewardSharingDetailMap"/>
+	    <association property="hardwareProductVO" resultMap="hardwareProductMap"/>
 	</resultMap>
+	
+	<resultMap id="userInfoMap" type="com.nanoDc.erp.vo.UserInfoVO">
+		<id property="user_id" column="user_id"/>
+	    <result property="user_name" column="user_name"/>
+	    <result property="user_email" column="user_email"/>
+	    <result property="level" column="level"/>
+	    <result property="user_status" column="user_status"/>
+	    <result property="phone_number" column="phone_number"/>
+	    <result property="profile_picutre_url" column="profile_picutre_url"/>
+	</resultMap>
+	
+	<resultMap id="HardwareRewardSharingDetailMap" type="com.nanoDc.erp.vo.HardwareRewardSharingDetailVO">
+	    <id property="reward_sharing_detail_id" column="reward_sharing_detail_id"/>
+	    <result property="hw_reward_sharing_id" column="hw_reward_sharing_id"/>
+	    <result property="user_id" column="user_id"/>
+	    <result property="reward_fil" column="reward_fil"/>
+	    <association property="userInfoVO" resultMap="userInfoMap"/>
+	    <association property="hardwareRewardSharingVO" resultMap="hardwareRewardSharingMap"/>
+	</resultMap>	
 	<select id="getRewardSharingList" resultMap="hardwareRewardSharingMap">
 		SELECT
 		    r.reward_sharing_id,
@@ -40,4 +59,38 @@
 		INNER JOIN filmountain.hw_product p ON r.hw_product_id = p.hw_product_id
 		WHERE r.status = 'active'
 		</select>
+		<select id="selectRewardSharingDetailListById" parameterType = "integer" resultMap="HardwareRewardSharingDetailMap">
+		SELECT
+		    d.reward_sharing_detail_id,
+		    d.hw_reward_sharing_id,
+		    d.user_id,
+		    d.reward_fil,
+		    u.user_name,
+		    u.user_status,
+		    u.level,
+		    u.user_email,
+		    u.phone_number,
+		    p.service_end_date,
+		    p.total_budget_fil,
+		    fil_paid_per_tb,
+		    status,
+		    p.hw_product_name,
+		    p.hw_product_status,
+		    p.recruitment_start_date,
+		    p.preparation_start_date,
+		    p.service_start_date,
+		    p.service_end_date,
+		    p.total_budget_fil
+		FROM hw_reward_sharing_detail d
+		INNER JOIN user_info u ON d.user_id = u.user_id
+		INNER JOIN hw_reward_sharing r ON r.reward_sharing_id = d.hw_reward_sharing_id
+		INNER JOIN hw_product p ON r.hw_product_id = p.hw_product_id
+		WHERE r.status = 'active' AND d.hw_reward_sharing_id= #{hw_reward_sharing_id}
+		</select>
+		
+		
+		
+		
+		
+		
 </mapper>

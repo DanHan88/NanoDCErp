@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content" th:fragment="MainContent">
+		 <div class="modal fade" id="reward_detail_list_modal" tabindex="-1" role="dialog">
+				  <div class="modal-dialog modal-lg" style="overflow:auto; height:800px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h6 class="modal-title">배분 상세 내역</h6>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="card">
+								<div class="card-header">
+								</div>								
+								<div class="card-block table-responsive">
+									<table class="table table-bordered" id="reward_detail_table" width="100%" cellspacing="0">
+									<colgroup>
+										<col width="40%">
+										<col width="30%">
+										<col width="30%">					
+									</colgroup>
+                                    <thead>
+                                        <tr>
+											<th>이메일</th>
+											<th>회원명</th>
+											<th>FIL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    </tbody>
+                                </table>         
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						</div>						
+					</div>
+				</div>
+				  </div>	
+		
         <div class="mb-9">
           <div class="row g-3 mb-4">
             <div class="col-auto">
@@ -48,7 +89,7 @@
                       <td th:text="${reward.hardwareProductVO.hw_product_name}" class="total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${reward.status}" class="total align-middle fw-semibold text-body-highlight"></td>
                       <td class="ps-10 total align-middle position-relative">
-                      <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_user" type="button" id="button-addon2" th:value="${reward.reward_sharing_id}">상세
+                      <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_reward" type="button" id="button-addon2" th:value="${reward.reward_sharing_id}">상세
 					    </button>
 					    </td>
                     </tr></tbody>
