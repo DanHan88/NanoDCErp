@@ -2,20 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content" th:fragment="MainContent">
 			
-			<div class="modal fade" id="success_alert" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="success_alert" tabindex="-1" role="dialog">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
-			      <div class="modal-header bg-primary">
-			        <h5 class="modal-title text-white dark__text-gray-1100" id="staticBackdropLabel">Modal title</h5>
+			      <div class="modal-header bg-success">
+			        <h5 class="modal-title text-white dark__text-gray-1100" id="success_alert_title">제품 등록 성공!</h5>
 			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
 			      </div>
-			      <div class="modal-body">
-			       <span class="fas fa-check-circle text-success fs-5 me-3"></span>
-			  		<p class="mb-0 flex-1">제품 수정 성공!</p>
+			      <div class="modal-footer">
+			        <button class="btn btn-outline-success" type="button" data-bs-dismiss="modal">확인</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade" id="fail_alert" tabindex="-1" role="dialog">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header bg-danger">
+			        <h5 class="modal-title text-white dark__text-gray-1100" id="fail_alert_title">제품 등록 실패</h5>
+			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
 			      </div>
 			      <div class="modal-footer">
-			        <button class="btn btn-primary" type="button">Okay</button>
-			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+			        <button class="btn btn-outline-danger" type="button" data-bs-dismiss="modal">확인</button>
 			      </div>
 			    </div>
 			  </div>
@@ -135,28 +143,28 @@
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateA" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateA">투자모집 시작일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_A" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_A" type="text"  readonly="readonly">
                         </div>
                         <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateB" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateB">설치 시작일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_B" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_B" type="text"   readonly="readonly">
                         </div>
                          <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateC" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateC">운영 시작일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_C" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_C" type="text"   readonly="readonly">
                         </div>
                          <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckUpdateD" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckUpdateD">서비스 종료일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_D" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_update_D" type="text"  readonly="readonly">
                         </div>
 					  <div class="mb-2">
 					
@@ -415,58 +423,52 @@
   <div class="mb-2">
 					    <label class="form-label fs-9" for="basic-form-name">상품명</label>
 					
-					    <input class="form-control" id="hw_product_name" type="text" placeholder="ex) NanoDC 001" />
+					    <input class="form-control" id="hw_product_name_add" type="text" placeholder="ex) NanoDC 001" />
 					  </div>
 					  <div class="mb-2">
 					
 					    <label class="form-label fs-9" for="basic-form-name">도시</label>
 					
-					    <input class="form-control" id="city" type="text" placeholder="ex) 서울" />
+					    <input class="form-control" id="city_add" type="text" placeholder="ex) 서울" />
 					  </div>
 					  <div class="mb-2">
 					
 					    <label class="form-label fs-9" for="basic-form-name">예산</label>
-					    <input class="form-control" id="total_budget_fil" type="number" placeholder="ex) 1000" />
+					    <input class="form-control" id="total_budget_fil_add" type="number" placeholder="ex) 1000" />
 					  </div>
 					  <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewA" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckNewA">투자모집 시작일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_A" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_A" type="text" placeholder="dd/mm/yyyy" readonly="readonly">
                         </div>
                         <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewB" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckNewB">설치 시작일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_B" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_B" type="text" placeholder="dd/mm/yyyy" readonly="readonly">
                         </div>
                          <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewC" type="checkbox">
                         	<label class="form-check-label fs-9" for="flexSwitchCheckNewC">운영 시작일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_C" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_C" type="text" placeholder="dd/mm/yyyy" readonly="readonly">
                         </div>
                          <div class="mb-1">					  
 						  <div class="form-check form-switch">
                         	<input class="form-check-input flexSwitchCheck" id="flexSwitchCheckNewD" type="checkbox">
-                        	<label class="form-check-label fs-9" for="flexSwitchCheckNewE">서비스 종료일</label>
+                        	<label class="form-check-label fs-9" for="flexSwitchCheckNewD">서비스 종료일</label>
                         	</div>
-                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_E" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        	<input style="display: none;" class="form-control datetimepicker flatpickr-input" id="datetimepicker_new_D" type="text" placeholder="dd/mm/yyyy" readonly="readonly">
                         </div>
-					  <div class="mb-2">
-					
-					    <label class="form-label fs-9">사진 업로드</label>
-					
-					    <input class="form-control" type="file" />
-					  </div>
 					 <div class="mb-2">
 
-                          <label class="form-label fs-9" for="hw_product_status">서버상태</label>
+                          <label class="form-label fs-9" for="hw_product_status_add">서버상태</label>
 
-                          <select class="form-select" id="hw_product_status" aria-label="Default select example">
+                          <select class="form-select" id="hw_product_status_add" aria-label="Default select example">
                             <option value="투자모집중" selected="selected">투자모집중</option>
                             <option value="설치중">설치중</option>
                             <option value="운영중">운영중</option>
@@ -475,12 +477,12 @@
                           </select>
                         </div>
                         
-                         <div class="mb-2">
+                         <div class="mb-2" id="add_details">
 
 							    <label class="form-label fs-9" for="basic-form-textarea">상세 설명</label>
 							    <textarea class="tinymce" name="content" data-tinymce="{}"></textarea>
 							  </div>
-  <button class="btn btn-primary" type="submit">Submit</button>
+							   <button class="btn btn-primary" id="add_product_confirm" >수정</button>
 </form>
             </div>
         </div>
@@ -542,13 +544,13 @@
                   </thead>
                   <tbody class="list" id="order-table-body">
 					 <tr th:each="product : ${productList}"  class="hover-actions-trigger btn-reveal-trigger position-static">
-                      <td th:text="${#dates.format(product.recruitment_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="recruitment_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+                      <td th:text="${#dates.format(product.recruitment_start_date, 'yyyy-MM-dd')}" class="recruitment_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
                       <td th:text="${product.hw_product_name}" class="hw_product_name total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${product.hw_product_status}" class="hw_product_status total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${#dates.format(product.preparation_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="preparation_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-					  <td th:text="${#dates.format(product.service_start_date, 'yyyy-MM-dd HH:mm:ss')}" class="service_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-					  <td th:text="${#dates.format(product.service_end_date, 'yyyy-MM-dd HH:mm:ss')}" class="service_end_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${product.total_budget_fil}" class="total_budget_fil total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${#dates.format(product.preparation_start_date, 'yyyy-MM-dd')}" class="preparation_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+					  <td th:text="${#dates.format(product.service_start_date, 'yyyy-MM-dd')}" class="service_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+					  <td th:text="${#dates.format(product.service_end_date, 'yyyy-MM-dd')}" class="service_end_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+                      <td th:text="${#numbers.formatDecimal(product.total_budget_fil, 0, 'COMMA', 0, 'POINT')}" class="total_budget_fil total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${product.city}" class="city total align-middle fw-semibold text-body-highlight"></td>
                       <td class=" ps-10 total align-middle position-relative">
     					<!-- "상세" 버튼 -->

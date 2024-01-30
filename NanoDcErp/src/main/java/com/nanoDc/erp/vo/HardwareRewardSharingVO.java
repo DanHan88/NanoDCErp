@@ -1,7 +1,6 @@
 package com.nanoDc.erp.vo;
 
 import java.util.Date;
-import java.util.List;
 
 public class HardwareRewardSharingVO {
 
@@ -10,8 +9,13 @@ public class HardwareRewardSharingVO {
 	private Date regdate;
 	private double fil_paid_per_tb;
 	private String status;	
-	private List<HardwareRewardSharingDetailVO> ListHardwareRewardSharingDetail;
-
+	private HardwareProductVO hardwareProductVO;
+	public HardwareProductVO getHardwareProductVO() {
+		return hardwareProductVO;
+	}
+	public void setHardwareProductVO(HardwareProductVO hardwareProductVO) {
+		this.hardwareProductVO = hardwareProductVO;
+	}
 	public int getReward_sharing_id() {
 		return reward_sharing_id;
 	}

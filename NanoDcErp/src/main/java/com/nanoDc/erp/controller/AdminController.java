@@ -118,9 +118,11 @@ public class AdminController {
 	 @GetMapping(value={"/productManager"})
 	    public ModelAndView productManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
-	        List<HardwareProductVO> productList = this.adminService.getProductList();
+	        List<HardwareProductVO> productList = this.adminService.getProductList();        
+	        
 	        mav.addObject("productList", productList);
 	        mav.setViewName("views/admin/productManager");
+	       
 	        return mav;
 	    }
 	 /*----------------------------------*/
@@ -165,30 +167,11 @@ public class AdminController {
 		   return adminService.updateUser(userInfoVO, request);
 	 }
 	 
-	 /* 유저 비밀번호 초기화 */
-	 @ResponseBody
-	    @PostMapping(value = { "/userPwReset" })
-	    public String userPwReset(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
-	        
-
-	        return adminService.userPwReset(userInfoVO, request);
-	    }
-	 /* 유저 투자리스트 가져오기 */
-	 @ResponseBody
-	    @PostMapping(value={"/selectInvestmentListForUser"})
-	    public List<HardwareInvestmentVO> selectInvestmentListForUser(@RequestBody int user_id) {
-	    	return adminService.selectInvestmentListForUser(user_id);
-	    }
-	 
-	 /*----------------------------------*/
-	 /* -----------productmanager 기능 ----------*/
-	 /* ---------------------------------*/
-	 
 	 /* 상품 정보 수정 */
 	 @ResponseBody
 	 @PostMapping(value={ "/updateProduct" })
 	 public String updateProduct(MultipartHttpServletRequest request) throws ParseException {
-		   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss");
+		   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		   String hw_product_name = request.getParameter("hw_product_name");
 		   String city = request.getParameter("city");
 		   
@@ -243,11 +226,57 @@ public class AdminController {
 		   hardwareProductVO.setTotal_budget_fil(total_budget_fil);
 		   hardwareProductVO.setHw_product_status(hw_product_status);
 		   hardwareProductVO.setPicture_url(filePathString);
+		   hardwareProductVO.setHw_product_name(hw_product_name);
 		   
 		   return adminService.updateProduct(hardwareProductVO, request);
 	 }
+	 /* 상품 정보 추가 */
+	 @ResponseBody
+	 @PostMapping(value={ "/addProduct" })
+	 public String addProduct(MultipartHttpServletRequest request) throws ParseException {
+		   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		   String hw_product_name = request.getParameter("hw_product_name");
+		   String city = request.getParameter("city");
+		   
+		   String recruitment_start_date_string = request.getParameter("recruitment_start_date");
+		   String preparation_start_date_string = request.getParameter("preparation_start_date");
+		   String service_start_date_string = request.getParameter("service_start_date");
+		   String service_end_date_string = request.getParameter("service_end_date");
+		   String details = request.getParameter("details");
+		   float total_budget_fil = Float.parseFloat(request.getParameter("total_budget_fil"));
+		   String hw_product_status = request.getParameter("hw_product_status");
+
+		   HardwareProductVO hardwareProductVO = new HardwareProductVO();
+		   hardwareProductVO.setCity(city);
+		   if(recruitment_start_date_string!=null&&!recruitment_start_date_string.equals("")) {
+			   hardwareProductVO.setRecruitment_start_date(dateFormat.parse(recruitment_start_date_string));
+		   }
+		   if(preparation_start_date_string!=null&&!preparation_start_date_string.equals("")) {
+			   hardwareProductVO.setPreparation_start_date(dateFormat.parse(preparation_start_date_string));
+
+		   }
+		   if(service_start_date_string!=null&&!service_start_date_string.equals("")) {
+			   hardwareProductVO.setService_start_date(dateFormat.parse(service_start_date_string));
+		   }
+		   if(service_end_date_string!=null&&!service_end_date_string.equals("")) {
+			   hardwareProductVO.setService_end_date(dateFormat.parse(service_end_date_string));
+		   }   
+		   hardwareProductVO.setDetails(details);
+		   hardwareProductVO.setTotal_budget_fil(total_budget_fil);
+		   hardwareProductVO.setHw_product_status(hw_product_status);
+		   hardwareProductVO.setHw_product_name(hw_product_name);
+		   
+		   return adminService.addProduct(hardwareProductVO, request);
+	 }
 	 
-	 
+	 /* 유저 비밀번호 초기화 */
+	 @ResponseBody
+	    @PostMapping(value = { "/userPwReset" })
+	    public String userPwReset(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
+	        
+
+	        return adminService.userPwReset(userInfoVO, request);
+	    }
 }
 
 	 

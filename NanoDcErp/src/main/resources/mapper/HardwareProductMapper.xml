@@ -35,5 +35,35 @@
 
 	</update>
 	
+	<insert id="addProduct" parameterType="com.nanoDc.erp.vo.HardwareProductVO">
+		  INSERT INTO hw_product (
+		    hw_product_name,
+		    hw_product_status,
+		    total_budget_fil,
+		    city,
+		    details,
+		    picture_url,
+		    recruitment_start_date,
+		    preparation_start_date,
+		    service_start_date,
+		    service_end_date
+		  )
+		  VALUES (
+		    #{hw_product_name},
+		    #{hw_product_status},
+		    #{total_budget_fil},
+		    #{city},
+		    #{details},
+		    #{picture_url},
+		    #{recruitment_start_date},
+		    #{preparation_start_date},
+		    #{service_start_date},
+		    #{service_end_date}
+		  )
+	</insert>
+	
+	
+	
+	
 	
 </mapper>

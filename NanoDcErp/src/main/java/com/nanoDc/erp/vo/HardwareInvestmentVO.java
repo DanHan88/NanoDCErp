@@ -2,9 +2,6 @@ package com.nanoDc.erp.vo;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Repository;
-
-@Repository(value="HardwareInvestmentVO")
 public class HardwareInvestmentVO {
 
 	private String user_name;

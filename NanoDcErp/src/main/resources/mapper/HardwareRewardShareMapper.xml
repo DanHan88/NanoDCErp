@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanoDc.erp.mapper.HardwareRewardSharingMapper">
-	<resultMap id="hardwareRewardSharingDetailMap" type="com.nanoDc.erp.vo.HardwareProductVO">
+	<resultMap id="hardwareProductMap" type="com.nanoDc.erp.vo.HardwareProductVO">
 	    <id property="hw_product_id" column="hw_product_id"/>
 	    <result property="hw_product_id" column="hw_product_id"/>
 	    <result property="hw_product_name" column="hw_product_name"/>
@@ -20,7 +20,7 @@
 	    <result property="regdate" column="regdate"  javaType="java.util.Date" jdbcType="TIMESTAMP"/>
 	    <result property="fil_paid_per_tb" column="fil_paid_per_tb"/>
 	    <result property="status" column="status"/>
-	    <association property="hardwareProductDetailVO" resultMap="hardwareRewardSharingDetailMap"/>
+	    <association property="hardwareProductVO" resultMap="hardwareProductMap"/>
 	</resultMap>
 	<select id="getRewardSharingList" resultMap="hardwareRewardSharingMap">
 		SELECT

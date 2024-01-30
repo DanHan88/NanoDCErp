@@ -10,7 +10,7 @@ public class HardwareProductVO {
 	private Date preparation_start_date;
 	private Date service_start_date;
 	private Date service_end_date;
-	private double total_budget_fil;
+	private float total_budget_fil;
 	private String city;
 	private String details;
 	private String picture_url;
@@ -78,10 +78,10 @@ public class HardwareProductVO {
 	public void setService_end_date(Date service_end_date) {
 		this.service_end_date = service_end_date;
 	}
-	public double getTotal_budget_fil() {
+	public float getTotal_budget_fil() {
 		return total_budget_fil;
 	}
-	public void setTotal_budget_fil(double total_budget_fil) {
+	public void setTotal_budget_fil(float total_budget_fil) {
 		this.total_budget_fil = total_budget_fil;
 	}
 }

@@ -9,6 +9,7 @@ import com.nanoDc.erp.vo.HardwareProductVO;
 public interface HardwareProductMapper {
 	public List<HardwareProductVO> getProductList();
 	public void updateProduct(HardwareProductVO hardwareProductVO);
+	public void addProduct(HardwareProductVO hardwareProductVO);
 	
 	
 	

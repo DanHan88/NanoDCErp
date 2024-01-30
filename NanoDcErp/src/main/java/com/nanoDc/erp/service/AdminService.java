@@ -94,16 +94,16 @@ public class AdminService {
 	    	userInfoMapper.userPwReset(userInfoVO);
 	    	return "success";
 	    }
-	 /* 유저 투자 리스트 가져오기 */
-	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id){
-	    	return investmentMapper.selectInvestmentListForUser(user_id);
-	    }
 	 
-	 /* 상품 업데이트 */
+	 
 	 public String updateProduct(HardwareProductVO hardwareProductVO, HttpServletRequest request) {
 		 	productMapper.updateProduct(hardwareProductVO);
 	    	return "success";
 	    }
-	
+	 
+	 public String addProduct(HardwareProductVO hardwareProductVO, HttpServletRequest request) {
+		 	productMapper.addProduct(hardwareProductVO);
+	    	return "success";
+	    }
 	 
 }

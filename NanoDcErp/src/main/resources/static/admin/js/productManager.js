@@ -3,6 +3,12 @@ $(document).ready(function() {
 	 	var user_name; 
         var user_email; 
         var user_phone_number;
+        
+        $('#success_alert').on('hidden.bs.modal', function (e) {
+								 location.reload(true);
+					    });
+        
+        
   		$('.detail_product').on('click', function() {
 			 var clickedButton = $(this).parent().parent();
 			$('#hw_product_name').val(clickedButton.find('.hw_product_name').text());
@@ -48,44 +54,77 @@ $(document).ready(function() {
 							 
 			$('#detail_product_modal').modal('show');
 		});
+		
+		
 		$('#add_product_button').on('click', function() {
 			$('#add_product_modal').modal('show');
 		});
     
-        $('#register_product_confirm').click(function(){
-			user_name = $('#user_name').val(); 
-	        user_email = $('#user_email').val(); 
-	        user_phone_number = $('#user_phone').val(); 
+        $('#add_product_confirm').click(function(){
+					var hw_product_name = $('#hw_product_name_add').val();
+					var city = $('#city_add').val();
+					var hw_product_status = $('#hw_product_status_add').val();
+					//var fileInput = $('#fileInput_add')[0].files[0];
+					var total_budget_fil = $('#total_budget_fil_add').val();
+					//var product_id = val($(this).val());
+					var details = window.tinymce.get(1).getContent();
+					var recruitment_start_date ="";
+					var preparation_start_date="";
+					var service_start_date ="";
+					var service_end_date ="";
+						
+					var formData = new FormData();
+					if ($("#flexSwitchCheckNewA").prop("checked")) {
+			        	recruitment_start_date = $("#datetimepicker_new_A").val();
+			        } 
+			        if ($("#flexSwitchCheckNewB").prop("checked")) {
+			            preparation_start_date = $("#datetimepicker_new_B").val();
+			        } 
+			        if ($("#flexSwitchCheckNewC").prop("checked")) {
+						service_start_date = $("#datetimepicker_new_C").val();
+			        } 
+			        if ($("#flexSwitchCheckNewD").prop("checked")) {
+						service_end_date = $("#datetimepicker_new_D").val();
+			        } 
+					
+					formData.append('hw_product_name', hw_product_name);
+					formData.append('city', city);
+					formData.append('user_name', user_name);
+					formData.append('recruitment_start_date', recruitment_start_date);
+					formData.append('preparation_start_date', preparation_start_date);
+					formData.append('service_start_date', service_start_date);
+					formData.append('service_end_date', service_end_date);
+					formData.append('details',details);
+					formData.append('total_budget_fil',total_budget_fil);
+					formData.append('hw_product_status',hw_product_status);
+					/*
+					if(fileInput!=undefined){
+						formData.append('file', fileInput);
+					}else{
+						formData.append('file', 'no_change');
+					}*/	
             $.ajax({
-                type: "POST",
-                url: "/admin/addNewUser",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    user_name: user_name,
-                    user_email: user_email,
-                    phone_number: user_phone_number,
-                    user_status: "active",
-                    password: "123123"
-                }),
-                success: function (data) {
-                    $('#upload_user').modal('hide');
-                    if (data == 'success') {
-                        if ($('#alert_header_user').hasClass("bg-danger")) {
-                            $('#alert_header_user').removeClass("bg-danger").addClass("bg-success");
-                        } 
-                        $('#alert_title_user').text("회원 등록 완료");
-                        $('#alert_modal_user').modal('show');
-                    } else if (data == 'failed:session_closed') {
-                        $('#session_alert_user').modal('show');
-                    } else {
-                        if ($('#alert_header_user').hasClass("bg-success")) {
-                            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
-                        } 
-                        $('#alert_title_user').text("회원 등록 실패");
-                        $('#alert_modal_user').modal('show');
-                    }
-                }
-            });
+								type: "POST",
+							    url: "/admin/addProduct",
+							    data: formData,
+							    contentType: false,
+							    processData: false,
+							    success: function (data) {
+									$("#detail_product_modal").modal('hide');	 
+									if(data=='success'){
+										$('#success_alert_title').text('제품수정 성공!');
+										$('#success_alert').modal('show');
+			                        }
+			                        else if(data='failed:session_closed'){
+										$('#fail_alert').text('로그인을 다시해 주십시오.');
+										$("#fail_alert").modal('show');	 	
+									}
+			                        else{
+										$('#success_alert_title').text('제품수정 실패');
+										$("#fail_alert").modal('show');	 
+									}
+			                    }
+			                });
         });          
               $('#update_product_confirm').on('click', function() { 
 					var hw_product_name = $('#hw_product_name').val();
@@ -139,17 +178,18 @@ $(document).ready(function() {
 							    contentType: false,
 							    processData: false,
 							    success: function (data) {
-									$("#detail_product_modal").hide();
-									 $("#success_alert").show();
+									$("#detail_product_modal").modal('hide');	 
 									if(data=='success'){
-										 $("#success_alert").show();
+										$('#success_alert_title').text('제품수정 성공!');
+										$('#success_alert').modal('show');
 			                        }
 			                        else if(data='failed:session_closed'){
-										
-										
+										$('#fail_alert').text('로그인을 다시해 주십시오.');
+										$("#fail_alert").modal('show');	 	
 									}
 			                        else{
-										
+										$('#success_alert_title').text('제품수정 실패');
+										$("#fail_alert").modal('show');	 
 									}
 			                    }
 			                });
