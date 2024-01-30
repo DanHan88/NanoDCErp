@@ -41,34 +41,85 @@ $(document).ready(function() {
 								$('input[name="user_status"][value="active"]').prop('checked', true);
 							}else{
 								$('input[name="user_status"][value="inactive"]').prop('checked', true);
-							}				
-							/* $.ajax({
+							}	
+								
+							 $.ajax({
 			                    type: "POST",
-			                    url: "/selectInvestmentListForUser",
+			                    url: "/admin/selectInvestmentListForUser",
 			                    contentType: "application/json",
 			                    data: user_id,
 			                    success: function (data) {
 									$("#investment_user_table").find('tbody').empty();
+									
 									data.forEach(function(item) {
-										var date = new Date(item.purchase_date);
+										var date = new Date(item.hw_reg_date);
 									    var formattedDate = date.getFullYear() + '-' +
 									                        ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
 									                        ('0' + date.getDate()).slice(-2);
 									    var newRow = '<tr>' +
 									        '<td align="center" id="update_purchase_date">' + formattedDate + '</td>' +
-									        '<td align="center" id="update_product_name" data-user_id="'+  item.investment_category_id + '">' + item.product_name + '</td>' +
-									        '<<td align="center" id="update_purchase_size">' + item.purchase_size + '</td>' +
-									        '<td align="center" id="update_fil_invested">' + item.fil_invested + '</td>' +
-									        '<td align="center"><button type="button" class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.investment_id + '">수정</button>'+
-									        '<button type="button" class="btn btn-secondary btn-sm m-1 delete_user_investment_button" value="'+ item.investment_id + '">삭제</button></td></tr>';
+									        '<td align="center" id="update_product_name" data-user_id="'+  item.hw_product_id+ '">' + item.hw_product_name + '</td>' +
+									     
+									        '<td align="center" id="update_fil_invested">' + item.hw_invest_fil + '</td>' +
+									        '<td align="center"><button type="button" class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.hw_id + '">수정</button>'+
+									        '<button type="button" class="btn btn-secondary btn-sm m-1 delete_user_investment_button" value="'+ item.hw_id + '">삭제</button></td></tr>';
 									    $("#investment_user_table").append(newRow);
 									});
 									
 			                    }
-			                });*/ 
+			                });
 							$('#detail_user_modal').modal('show');
 							
 					    });
+					    $('#user_investment_add').on('click', function() {
+							   var hw_reg_date = $("#datetimepicker_invst").val();
+						       var fil_invested = $('#node_fil').val();
+						       var hw_product_id = $('#selectBox_product').val();
+						       var user_id = $('#user_edit_1_btn').val(); 	   	
+							   if(hw_reg_date==""||hw_product_id==""){
+										if ($('#alert_header_user').hasClass("bg-success")) 
+										{
+								            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
+							       		} 			
+							       		 $('#alert_title_user').text("모든 데이터를 입력해 주십시오.");
+								         $('#alert_modal_user').modal('show');
+								         return;
+							   }
+							   $.ajax({
+			                    type: "POST",
+			                    url: "/admin/addNewInvestment",
+			                    contentType: "application/json",
+			                    data: JSON.stringify({
+							        hw_reg_date: hw_reg_date,
+							        hw_status:"active",
+							        hw_invest_fil: fil_invested,
+							        hw_product_id : hw_product_id,
+							        user_id  : user_id
+							    }),
+			                    success: function (data) {
+									$('#add_user_modal').modal('hide');
+									if(data=='success'){
+										if ($('#alert_header_user').hasClass("bg-danger")) 
+											{
+							            		$('#alert_header_user').removeClass("bg-danger").addClass("bg-success");
+							       		 	} 
+										$('#alert_title_user').text("상품투자 등록 성공");
+										$('#alert_modal_user').modal('show');
+			                        }
+			                        else if(data='failed:session_closed'){	
+										$('#session_alert_user').modal('show');
+									}
+			                        else{
+										if ($('#alert_header_user').hasClass("bg-success")) 
+										{
+								            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
+							       		} 			
+							       		 $('#alert_title_user').text("상품투자 정보 등록 실패 : 중복된 제품명 또는 같은 정보");
+								            $('#alert_modal_user').modal('show');
+									}
+			                    	}
+			                	});  
+							});
 					     $('#user_update_confirm').on('click', function() {     
 							   var user_name = $("#user_name").val();
 						       var user_email = $('#user_email').val();
@@ -125,7 +176,13 @@ $(document).ready(function() {
 			                });
 					    });
 					   
-					   
+					   $('#add_user_investment_button').on('click', function() {
+					       $('#add_user_investment').modal('show');
+					    });
+					    $(document).on('click', '.delete_user_investment_button', function() {
+							$('#investment_delete').val($(this).val());
+						    $('#delete_user_investment').modal('show'); 
+						});
 						
 						
 						 $('#user_pw_reset_btn').on('click', function() {
@@ -137,7 +194,7 @@ $(document).ready(function() {
 						 $('#user_pw_reset_confirm').on('click', function() {
 							 var user_id = $('#user_edit_1_btn').val(); 
 							 var user_password = $('#new_password').val();
-							 debugger;
+
 			
 							 
 							  $.ajax({

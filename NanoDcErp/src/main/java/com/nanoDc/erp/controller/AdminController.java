@@ -24,6 +24,7 @@ import java.util.Date;
 import com.nanoDc.erp.service.AdminService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
+import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
@@ -61,8 +62,10 @@ public class AdminController {
 	    public ModelAndView userManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView(); 
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
+	        List<HardwareProductVO> productList = this.adminService.getProductList(); 
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/userManager");
+	        mav.addObject("productList", productList);
 	        return mav;
 	    }
 	 
@@ -181,6 +184,13 @@ public class AdminController {
 	    public List<HardwareInvestmentVO> selectInvestmentListForUser(@RequestBody int user_id) {
 	    	return adminService.selectInvestmentListForUser(user_id);
 	    }
+	 /* 유저 투자등록 */
+	 @ResponseBody
+	 @PostMapping(value={"/addNewInvestment"})
+	 public String addNewInvestment(@RequestBody HardwareInvestmentVO hardwareInvestmentVO, HttpServletRequest request) {
+	    
+	    return adminService.addNewInvestment(hardwareInvestmentVO,request);
+	    }   
 	 
 	 /*----------------------------------*/
 	 /* -----------productmanager 기능 ----------*/
@@ -287,6 +297,12 @@ public class AdminController {
 		   
 		   return adminService.addProduct(hardwareProductVO, request);
 	 }
+	 @ResponseBody
+     @PostMapping(value={"/selectRewardSharingDetailListById"})
+     public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(@RequestBody int reward_sharing_id) {
+     List<HardwareRewardSharingDetailVO> resultList = adminService.selectRewardSharingDetailListById(reward_sharing_id);
+        return resultList;
+     }
 }
 
 	 

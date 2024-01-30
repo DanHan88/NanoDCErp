@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanoDc.erp.mapper.HardwareInvestmentMapper">
+	<!-- select -->
 		<select id="getInvestmentList" resultType="com.nanoDc.erp.vo.HardwareInvestmentVO">
 			SELECT investment.hw_id, 
 		   		   investment.hw_status, 
@@ -15,7 +16,7 @@
 			FROM filmountain.hw_investment AS investment
 			INNER JOIN filmountain.hw_product AS product ON investment.hw_product_id = product.hw_product_id
 			INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
-			WHERE investment.hw_status='active' AND product.hw_product_status='active' AND user.user_status='active'
+			WHERE investment.hw_status='active' AND product.hw_product_status!='서비스종료' AND user.user_status='active'
 		</select>
 		
 		<select id="selectInvestmentListForUser" parameterType="integer" resultType="com.nanoDc.erp.vo.HardwareInvestmentVO">
@@ -31,6 +32,24 @@
 			FROM filmountain.hw_investment AS investment
 			INNER JOIN filmountain.hw_product AS product ON investment.hw_product_id = product.hw_product_id
 			INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
-			WHERE investment.hw_status='active' AND product.hw_product_status='active' AND user.user_status='active' AND user.user_id = #{user_id}
+			WHERE investment.hw_status='active' AND product.hw_product_status!='서비스종료' AND user.user_status='active' AND user.user_id = #{user_id}
 	</select>
+	
+	<!-- insert -->
+	<insert id="addNewinvestmentUser" parameterType="com.nanoDc.erp.vo.HardwareInvestmentVO">
+		INSERT INTO filmountain.hw_investment
+		(hw_reg_date,
+		 hw_status,
+		 hw_product_id,
+		 user_id,
+		 hw_invest_fil)
+		VALUES
+		(#{hw_reg_date}, 
+		#{hw_status},
+		#{hw_product_id}, 
+		#{user_id}, 
+		
+		#{hw_invest_fil})
+	</insert>
+	<!-- update -->
 </mapper>

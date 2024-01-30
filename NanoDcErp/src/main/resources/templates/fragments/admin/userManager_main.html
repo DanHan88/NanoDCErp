@@ -34,7 +34,10 @@
 								    <li class="nav-item" id="member_tab_li">
 								        <a class="nav-link active" id="member_tab_link" data-bs-toggle="tab" href="#member_tab" role="tab" aria-controls="member_tab" aria-selected="true">회원 정보</a>
 								    </li>
-								    <li class="nav-item" id="investment_tab_li"><a class="nav-link" data-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-selected="false">투자내역</a></li>	
+								   <li class="nav-item" id="investment_tab_li">
+									    <a class="nav-link" data-bs-toggle="tab" href="#investment_tab" role="tab" aria-controls="investment_tab" aria-selected="false">투자내역</a>
+									</li>
+
 								    <li class="nav-item" id="sendFil_tab_li">
 								        <a class="nav-link" id="sendFil_tab_link" data-bs-toggle="tab" href="#sendFil_tab" role="tab" aria-controls="sendFil_tab" aria-selected="false">Fil 전송</a>
 								    </li>
@@ -53,22 +56,23 @@
 														</div>								
 														<div class="card-block table-responsive">
 															<table id="investment_user_table" class="table table-hover table-bordered table-sm">
-																<colgroup><col width="20%">
-																<col width="30%">
-																<col width="15%">
-																<col width="15%">
-																<col width="25%">					
-																</colgroup><thead>
-																	<tr>
-																		<th>구매일</th>
-																		<th>상품명</th>
-																		<th>투자TB</th>
-																		<th>투자FIL</th>
-																		<th></th>
-																	</tr>
-																</thead>									
-																<tbody></tbody>
-															</table>
+														    <colgroup>
+														        <col width="20%">
+														        <col width="20%">
+														        <col width="15%">
+														        <col width="20%">
+														    </colgroup>
+														    <thead>
+														        <tr>
+														            <th style="text-align: center;">구매일</th>
+														            <th style="text-align: center;">상품명</th>
+														            <th style="text-align: center;">투자FIL</th>
+														            <th style="text-align: center;"></th>
+														        </tr>
+														    </thead>
+														    <tbody></tbody>
+														</table>
+
 														</div>
 													</div>
 												</div>
@@ -239,38 +243,7 @@
 
         </div>
     </form>
-</div>
-
-<div class="tab-pane" id="investment_tab" role="tabpanel" aria-expanded="false">
-											<div class="row">
-												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-													<div class="card">
-														<div class="card-header">
-															<button id="add_user_investment_button" type="button" class="btn btn-primary btn-sm float-right" style="margin-top: 0px;">투자 등록</button>				
-														</div>								
-														<div class="card-block table-responsive">
-															<table id="investment_user_table" class="table table-hover table-bordered table-sm">
-																<colgroup><col width="20%">
-																<col width="30%">
-																<col width="15%">
-																<col width="15%">
-																<col width="25%">					
-																</colgroup><thead>
-																	<tr>
-																		<th>구매일</th>
-																		<th>상품명</th>
-																		<th>투자TB</th>
-																		<th>투자FIL</th>
-																		<th></th>
-																	</tr>
-																</thead>									
-																<tbody></tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>										
+</div>								
 																													
 									</div>
 								</div>
@@ -318,6 +291,78 @@
         </div>
     </div>
 </div>
+<!--투자 정보 삭제 모달 -->
+<div class="modal fade" id="delete_user_investment" tabindex="-1" role="dialog">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header bg-primary">
+				        <h5 class="modal-title text-white dark__text-gray-1100" >투자정보 삭제</h5>
+				                        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
+
+				      </div>
+				      <div class="modal-body">
+				        <p>투자정보를 삭제 하시겠습니까?</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" id="investment_delete" class="btn btn-danger">삭제</button>
+				        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">취소</button>
+				      </div>
+				    </div>
+				  </div>
+			</div>
+<!--투자 등록 모달 -->
+<div class="modal fade" id="add_user_investment" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header bg-primary">
+							<h5 class="modal-title text-white dark__text-gray-1100" >투자정보 등록</h5>
+							<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group row">
+								<label class="col-md-4 form-control-label" for="datepicker" style="margin-top:5px;"><b>구매일</b></label>
+								<div class="col-md-8">
+      						<input style="" class="form-control datetimepicker flatpickr-input active" id="datetimepicker_invst" type="text" readonly="readonly">
+								</div>									
+							</div>
+				
+
+
+    
+                  
+
+							<div class="form-group row">
+								<label class="col-md-4 form-control-label" style="margin-top:5px;"><b>상품명</b></label>
+								<div class="col-md-8">
+									    <select class="form-control" id="selectBox_product" name="selectedItem">
+									           <option th:each="product : ${productList}" th:value="${product.hw_product_id}" th:text="${product.hw_product_name}"></option>
+
+							            </select>
+								</div>									
+							</div>
+							<div class="form-group row">
+								<label class="col-md-4 form-control-label" style="margin-top:5px;"><b>투자FIL</b></label>
+								<div class="col-md-8">
+									<input id="node_fil" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric">
+								</div>
+							</div>																																		
+						</div>
+						<div class="modal-footer">
+							<button id="user_investment_add" type="button" class="btn btn-primary">등록</button>
+							<button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">닫기</button>
+						
+						</div>
+					</div>
+				</div>
+				</div>
 <!--업데이트 성공 통보 모달 -->
 <div class="modal fade" id="alert_modal_user_update" tabindex="-1" role="dialog">
 				  <div class="modal-dialog" role="document">
@@ -395,7 +440,7 @@
     <th class="sort align-middle" scope="col" data-sort="total" style="width:15%;">회원명</th>
     <th class="sort align-middle ps-3" scope="col" data-sort="customer" style="width:15%; min-width: 250px;">이메일</th>
     <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:15%;">휴대폰번호</th>
-    <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">투자상품</th>
+    <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">총투자상품</th>
     <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:10%;">상태</th>
     <th class="sort align-middle text-start ps-4" scope="col" style="width:5%;">레벨</th> <!-- 수정된 "레벨" 열 -->
     <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
@@ -415,7 +460,7 @@
                       <td th:text="${userInfo.user_name}" class="user_name total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${userInfo.user_email}" class="user_email total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${userInfo.phone_number}" class="user_phone total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight ps-5"></td>
                       <td th:text="${userInfo.user_status}" class="user_status total align-middle fw-semibold text-body-highlight"  
                       	  th:style="${userInfo.user_status == 'active' ? 'color: green;' : 'color: red;'}"
 					      th:attr="data-user-id=${userInfo.user_id}"></td>
@@ -441,9 +486,11 @@
                   <button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
       </div>
         </html>

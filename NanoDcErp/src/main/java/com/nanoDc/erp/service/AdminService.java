@@ -15,6 +15,7 @@ import com.nanoDc.erp.mapper.HardwareRewardSharingMapper;
 import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
+import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
@@ -98,6 +99,11 @@ public class AdminService {
 	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id){
 	    	return investmentMapper.selectInvestmentListForUser(user_id);
 	    }
+	 /* 유저 투자 등록 */
+	 public String addNewInvestment(HardwareInvestmentVO hardwareInvestmentVO, HttpServletRequest request) {
+		 	investmentMapper.addNewinvestmentUser(hardwareInvestmentVO);
+	    	return "success";
+	    }
 	 
 	 /* 상품 업데이트 */
 	 public String updateProduct(HardwareProductVO hardwareProductVO, HttpServletRequest request) {
@@ -110,5 +116,8 @@ public class AdminService {
 		 	productMapper.addProduct(hardwareProductVO);
 	    	return "success";
 	    }
+	 public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(int reward_sharing_id){
+         return rewardSharingMapper.selectRewardSharingDetailListById(reward_sharing_id);
+      }
 	 
 }
