@@ -217,7 +217,7 @@ public class AdminController {
 
 	                java.nio.file.Path filePath = uploadPath.resolve(hw_product_id+fileName);
 	                file.transferTo(filePath.toFile());
-	                filePathString = "/profile/"+hw_product_id+fileName;
+	                filePathString = "/img/"+hw_product_id+fileName;
 	            } catch (IOException e) {
 	                e.printStackTrace();
 	            }

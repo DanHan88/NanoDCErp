@@ -17,4 +17,20 @@
 			INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
 			WHERE investment.hw_status='active' AND product.hw_product_status='active' AND user.user_status='active'
 		</select>
+		
+		<select id="selectInvestmentListForUser" parameterType="integer" resultType="com.nanoDc.erp.vo.HardwareInvestmentVO">
+			SELECT investment.hw_id, 
+		   		   investment.hw_status, 
+		   		   investment.hw_reg_date, 
+		  		   product.hw_product_name, 
+		   		   user.user_name, 
+		   		   user.user_email,
+		   		   investment.hw_invest_fil,
+		   		   investment.user_id,
+		   		   investment.hw_product_id	   
+			FROM filmountain.hw_investment AS investment
+			INNER JOIN filmountain.hw_product AS product ON investment.hw_product_id = product.hw_product_id
+			INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
+			WHERE investment.hw_status='active' AND product.hw_product_status='active' AND user.user_status='active' AND user.user_id = #{user_id}
+	</select>
 </mapper>

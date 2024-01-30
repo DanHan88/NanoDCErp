@@ -550,7 +550,7 @@
                       <td th:text="${#dates.format(product.preparation_start_date, 'yyyy-MM-dd')}" class="preparation_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
 					  <td th:text="${#dates.format(product.service_start_date, 'yyyy-MM-dd')}" class="service_start_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
 					  <td th:text="${#dates.format(product.service_end_date, 'yyyy-MM-dd')}" class="service_end_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${#numbers.formatDecimal(product.total_budget_fil, 0, 'COMMA', 0, 'POINT')}" class="total_budget_fil total align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${product.total_budget_fil}" class="total_budget_fil total align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${product.city}" class="city total align-middle fw-semibold text-body-highlight"></td>
                       <td class=" ps-10 total align-middle position-relative">
     					<!-- "상세" 버튼 -->

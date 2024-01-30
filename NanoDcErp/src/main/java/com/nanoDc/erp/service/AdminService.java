@@ -65,7 +65,7 @@ public class AdminService {
 	    	if(overlappingUserInfoVO!=null) {
 	    		return "error1";
 	    	} */
-	    	userInfoVO.setProfile_picture_url("/profile/default_profile.jpg");	
+	    	userInfoVO.setProfile_picture_url("/img/default_profile.jpg");	
 	    	userInfoMapper.addNewUser(userInfoVO);
 	    	
 	    	int userId = userInfoMapper.get_last_useriId();
