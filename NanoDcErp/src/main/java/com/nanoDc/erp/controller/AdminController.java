@@ -167,6 +167,25 @@ public class AdminController {
 		   return adminService.updateUser(userInfoVO, request);
 	 }
 	 
+	 /* 유저 비밀번호 초기화 */
+	 @ResponseBody
+	    @PostMapping(value = { "/userPwReset" })
+	    public String userPwReset(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
+	        
+
+	        return adminService.userPwReset(userInfoVO, request);
+	    }
+	 /* 유저 투자리스트 가져오기 */
+	 @ResponseBody
+	    @PostMapping(value={"/selectInvestmentListForUser"})
+	    public List<HardwareInvestmentVO> selectInvestmentListForUser(@RequestBody int user_id) {
+	    	return adminService.selectInvestmentListForUser(user_id);
+	    }
+	 
+	 /*----------------------------------*/
+	 /* -----------productmanager 기능 ----------*/
+	 /* ---------------------------------*/
+	  
 	 /* 상품 정보 수정 */
 	 @ResponseBody
 	 @PostMapping(value={ "/updateProduct" })
@@ -268,15 +287,6 @@ public class AdminController {
 		   
 		   return adminService.addProduct(hardwareProductVO, request);
 	 }
-	 
-	 /* 유저 비밀번호 초기화 */
-	 @ResponseBody
-	    @PostMapping(value = { "/userPwReset" })
-	    public String userPwReset(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
-	        
-
-	        return adminService.userPwReset(userInfoVO, request);
-	    }
 }
 
 	 

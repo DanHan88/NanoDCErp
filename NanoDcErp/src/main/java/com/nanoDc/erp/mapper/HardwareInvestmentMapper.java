@@ -9,7 +9,7 @@ import com.nanoDc.erp.vo.HardwareInvestmentVO;
 @Mapper
 public interface HardwareInvestmentMapper {
 	 public List<HardwareInvestmentVO> getInvestmentList();
-	
+	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id);
 	
 	
 	
