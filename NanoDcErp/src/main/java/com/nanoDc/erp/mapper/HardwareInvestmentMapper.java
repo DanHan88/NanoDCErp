@@ -12,6 +12,7 @@ public interface HardwareInvestmentMapper {
 	 public List<HardwareInvestmentVO> getInvestmentList();
 	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id);
 	 public void addNewinvestmentUser(HardwareInvestmentVO hardwareInvestmentVO);
+	 public void updateinvestmentUser(HardwareInvestmentVO hardwareInvestmentVO);
 	
 	
 }

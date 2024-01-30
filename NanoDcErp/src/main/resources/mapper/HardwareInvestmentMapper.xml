@@ -51,5 +51,18 @@
 		
 		#{hw_invest_fil})
 	</insert>
+	
 	<!-- update -->
+	
+	<update id="updateInvestment" parameterType="com.nanoDc.erp.vo.HardwareInvestmentVO">
+	  
+	    UPDATE filmountain.hw_investment
+	    SET
+	        hw_status = #{newStatus},
+	        hw_product_id = #{newProductId},
+	        hw_invest_fil = #{newInvestFil}
+	    WHERE
+	        user_id = #{userId}
+	</update>
+	
 </mapper>

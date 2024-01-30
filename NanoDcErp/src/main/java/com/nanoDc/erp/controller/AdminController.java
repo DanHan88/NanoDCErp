@@ -191,9 +191,16 @@ public class AdminController {
 	    
 	    return adminService.addNewInvestment(hardwareInvestmentVO,request);
 	    }   
+	 /* 유저 투자 수정 (개인) */
+	 @ResponseBody
+	 @PostMapping(value={"/updateInvestmentUser"})
+	 public String updateinvestmentUser(@RequestBody HardwareInvestmentVO hardwareInvestmentVO, HttpServletRequest request) {
+	    
+	    return adminService.updateinvestmentUser(hardwareInvestmentVO,request);
+	    }   
 	 
 	 /*----------------------------------*/
-	 /* -----------productmanager 기능 ----------*/
+	 /* -----------productmanager기능----------*/
 	 /* ---------------------------------*/
 	  
 	 /* 상품 정보 수정 */
@@ -297,6 +304,11 @@ public class AdminController {
 		   
 		   return adminService.addProduct(hardwareProductVO, request);
 	 }
+	 /*---------------------------------------------*/
+	 /* -----------HardwareRewardmanger 기능 ----------*/
+	 /* --------------------------------------------*/
+	 
+	 /*배분 상세 내역 조회*/
 	 @ResponseBody
      @PostMapping(value={"/selectRewardSharingDetailListById"})
      public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(@RequestBody int reward_sharing_id) {

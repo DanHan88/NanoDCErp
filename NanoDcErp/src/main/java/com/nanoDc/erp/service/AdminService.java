@@ -104,6 +104,11 @@ public class AdminService {
 		 	investmentMapper.addNewinvestmentUser(hardwareInvestmentVO);
 	    	return "success";
 	    }
+	 /* 유저 투자 수정 */
+	 public String updateinvestmentUser(HardwareInvestmentVO hardwareInvestmentVO, HttpServletRequest request) {
+		 	investmentMapper.updateinvestmentUser(hardwareInvestmentVO);
+	    	return "success";
+	    }
 	 
 	 /* 상품 업데이트 */
 	 public String updateProduct(HardwareProductVO hardwareProductVO, HttpServletRequest request) {
@@ -111,11 +116,12 @@ public class AdminService {
 	    	return "success";
 	    }
 	
-	 
+	 /*상품 등록*/
 	 public String addProduct(HardwareProductVO hardwareProductVO, HttpServletRequest request) {
 		 	productMapper.addProduct(hardwareProductVO);
 	    	return "success";
 	    }
+	 /*배분 상세내역 조회*/
 	 public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(int reward_sharing_id){
          return rewardSharingMapper.selectRewardSharingDetailListById(reward_sharing_id);
       }

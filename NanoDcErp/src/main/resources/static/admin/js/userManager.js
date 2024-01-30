@@ -59,10 +59,10 @@ $(document).ready(function() {
 									    var newRow = '<tr>' +
 									        '<td align="center" id="update_purchase_date">' + formattedDate + '</td>' +
 									        '<td align="center" id="update_product_name" data-user_id="'+  item.hw_product_id+ '">' + item.hw_product_name + '</td>' +
-									     
+									     	'<td align="center" id="update_status">' + item.hw_status + '</td>' +
 									        '<td align="center" id="update_fil_invested">' + item.hw_invest_fil + '</td>' +
 									        '<td align="center"><button type="button" class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.hw_id + '">수정</button>'+
-									        '<button type="button" class="btn btn-secondary btn-sm m-1 delete_user_investment_button" value="'+ item.hw_id + '">삭제</button></td></tr>';
+									        '</td></tr>';
 									    $("#investment_user_table").append(newRow);
 									});
 									
@@ -120,6 +120,16 @@ $(document).ready(function() {
 			                    	}
 			                	});  
 							});
+							// user_investment_update 버튼 클릭 시 호출되는 함수
+							 $(document).on('click', '.update_user_investment_button', function() {
+						        debugger;
+						        $('#update_user_investment').modal('show');
+						        // 나머지 필요한 값들을 가져와서 처리하는 로직을 추가해야 합니다.
+						        // 그 후 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
+						    });
+								
+
+							
 					     $('#user_update_confirm').on('click', function() {     
 							   var user_name = $("#user_name").val();
 						       var user_email = $('#user_email').val();

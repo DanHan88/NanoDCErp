@@ -60,12 +60,13 @@
 														        <col width="20%">
 														        <col width="20%">
 														        <col width="15%">
-														        <col width="20%">
+														        <col width="25%">
 														    </colgroup>
 														    <thead>
 														        <tr>
 														            <th style="text-align: center;">구매일</th>
 														            <th style="text-align: center;">상품명</th>
+														            <th style="text-align: center;">상태</th>
 														            <th style="text-align: center;">투자FIL</th>
 														            <th style="text-align: center;"></th>
 														        </tr>
@@ -252,6 +253,55 @@
 					</div>
 				</div>
 			</div>
+			<!--유저 상품 수정 모달 -->
+			<div class="modal fade" id="update_user_investment" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header bg-primary">
+							<h6 class="modal-title">상품 내역 수정</h6>
+							<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+			                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+			                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+			                    </svg>
+			                </button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group row">
+								<label class="col-md-4 form-control-label" style="margin-top:5px;"><b>구매일</b></label>
+								<div class="col-md-8">
+      								<input type="text" class="form-control" id="datepicker_update" placeholder="Select date">
+								</div>									
+							</div>
+							<div class="form-group row">
+							    <label class="col-md-4 form-control-label" style="margin-top:5px;"><b>상태</b></label>
+							    <div class="col-md-8">
+							        <select class="form-control" id="selectBox_status_update" name="selectedStatus">
+							            <option value="active">Active</option>
+							            <option value="inactive">Inactive</option>
+							        </select>
+							    </div>
+							</div>
+							<div class="form-group row">
+								<label class="col-md-4 form-control-label" style="margin-top:5px;"><b>상태</b></label>
+								<div class="col-md-8">
+									<input id="node_tib_update" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label class="col-md-4 form-control-label" style="margin-top:5px;"><b>투자FIL</b></label>
+								<div class="col-md-8">
+									<input id="node_fil_update" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric">
+								</div>
+							</div>																																	
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+							<button id="user_investment_update" type="button" class="btn btn-primary">수정</button>
+						</div>
+					</div>
+				</div>
+				</div>
 <!--유저 등록 모달 -->
 			<div class="modal fade" id="upload_user" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
