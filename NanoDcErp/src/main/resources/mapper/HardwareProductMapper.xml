@@ -12,7 +12,8 @@
 			   service_end_date, 
 			   total_budget_fil,
 			   city,
-			   details
+			   details,
+			   picture_url
 		FROM filmountain.hw_product
 	</select>
 	<update id="updateProduct" parameterType="com.nanoDc.erp.vo.HardwareProductVO">

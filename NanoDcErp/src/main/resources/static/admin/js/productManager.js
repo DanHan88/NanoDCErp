@@ -7,8 +7,19 @@ $(document).ready(function() {
         $('#success_alert').on('hidden.bs.modal', function (e) {
 								 location.reload(true);
 					    });
-        
-        
+		$('#fileInput_update').on('change', function (e) {
+				var file = e.target.files[0];
+				if (file) {
+				var reader = new FileReader();
+				                reader.onload = function (e) {
+				                    $('#picture_update').attr('src', e.target.result).show();
+				                };
+				                reader.readAsDataURL(file);
+				            } else {
+				                $('#profilePicture').hide();
+				            }
+				        });
+				        
   		$('.detail_product').on('click', function() {
 			 var clickedButton = $(this).parent().parent();
 			$('#hw_product_name').val(clickedButton.find('.hw_product_name').text());
@@ -16,6 +27,8 @@ $(document).ready(function() {
 			$('#hw_product_status').val(clickedButton.find('.hw_product_status').text());
 			$('#total_budget_fil').val(clickedButton.find('.total_budget_fil').text());
 			$('#update_product_confirm').val($(this).val());
+			debugger;
+			$('#picture_update').attr('src', '/uploads'+$(this).attr('data-pictureUrl'));
 			if($(this).attr('data-details') !=undefined){
 				window.tinymce.get(0).setContent($(this).attr('data-details'));	
 			}else{
@@ -64,9 +77,7 @@ $(document).ready(function() {
 					var hw_product_name = $('#hw_product_name_add').val();
 					var city = $('#city_add').val();
 					var hw_product_status = $('#hw_product_status_add').val();
-					//var fileInput = $('#fileInput_add')[0].files[0];
 					var total_budget_fil = $('#total_budget_fil_add').val();
-					//var product_id = val($(this).val());
 					var details = window.tinymce.get(1).getContent();
 					var recruitment_start_date ="";
 					var preparation_start_date="";
@@ -97,12 +108,6 @@ $(document).ready(function() {
 					formData.append('details',details);
 					formData.append('total_budget_fil',total_budget_fil);
 					formData.append('hw_product_status',hw_product_status);
-					/*
-					if(fileInput!=undefined){
-						formData.append('file', fileInput);
-					}else{
-						formData.append('file', 'no_change');
-					}*/	
             $.ajax({
 								type: "POST",
 							    url: "/admin/addProduct",
@@ -133,7 +138,6 @@ $(document).ready(function() {
 					var user_name = $('#user_name').val(); 
 					var fileInput = $('#fileInput_update')[0].files[0];
 					var total_budget_fil = $('#total_budget_fil').val();
-					//var product_id = val($(this).val());
 					var details = window.tinymce.get(0).getContent();
 					var recruitment_start_date ="";
 					var preparation_start_date="";
