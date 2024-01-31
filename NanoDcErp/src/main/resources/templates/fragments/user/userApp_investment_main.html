@@ -13,6 +13,7 @@
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-3 mb-9">
           <div class="col" th:each="investment : ${investmentList}">
             <div class="card h-10">
+				 <img th:src="'/uploads/'+${investment.picture_url}" class="card-img-top" alt="...">
               <div class="card-body">
                 <div class="d-flex align-items-center">
                   <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5" th:text="${investment.hw_product_name}"></h4>

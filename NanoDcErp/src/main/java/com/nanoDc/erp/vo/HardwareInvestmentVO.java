@@ -17,7 +17,15 @@ public class HardwareInvestmentVO {
 	private int hw_product_id;
 	private double hw_invest_fil;
 	private String hw_product_status;
+	private String picture_url;
 	
+	
+	public String getPicture_url() {
+		return picture_url;
+	}
+	public void setPicture_url(String picture_url) {
+		this.picture_url = picture_url;
+	}
 	public String getHw_product_status() {
 		return hw_product_status;
 	}
