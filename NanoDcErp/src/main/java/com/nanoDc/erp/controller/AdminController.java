@@ -53,7 +53,7 @@ public class AdminController {
 	@GetMapping(value={"/login"})
     public ModelAndView adminLogin(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("views/admin/login/sign-in");
+        mav.setViewName("views/admin/admin_Login");
         return mav;
     }
 	
@@ -200,7 +200,7 @@ public class AdminController {
 	    }   
 	 
 	 /*----------------------------------*/
-	 /* -----------productmanager기능----------*/
+	 /* -----------productmanager 기능----------*/
 	 /* ---------------------------------*/
 	  
 	 /* 상품 정보 수정 */
