@@ -31,6 +31,28 @@
 
 	</select>
 	
+	<select id="verifyUserInfoVO" parameterType="com.nanoDc.erp.vo.UserInfoVO" resultType="com.nanoDc.erp.vo.UserInfoVO">
+		select 
+			user_id,
+			phone_number,
+			user_status,
+			user_reg_date,
+			user_name,
+			user_email,
+			profile_picture_url,
+			level
+		 from user_Info
+		where user_email=#{user_email}
+	</select>
+	
+	<select id="getUserPassword" parameterType="string" resultType="string">
+		select 
+			password
+		 from password
+		where user_id=#{user_id}
+	</select>
+	
+	
 	<!-- Update -->
 	
 	<update id="updateUser" parameterType="com.nanoDc.erp.vo.UserInfoVO">

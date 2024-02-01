@@ -59,6 +59,9 @@ public class AdminService {
 	 public List<HardwareRewardSharingVO> getRewardSharingList() {
 	        return this.rewardSharingMapper.getRewardSharingList();
 	    }
+	 public UserInfoVO selectDetailUserInfoByUserId(int user_id) {
+	    	return userInfoMapper.selectDetailUserInfoByUserId(user_id);
+	    }
 	 
 	 /*새로운 유저 추가*/
 	 public String addNewUser(UserInfoVO userInfoVO, HttpServletRequest request) {

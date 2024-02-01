@@ -5,14 +5,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.Date;
+
+import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.service.AdminService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
@@ -35,9 +44,12 @@ import com.nanoDc.erp.vo.UserInfoVO;
 public class AdminController {
 	 @Value("${upload.directory}")
 	    private String uploadDirectory;
-	
+	 @Autowired
+	 	private PasswordEncoder pwEncoder;
 	 @Autowired
 	    private AdminService adminService;
+	 @Autowired
+	    private UserInfoMapper userInfoMapper;
 	
 	 /*----------------------------------*/
 	 /* -----------GetMapping----------*/
@@ -51,11 +63,54 @@ public class AdminController {
     }
 	/*로그인 페이지*/ 
 	@GetMapping(value={"/login"})
-    public ModelAndView adminLogin(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
+	  public ModelAndView login(@ModelAttribute("loginError") String loginError,
+	    		@ModelAttribute LoginVO loginVO,
+	            HttpServletRequest request) {
+	        ModelAndView mav = new ModelAndView();
+	        Cookie[] cookies = request.getCookies();
         mav.setViewName("views/admin/admin_Login");
         return mav;
     }
+	 @PostMapping(value={"/login.do"})
+	    private String doLogin(LoginVO loginVO, BindingResult result, RedirectAttributes redirect, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	        LoginVO lvo = new LoginVO();
+	        UserInfoVO userInfoVO = new UserInfoVO();     
+	        userInfoVO.setUser_email(loginVO.getId());
+	        userInfoVO = userInfoMapper.verifyUserInfoVO(userInfoVO);
+	        if (userInfoVO == null) {
+	        	redirect.addFlashAttribute("loginError", "아이디를 확인해주세요");
+	            return "redirect:/login";
+	        }
+	        if ("inactive".equals(userInfoVO.getUser_status()) || Integer.parseInt(userInfoVO.getLevel()) < 10) {
+	        	redirect.addFlashAttribute("loginError", "유효하지 않은 아이디입니다.");
+	            return "redirect:/login";
+	        }
+	        if (Integer.parseInt(userInfoVO.getLevel()) < 10) {
+	        	redirect.addFlashAttribute("loginError", "유효한 관리자 계정이 아닙니다.");
+	            return "redirect:/login";
+	        }
+	        
+	        HttpSession session = request.getSession();
+	        String rawPw = "";
+	        String encodePw = "";
+	        if (userInfoVO != null) {
+	        	lvo.setId(userInfoVO.getUser_name());
+	            lvo.setUserInfoVO(userInfoVO);
+	            lvo.setAdmin(false);
+	        	rawPw = loginVO.getPassword();
+	            String value = pwEncoder.encode(rawPw);
+	            if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = userInfoMapper.getUserPassword(loginVO.getId()))) {
+	                lvo.setPassword("");
+	                 Cookie rememberMeCookie = new Cookie("userId", String.valueOf(userInfoVO.getUser_id()));
+	                 rememberMeCookie.setMaxAge(7 * 24 * 60 * 60); // 30 days
+	                 response.addCookie(rememberMeCookie);
+	                session.setAttribute("user", (Object)lvo);
+	                return "redirect:/userManager";
+	            }
+	        }
+	        redirect.addFlashAttribute("loginError", "비밀번호를 확인해주세요");
+	        return "redirect:/login";
+	    }
 	
 	/*회원 관리 페이지*/ 
 	 @GetMapping(value={"/userManager"})

@@ -13,4 +13,7 @@ public interface UserInfoMapper {
 	public int get_last_useriId();
 	public void updateUser(UserInfoVO userInfoVO);
 	public void userPwReset(UserInfoVO userInfoVO);
+	public UserInfoVO verifyUserInfoVO(UserInfoVO userInfoVO);
+	public String getUserPassword(String user_id);
+	public UserInfoVO selectDetailUserInfoByUserId(int user_id);
 }
