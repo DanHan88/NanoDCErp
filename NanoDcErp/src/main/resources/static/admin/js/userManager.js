@@ -4,6 +4,7 @@ $(document).ready(function() {
         var user_email; 
         var user_phone_number; 
         var user_password; 
+        var user_hw_id;
     // jQuery code executes after the document is fully loaded
     
     // Click event for the button with id 'create_user'
@@ -59,10 +60,11 @@ $(document).ready(function() {
 									    var newRow = '<tr>' +
 									        '<td align="center" id="update_purchase_date">' + formattedDate + '</td>' +
 									        '<td align="center" id="update_product_name" data-user_id="'+  item.hw_product_id+ '">' + item.hw_product_name + '</td>' +
-									     	'<td align="center" id="update_status">' + item.hw_status + '</td>' +
-									        '<td align="center" id="update_fil_invested">' + item.hw_invest_fil + '</td>' +
-									        '<td align="center"><button type="button" class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.hw_id + '">수정</button>'+
-									        '</td></tr>';
+ 									     	'<td align="center" id="update_status">' + item.hw_status + '</td>' +
+ 									        '<td align="center" id="update_fil_invested">' + item.hw_invest_fil + '</td>' +
+
+									        '<td align="center"><button type="button" id=hw_id_button class="btn btn-secondary btn-sm m-1 update_user_investment_button" value="' + item.hw_id + '">수정</button>'+
+ 									        '</td></tr>';
 									    $("#investment_user_table").append(newRow);
 									});
 									
@@ -73,8 +75,8 @@ $(document).ready(function() {
 					    });
 					    $('#user_investment_add').on('click', function() {
 							   var hw_reg_date = $("#datetimepicker_invst").val();
-						       var fil_invested = $('#node_fil').val();
-						       var hw_product_id = $('#selectBox_product').val();
+ 						       var fil_invested = $('#node_fil').val();
+ 						       var hw_product_id = $('#selectBox_product').val();;
 						       var user_id = $('#user_edit_1_btn').val(); 	   	
 							   if(hw_reg_date==""||hw_product_id==""){
 										if ($('#alert_header_user').hasClass("bg-success")) 
@@ -122,10 +124,15 @@ $(document).ready(function() {
 							});
 							// user_investment_update 버튼 클릭 시 호출되는 함수
 							 $(document).on('click', '.update_user_investment_button', function() {
-						        debugger;
+						        var hw_id = $(this).val();
+						      	var clicked= $(this).parent().parent();
 						        $('#update_user_investment').modal('show');
 						        // 나머지 필요한 값들을 가져와서 처리하는 로직을 추가해야 합니다.
 						        // 그 후 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
+						         $('#datetimepicker_invst_a').val(clicked.find('#update_purchase_date').text());
+								$('#selectBox_status_update').val(clicked.find('#update_status').text());
+								$('#node_fil_update').val(clicked.find('#update_fil_invested').text());
+								$('#selectupdate_product').val(hw_id);
 						    });
 								
 
@@ -185,6 +192,77 @@ $(document).ready(function() {
 			                    }
 			                });
 					    });
+					    
+					    // user_investment_update 버튼 클릭 시 호출되는 함수
+ 							 $(document).on('click', '.update_user_investment_button', function() {
+				
+							  var hw_id = $(this).val();
+						      var clicked= $(this).parent().parent();
+
+ 						        $('#update_user_investment').modal('show');
+						         $('#datetimepicker_invst_a').val(clicked.find('#update_purchase_date').text());
+								$('#selectBox_status_update').val(clicked.find('#update_status').text());
+								$('#node_fil_update').val(clicked.find('#update_fil_invested').text());
+								$('#selectupdate_product').val(hw_id);
+								
+					
+ 						        // 나머지 필요한 값들을 가져와서 처리하는 로직을 추가해야 합니다.
+ 						        // 그 후 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
+ 						    });
+ 								
+							$('#user_investment_update').on('click', function() {
+							   var hw_reg_date = $("#datetimepicker_invst_a").val();
+						       var fil_invested = $('#node_fil_update').val();
+						       var hw_product_id = $('#selectBox_product').val();
+						       var hw_status = $('#selectBox_status_update').val();
+						       var user_hw_id = $('#selectupdate_product').val();
+						     	debugger;
+						       	   		
+							   if(hw_reg_date==""||hw_product_id==""){
+										if ($('#alert_header_user').hasClass("bg-success")) 
+										{
+								            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
+							       		} 			
+							       		 $('#alert_title_user').text("모든 데이터를 입력해 주십시오.");
+								         $('#alert_modal_user').modal('show');
+								         return;
+							   }
+							   $.ajax({
+			                    type: "POST",
+			                    url: "/admin/updateInvestmentUser",
+			                    contentType: "application/json",
+			                    data: JSON.stringify({
+							        hw_reg_date: hw_reg_date,
+							        hw_status:hw_status,
+							        hw_invest_fil: fil_invested,
+							        hw_product_id : hw_product_id,
+							        hw_id  : user_hw_id
+							    }),
+			                    success: function (data) {
+									$('#add_user_modal').modal('hide');
+									if(data=='success'){
+										if ($('#alert_header_user').hasClass("bg-danger")) 
+											{
+							            		$('#alert_header_user').removeClass("bg-danger").addClass("bg-success");
+							       		 	} 
+										$('#alert_title_user').text("상품 수정 성공");
+										$('#alert_modal_user').modal('show');
+			                        }
+			                        else if(data='failed:session_closed'){	
+										$('#session_alert_user').modal('show');
+									}
+			                        else{
+										if ($('#alert_header_user').hasClass("bg-success")) 
+										{
+								            $('#alert_header_user').removeClass("bg-success").addClass("bg-danger");
+							       		} 			
+							       		 $('#alert_title_user').text("상품 수정 실패 : 중복된 제품명 또는 같은 정보");
+								            $('#alert_modal_user').modal('show');
+									}
+			                    	}
+			                	});  
+							});
+			
 					   
 					   $('#add_user_investment_button').on('click', function() {
 					       $('#add_user_investment').modal('show');
