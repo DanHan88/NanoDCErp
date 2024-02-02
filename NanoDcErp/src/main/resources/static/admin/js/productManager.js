@@ -27,7 +27,6 @@ $(document).ready(function() {
 			$('#hw_product_status').val(clickedButton.find('.hw_product_status').text());
 			$('#total_budget_fil').val(clickedButton.find('.total_budget_fil').text());
 			$('#update_product_confirm').val($(this).val());
-			debugger;
 			$('#picture_update').attr('src', '/uploads'+$(this).attr('data-pictureUrl'));
 			if($(this).attr('data-details') !=undefined){
 				window.tinymce.get(0).setContent($(this).attr('data-details'));	

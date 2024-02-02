@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		
-      <div class="content p-0" th:fragment="MainContent">
-        <!-- Add the container-fluid class to make the container full-width -->
-        <div class="container-fluid">
-		    <div class="d-flex align-items-center">
-            <!-- Add the mx-auto class to center the image horizontally -->
-            	<img src="/assets/img/filmountain/nanodc_yellow.png" alt="phoenix" style="width: auto; height: 80vh; object-fit: cover; display: block; margin: auto; margin-top:11vh;">
-        	</div>
-        	 <div class="row">
-        	<div class="col-12 text-center">
-	                <button type="button" class="btn w-100 fw-bold text-body-emphasis" style="background-color: #E5C71E;">출금신청</button>
-	          </div>
-	          </div>
-        	<!-- Buttons overlay -->
-	        <div class="row position-absolute top-50 start-50 translate-middle">
-	            <div class="col-12 text-center" style="padding-left:27vh;">
-					<a href="/user/investment/">
-					<span class="uil fs-5 lh-1 text-body uil uil-coins"></span>
-	                <h1 class="fs-7 pt-1">1,221TB</h1>
-	                <p class="fs-10 mb-0 text-black">투자 TB</p>
-	                </a>
-	            </div>
-	            <div class="col-12 text-center mt-1" style="padding-left:27vh;">
-					<a href="/user/reward/">
-	               <span class="uil fs-5 lh-1 text-body uil uil-money-stack"></span>
-	                <h1 class="fs-7 pt-1">234FIL</h1>
-	                <p class="fs-10 mb-0 text-black">리워드</p>
-	                </a>
-	            </div>
-	            <div class="col-12 text-center mt-1" style="padding-left:27vh;">
-					<a href="/user/transaction/">
-	               <span class="uil fs-5 lh-1 text-body uil uil-money-insert"></span>
-	                <h1 class="fs-7 pt-1">123FIL</h1>
-	                <p class="fs-10 mb-0 text-black">출금가능 FIL</p>
-	                </a>
-	            </div>
-	            
-	             <div class="col-12 text-center mt-1" style="padding-left:27vh;">
-	               <span class="uil fs-5 lh-1 text-body uil uil-usd-circle"></span>
-	                <h1 class="fs-7 pt-1">9,230원</h1>
-	                <p class="fs-10 mb-0 text-black">1FIL</p>
-	            </div>
-	        </div>
+<div class="content p-0 mx-auto" th:fragment="MainContent" style="overflow-x: hidden; width:95%">
+    <div class="container-fluid p-0 m-0" id="userApp_view" style="visibility:hidden;">
+        <div class="d-flex align-items-center">
+            <div class="custom_container">
+  <img class="p-0" id="main_yellow" src="/assets/img/filmountain/main_yellow.png" alt="main_yellow">
+  <img class="p-0" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" id="panel" alt="panel">
+  <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/investment1.png" id="panel_investment" alt="panel">
+  <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/reward1.png" id="panel_reward" alt="panel">
+  <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/cash1.png" id="panel_cash" alt="panel">
+  <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/status1.png" id="panel_status" alt="panel">
+  <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/price1.png" id="panel_price" alt="panel">
+</div>
+            <!-- Buttons overlay -->
+            <div class="row position-absolute top-50 start-50 translate-middle" style=" z-index: 3;">
+                <div class="col-12 text-center userApp_buttons" id="app_button1" value="investment" style="cursor: pointer;">
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">1,221TB</p>
+                </div>
+                <div class="col-12 text-center userApp_buttons" id="app_button2" value="reward" style="cursor: pointer;">
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">234FIL</p>
+                </div>
+                <div class="col-12 text-center userApp_buttons" id="app_button3" value="cash" style="cursor: pointer;">
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">123FIL</p>
+                </div>
+                <div class="col-12 text-center userApp_buttons" id="app_button4" value="status" style="cursor: pointer;">
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">운영중</p>
+                </div>
+                <div class="col-12 text-center userApp_buttons" id="app_button5" value="price" style="cursor: pointer;">
+                    <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">9,230원</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <audio id="bgm" loop>
+			  <source src="/assets/bgm/bgm_30min.mp3" type="audio/mp3">
+			  <audio id="buttonSound" src="/assets/bgm/buttonsound1.wav" preload="auto"></audio>
+			  <audio id="serverOnSound" src="/assets/bgm/serverOnSound.wav" preload="auto"></audio>
+			</audio>
         </div>
     </div>
+</div>
     
 </html>

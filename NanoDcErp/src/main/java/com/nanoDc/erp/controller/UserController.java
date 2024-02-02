@@ -58,7 +58,7 @@ public class UserController {
         return mav;
     }
 	
-	@GetMapping(value={"/transaction"})
+	@GetMapping(value={"/cash"})
     public ModelAndView transaction(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("views/user/transaction");

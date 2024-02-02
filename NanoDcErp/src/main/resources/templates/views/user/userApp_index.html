@@ -60,6 +60,50 @@
     <link href="/vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="/vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="/vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+  <style>
+    .custom_container {
+      position: relative;
+      width: 100%;
+      height: 95vh;
+     
+      overflow: hidden; /* Ensure that the container doesn't expand to fit its contents */
+    }
+
+    #main_yellow {
+      width: 100%;
+      height: 75vh;
+      display: block;
+      margin: auto;
+      margin-top: 13vh;
+      margin-bottom: 10vh;
+      position: absolute;
+      z-index: 1; /* Set a lower z-index for main_yellow to place it below investment.png */
+    }
+
+    #panel {
+      width: 100%;
+      height: 75vh;
+      display: block;
+      margin: auto;
+      margin-top: 13vh;
+      margin-bottom: 10vh;
+      position: absolute;
+      z-index: 2; /* Set a higher z-index for investment.png to place it above main_yellow */
+    }
+    .panel_buttons {
+      width: 100%;
+      height: 75vh;
+      display: block;
+      margin: auto;
+      margin-top: 13vh;
+      margin-bottom: 10vh;
+      position: absolute;
+      z-index: 3; /* Set a higher z-index for investment.png to place it above main_yellow */
+    }
+  </style>
+  
+  
+  
   </head>
 
 
@@ -72,7 +116,8 @@
 		<!--TOPBAR  -->
       <div th:replace="~{fragments/user/userApp_topbar :: TopBar}"></div>
       <!--MainContent-->
-      <div th:replace="~{fragments/user/userApp_main :: MainContent}"></div>   
+      <div th:replace="~{fragments/user/userApp_main :: MainContent}"></div> 
+      <div th:replace="~{fragments/user/userApp_bottombar :: BottomBar}"></div>   
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
         var navbarTop = document.querySelector('.navbar-top');
@@ -93,6 +138,13 @@
     <!--    JavaScripts-->
     <!-- ===============================================-->
     <script src="/vendors/popper/popper.min.js"></script>
+    
+    
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+      <script src="/vendors/jquery/jquery.min.js"></script>
+    <script src="/vendors/jquery-easing/jquery.easing.min.js"></script> 
     <script src="/vendors/bootstrap/bootstrap.min.js"></script>
     <script src="/vendors/anchorjs/anchor.min.js"></script>
     <script src="/vendors/is/is.min.js"></script>
@@ -110,6 +162,7 @@
     <script src="/vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
     <script src="/vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="/assets/js/ecommerce-dashboard.js"></script>
+    <script src="/user/js/userApp.js"></script>
 
   
 
