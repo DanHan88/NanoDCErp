@@ -1,8 +1,8 @@
 var resizeWebViewCalled = false;
 var href = '/user/'; 
 var src = "/assets/img/filmountain/";
-
 var isRunning = false;
+var isClicked = false;
 var investment_img = [
         '/assets/img/filmountain/serverImg/investment1.png',
         '/assets/img/filmountain/serverImg/investment2.png',
@@ -70,6 +70,7 @@ function resizeWebView() {
 							}
 						    resizeWebViewCalled = true;
 						    $('#userApp_view').css('visibility', 'visible').show();	  
+						    $('#power_button').css('visibility', 'visible').show();	  
 						    $('#debug').text('width: ' +imageWidth +'height: ' + imageHeight); 
 						    $('.panel_buttons').css('filter', 'brightness(0.50)');
 						    $('.app_text').css('filter', 'brightness(0.50)');
@@ -92,6 +93,10 @@ $(document).ready(function() {
 				isRunning = true;
 				return;
 			}
+			if(isClicked){
+				return;
+			}
+			href = '/user/';
 			 playButtonSound();
 		if($(clickedObject).attr('id') == 'app_button1'){
 			src +="investment.png";
@@ -174,8 +179,9 @@ $(document).ready(function() {
       
 	 $('.userApp_buttons')
     .on('mousedown touchstart', function(event) {
-        event.preventDefault(this);
-        handleButtonClick(this);
+        event.preventDefault(this); 
+        handleButtonClick(this);  
+        isClicked=true;   
     })
     .on('mouseup mouseleave touchend touchcancel', function(event) {
         event.preventDefault(this);
