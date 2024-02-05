@@ -96,6 +96,7 @@ $(document).ready(function() {
 			if(isClicked){
 				return;
 			}
+			isClicked=true;
 			href = '/user/';
 			 playButtonSound();
 		if($(clickedObject).attr('id') == 'app_button1'){
@@ -180,8 +181,7 @@ $(document).ready(function() {
 	 $('.userApp_buttons')
     .on('mousedown touchstart', function(event) {
         event.preventDefault(this); 
-        handleButtonClick(this);  
-        isClicked=true;   
+        handleButtonClick(this);   
     })
     .on('mouseup mouseleave touchend touchcancel', function(event) {
         event.preventDefault(this);
