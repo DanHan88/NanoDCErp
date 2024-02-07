@@ -12,7 +12,7 @@
         </div>               
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-3 mb-9">
           <div class="col" th:each="investment : ${investmentList}">
-            <div class="card h-10">
+            <div class="card h-10" id="investmentChartParent">
 				 <img th:src="'/uploads/'+${investment.picture_url}" class="card-img-top" alt="...">
               <div class="card-body">
                 <div class="d-flex align-items-center">
@@ -31,10 +31,27 @@
 				      th:if="${investment.hw_product_status eq '투자모집중'}">투자모집중</span>
 				<span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-danger"
 				      th:if="${investment.hw_product_status eq '운영종료'}">운영종료</span>		
-				
-                <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 text-truncate lh-1">총투자 : <span class="fw-semibold ms-1" th:text="${investment.hw_invest_fil}"></span></p>
-                </div>
+			
+                <div class="d-flex justify-content-between">
+                        <div>
+                          <h5 style="display:none;">투자 FIL : <span class="fw-semibold ms-1" id="hw_invest_fil" th:text="${investment.hw_invest_fil}"></span></h5>
+                        </div>
+                      </div>
+                      <div class="pb-4 pt-3">
+                        <div class="investmentChart" style="height:115px;width:100%;"></div>
+                      </div>
+                      <div>
+						 <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-success-light me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">총투자FIL</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="total_budget_fil" th:text="${investment.total_budget_fil}"></h6>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-success me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">투자FIL</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="invest_percent" th:text="${investment.invest_percent}"></h6>
+                        </div>
+                      </div>
                 <div class="d-flex align-items-center mt-4">
                   <p class="mb-0 fw-bold fs-9">투자일 :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1" th:text="${#dates.format(investment.hw_reg_date, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
                 </div>

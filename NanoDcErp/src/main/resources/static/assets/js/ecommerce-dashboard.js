@@ -719,11 +719,11 @@
   const topCouponsChartInit = () => {
     const { getData, getColor } = window.phoenix.utils;
     const ECHART_TOP_COUPONS = '.echart-top-coupons';
-    const $echartTopCoupons = document.querySelector(ECHART_TOP_COUPONS);
+    const $echartTopCoupons = document.querySelectorAll(ECHART_TOP_COUPONS);
 
-    if ($echartTopCoupons) {
-      const userOptions = getData($echartTopCoupons, 'options');
-      const chart = echarts.init($echartTopCoupons);
+    $echartTopCoupons.forEach($echartTopCoupons => {
+        const userOptions = getData($echartTopCoupons, 'options');
+        const chart = echarts.init($echartTopCoupons);
 
       const getDefaultOptions = () => ({
         color: [
@@ -792,7 +792,7 @@
       });
 
       echartSetOption(chart, userOptions, getDefaultOptions);
-    }
+    });
   };
 
   // dayjs.extend(advancedFormat);

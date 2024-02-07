@@ -27,7 +27,7 @@
 	
 	<select id="get_last_useriId"  resultType="integer">
 		SELECT MAX(user_id) AS user_id
-		FROM user_info;
+		FROM user_info
 
 	</select>
 	
@@ -109,7 +109,7 @@
 		 password)
 		VALUES
 		(#{user_id}, 
-		#{password});
+		#{password})
 	</insert>
 	
 	

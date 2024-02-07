@@ -16,10 +16,28 @@ public class HardwareInvestmentVO {
 	private int user_id;
 	private int hw_product_id;
 	private double hw_invest_fil;
+	private double total_budget_fil;
 	private String hw_product_status;
+	private String invest_percent;
 	private String picture_url;
 	
 	
+	
+	public String getInvest_percent() {
+		 if (total_budget_fil != 0) {
+	            double percentage = (hw_invest_fil / total_budget_fil) * 100;
+	            // Using String.format to format the percentage to 2 decimal places
+	            return String.format("%.2f%%", percentage);
+	        } else {
+	            return "Total budget is zero, unable to calculate percentage.";
+	        }
+	}
+	public double getTotal_budget_fil() {
+		return total_budget_fil;
+	}
+	public void setTotal_budget_fil(double total_budget_fil) {
+		this.total_budget_fil = total_budget_fil;
+	}
 	public String getPicture_url() {
 		return picture_url;
 	}

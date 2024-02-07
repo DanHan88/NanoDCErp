@@ -58,6 +58,7 @@
 		FROM filmountain.hw_reward_sharing r
 		INNER JOIN filmountain.hw_product p ON r.hw_product_id = p.hw_product_id
 		WHERE r.status = 'active'
+		ORDER BY r.regdate DESC
 		</select>
 		<select id="selectRewardSharingDetailListById" parameterType = "integer" resultMap="HardwareRewardSharingDetailMap">
 		SELECT
@@ -87,6 +88,7 @@
 		INNER JOIN hw_reward_sharing r ON r.reward_sharing_id = d.hw_reward_sharing_id
 		INNER JOIN hw_product p ON r.hw_product_id = p.hw_product_id
 		WHERE r.status = 'active' AND d.hw_reward_sharing_id= #{hw_reward_sharing_id}
+		ORDER BY r.regdate DESC
 		</select>
 		<select id="selectRewardSharingDetailListByUser" parameterType = "integer" resultMap="HardwareRewardSharingDetailMap">
 		SELECT
@@ -116,6 +118,7 @@
 		INNER JOIN hw_reward_sharing r ON r.reward_sharing_id = d.hw_reward_sharing_id
 		INNER JOIN hw_product p ON r.hw_product_id = p.hw_product_id
 		WHERE r.status = 'active' AND u.user_id= #{user_id}
+		ORDER BY r.regdate DESC
 		</select>
 		
 		

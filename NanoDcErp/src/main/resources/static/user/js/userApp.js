@@ -120,14 +120,14 @@ $(document).ready(function() {
 			buttonAnimation($("#panel_cash"),cash_img);
 		}else if($(clickedObject).attr('id') == 'app_button4'){
 			src +="status.png";
-			href += 'status';
+			href = 'https://filfox.info/ko/address/f02368818';
 			currentStage =1;
 			$('#panel_status').css('filter', 'brightness(1.5)'); 
 			buttonAnimation($("#panel_status"),status_img);
 		}
 		else if($(clickedObject).attr('id') == 'app_button5'){
 			src +="price.png";
-			href += 'price';
+			href = 'https://lightning.korbit.co.kr/trade/?market=fil-krw';
 			currentStage =1;
 			$('#panel_price').css('filter', 'brightness(1.5)'); 
 			buttonAnimation($("#panel_price"),price_img);
@@ -136,7 +136,7 @@ $(document).ready(function() {
 		$('#panel').css('visibility', 'visible');
         setTimeout(function() {
           window.location.href = href;
-        }, 800);
+        }, 900);
          
       }
       function resetButton(clickedObject) {
