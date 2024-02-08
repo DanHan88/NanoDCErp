@@ -19,19 +19,13 @@ public class LoginVO {
     private String id;
     private String password;
     private UserInfoVO userInfoVO;
-    private boolean isAdmin;
+    private String level;
     
     
     
   
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
+	
 
 	public UserInfoVO getUserInfoVO() {
 		return userInfoVO;
@@ -56,5 +50,13 @@ public class LoginVO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
 }
 

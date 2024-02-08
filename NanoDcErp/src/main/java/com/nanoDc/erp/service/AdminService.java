@@ -34,13 +34,13 @@ public class AdminService {
 	@Autowired
 	HardwareRewardSharingMapper rewardSharingMapper;
 
-	 public boolean checkSession(HttpServletRequest request,boolean isAdmin) {
+	 public boolean checkSession(HttpServletRequest request) {
 	    	HttpSession session = request.getSession();
 	    	LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        if (session.getAttribute("user") == null || loginVO.getId() == "") {
 		        return false;
 		    }
-	        if(isAdmin!=loginVO.isAdmin()) {
+	        if(Integer.parseInt(loginVO.getLevel()) < 10) {
 	        	return false;
 	        }
 		    return true;

@@ -27,7 +27,7 @@
 	
 	<select id="get_last_useriId"  resultType="integer">
 		SELECT MAX(user_id) AS user_id
-		FROM user_info
+		FROM user_info;
 
 	</select>
 	
@@ -41,11 +41,11 @@
 			user_email,
 			profile_picture_url,
 			level
-		 from user_Info
+		 from user_info
 		where user_email=#{user_email}
 	</select>
 	
-	<select id="getUserPassword" parameterType="string" resultType="string">
+	<select id="getUserPassword" parameterType="com.nanoDc.erp.vo.LoginVO" resultType="string">
 		select 
 			password
 		 from password
@@ -109,7 +109,7 @@
 		 password)
 		VALUES
 		(#{user_id}, 
-		#{password})
+		#{password});
 	</insert>
 	
 	
