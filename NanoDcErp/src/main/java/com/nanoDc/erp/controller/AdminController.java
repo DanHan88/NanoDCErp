@@ -79,15 +79,15 @@ public class AdminController {
 	        userInfoVO = userInfoMapper.verifyUserInfoVO(userInfoVO);
 	        if (userInfoVO == null) {
 	        	redirect.addFlashAttribute("loginError", "아이디를 확인해주세요");
-	            return "redirect:/login";
+	            return "redirect:/admin/login";
 	        }
-	        if ("inactive".equals(userInfoVO.getUser_status()) || Integer.parseInt(userInfoVO.getLevel()) < 10) {
+	        if ("inactive".equals(userInfoVO.getUser_status())) {
 	        	redirect.addFlashAttribute("loginError", "유효하지 않은 아이디입니다.");
-	            return "redirect:/login";
+	            return "redirect:/admin/login";
 	        }
 	        if (Integer.parseInt(userInfoVO.getLevel()) < 10) {
 	        	redirect.addFlashAttribute("loginError", "유효한 관리자 계정이 아닙니다.");
-	            return "redirect:/login";
+	            return "redirect:/admin/login";
 	        }
 	        
 	        HttpSession session = request.getSession();
@@ -96,20 +96,20 @@ public class AdminController {
 	        if (userInfoVO != null) {
 	        	lvo.setId(userInfoVO.getUser_name());
 	            lvo.setUserInfoVO(userInfoVO);
-	            lvo.setAdmin(false);
+	            lvo.setLevel(userInfoVO.getLevel());
 	        	rawPw = loginVO.getPassword();
 	            String value = pwEncoder.encode(rawPw);
-	            if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = userInfoMapper.getUserPassword(loginVO.getId()))) {
+	            if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = userInfoMapper.getUserPassword(userInfoVO.getUser_id()))) {
 	                lvo.setPassword("");
 	                 Cookie rememberMeCookie = new Cookie("userId", String.valueOf(userInfoVO.getUser_id()));
 	                 rememberMeCookie.setMaxAge(7 * 24 * 60 * 60); // 30 days
 	                 response.addCookie(rememberMeCookie);
 	                session.setAttribute("user", (Object)lvo);
-	                return "redirect:/userManager";
+	                return "redirect:/admin/userManager";
 	            }
 	        }
 	        redirect.addFlashAttribute("loginError", "비밀번호를 확인해주세요");
-	        return "redirect:/login";
+	        return "redirect:/admin/login";
 	    }
 	
 	/*회원 관리 페이지*/ 
