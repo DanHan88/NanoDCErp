@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 import com.nanoDc.erp.mapper.HardwareInvestmentMapper;
 import com.nanoDc.erp.mapper.HardwareProductMapper;
 import com.nanoDc.erp.mapper.HardwareRewardSharingMapper;
+import com.nanoDc.erp.mapper.TransactionMapper;
 import com.nanoDc.erp.mapper.UserInfoMapper;
+import com.nanoDc.erp.mapper.WalletMapper;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
+import com.nanoDc.erp.vo.TransactionVO;
+import com.nanoDc.erp.vo.WalletVO;
 
 @Service
 public class UserService {
@@ -25,6 +29,11 @@ public class UserService {
 	HardwareProductMapper productMapper;
 	@Autowired
 	HardwareRewardSharingMapper rewardSharingMapper;
+	@Autowired
+	TransactionMapper transactionMapper;
+	@Autowired
+	WalletMapper walletMapper;
+	
 	
 	/* 유저 투자 리스트 가져오기 */
 	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id){
@@ -39,6 +48,15 @@ public class UserService {
 	        return this.investmentMapper.selectInvestmentListForUser(user_id);
 	    }
 	 
+	 public String addNewTransaction(TransactionVO transcationVO) {
+	       this.transactionMapper.addNewTransaction(transcationVO);
+	       return "success";
+	    }
+	 public String addNewWallet(WalletVO walletVO) {
+	       this.walletMapper.addNewWallet(walletVO);
+	       return "success";
+	    }
+	
 	 
 	 
 }

@@ -7,8 +7,9 @@ import com.nanoDc.erp.vo.HardwareProductVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 import com.nanoDc.erp.vo.TransactionVO;
+import com.nanoDc.erp.vo.WalletVO;
 
 @Mapper
-public interface TransactionMapper {
-	public void addNewTransaction(TransactionVO transactionVO);
+public interface WalletMapper {
+	public void addNewWallet(WalletVO walletVO);
 }

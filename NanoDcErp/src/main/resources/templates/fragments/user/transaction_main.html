@@ -1,19 +1,99 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content mt-7" th:fragment="MainContent">
-			 <nav class="mb-2" aria-label="breadcrumb">
-          
-        </nav>
+		<div class="modal fade" id="addNewTransactionPayout_modal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title dark__text-gray-1100" id="success_alert_title">송금신청</h5>
+			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
+			      </div>
+			      <div class="modal-body">
+					  <div class="mb-2">
+					
+					    <label class="form-label fs-9" for="basic-form-name">신청 FIL 수량</label>
+					
+					    <input class="form-control" id="fil" type="number"/>
+					  </div>
+					  <div class="mb-2">
+
+                          <label class="form-label fs-9" for="wallet">보낼지갑</label>
+
+                          <select class="form-select mb-1" id="wallet" aria-label="Default select example">
+                            <option value="1" selected="selected">f1111</option>
+                            <option value="2">f2222</option>
+                            <option value="3">f3333</option>
+                          </select>
+                        </div>
+				  </div>
+			      <div class="modal-footer">
+			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">닫기</button>
+			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">신청</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade" id="walletManager_modal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title dark__text-gray-1100" id="success_alert_title">지갑관리</h5>
+			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
+			      </div>
+			      <div class="modal-body">
+					  <div class="mb-2">
+					
+					    <label class="form-label fs-9" for="basic-form-name">지갑 추가</label>
+						<div class="row">
+							<div class="col-8">
+								<input class="form-control" id="new_transaction_fil_amount" type="number"/>
+							</div>
+							<div class="col-4">
+								<button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">추가</button>	
+							</div>
+						</div>
+					    
+					    
+					  </div>
+					  <div class="mb-2">
+                          <label class="form-label fs-9" for="wallet">지갑삭제</label>
+                          <div class="row">
+							<div class="col-8">
+								<select class="form-select mb-1"  id="new_transaction_wallet " aria-label="Default select example" >
+	                            <option value="1" selected="selected">f1111</option>
+	                            <option value="2">f2222</option>
+	                            <option value="3">f3333</option>
+	                          </select>
+							</div>
+							<div class="col-4">
+								<button class="btn btn-outline-danger" type="button" data-bs-dismiss="modal">삭제</button>	
+							</div>
+						</div>
+                        </div>
+				  </div>
+			      <div class="modal-footer">
+			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">닫기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
         <div class="row gx-6 gy-3 mb-4 align-items-center">
           <div class="col-auto">
             <h2 class="mb-0">송금내역</h2>
           </div>
           <div class="col-auto">
-          <button class="btn btn-primary" id="create_user">
+          <button class="btn btn-primary" id="addNewTransactionPayout">
 			  <svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
 				  <path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z">
 				  </path>
 			</svg>송금신청</button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-success" id="walletManager">
+			  <svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+				  <path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z">
+				  </path>
+			</svg>지갑관리</button>
         </div>
         </div>
         <div class="row">
