@@ -68,9 +68,53 @@ public class AdminController {
 	            HttpServletRequest request) {
 	        ModelAndView mav = new ModelAndView();
 	        Cookie[] cookies = request.getCookies();
-        mav.setViewName("views/admin/admin_Login");
-        return mav;
+	        if (cookies != null) {
+	            for (Cookie cookie : cookies) {
+	                if ("userId".equals(cookie.getName())) {
+	                    String storedUserId = cookie.getValue();
+	                    UserInfoVO userInfoVO = adminService.selectDetailUserInfoByUserId(Integer.parseInt(storedUserId));
+	                    if (userInfoVO != null) {
+	                    	HttpSession session = request.getSession();
+	                        LoginVO lvo = new LoginVO();
+	                        lvo.setId(userInfoVO.getUser_email());
+	                        lvo.setUserInfoVO(userInfoVO);
+	                        lvo.setPassword("");
+	                        lvo.setLevel(userInfoVO.getLevel());
+	                        session.setAttribute("user", (Object)lvo);
+	                        mav.setViewName("redirect:/admin/userManager");
+	                        return mav;
+	                    }
+	                }
+	            }
+	            }
+	        if (!adminService.checkSession(request)) {
+	            mav.setViewName("views/admin/admin_Login");
+	            mav.addObject("loginError", loginError);
+	            return mav;
+	        }
+	        mav.setViewName("redirect:/admin/userManager");
+	        return mav;
+	}
+	/*로그 아웃 */
+	@GetMapping(value={"/logout"})
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("userId".equals(cookie.getName())) {
+                    cookie.setMaxAge(0); // Set the max age to zero to delete the cookie
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
+        return "redirect:/admin/login";
     }
+	 
+	 /*로그인 조건부*/
 	 @PostMapping(value={"/login.do"})
 	    private String doLogin(LoginVO loginVO, BindingResult result, RedirectAttributes redirect, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	        LoginVO lvo = new LoginVO();
@@ -116,6 +160,12 @@ public class AdminController {
 	 @GetMapping(value={"/userManager"})
 	    public ModelAndView userManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView(); 
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
 	        List<HardwareProductVO> productList = this.adminService.getProductList(); 
 	        mav.addObject("userInfoList", userInfoList);
@@ -128,6 +178,12 @@ public class AdminController {
 	 @GetMapping(value={"/transactionManager"})
 	    public ModelAndView transactionManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/transactionManager");
@@ -137,6 +193,12 @@ public class AdminController {
 	 @GetMapping(value={"/rewardManager"})
 	    public ModelAndView rewardManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<HardwareRewardSharingVO> rewardList = this.adminService.getRewardSharingList();
 	        mav.addObject("rewardList", rewardList);
 	        mav.setViewName("views/admin/rewardManager");
@@ -146,7 +208,13 @@ public class AdminController {
 	 /*투자 배분 관리 페이지*/ 
 	 @GetMapping(value={"/investmentManager"})
 	    public ModelAndView investmentManager(HttpServletRequest request,Integer init_page) {
-	        ModelAndView mav = new ModelAndView();        
+	        ModelAndView mav = new ModelAndView();   
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<HardwareProductVO> productList = this.adminService.getProductList();
 	        List<HardwareInvestmentVO> investmentList = this.adminService.getInvestmentList();
 	        mav.addObject("productList", productList);
@@ -158,6 +226,12 @@ public class AdminController {
 	 @GetMapping(value={"/announcementManager"})
 	    public ModelAndView announcementManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/announcementManager");
@@ -167,6 +241,12 @@ public class AdminController {
 	 @GetMapping(value={"/eventManager"})
 	    public ModelAndView eventManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/eventManager");
@@ -176,6 +256,12 @@ public class AdminController {
 	 @GetMapping(value={"/productManager"})
 	    public ModelAndView productManager(HttpServletRequest request,Integer init_page) {
 	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        List<HardwareProductVO> productList = this.adminService.getProductList();        
 	        
 	        mav.addObject("productList", productList);

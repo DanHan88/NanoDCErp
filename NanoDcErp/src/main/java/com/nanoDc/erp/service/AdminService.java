@@ -40,9 +40,10 @@ public class AdminService {
 	        if (session.getAttribute("user") == null || loginVO.getId() == "") {
 		        return false;
 		    }
-	        if(Integer.parseInt(loginVO.getLevel()) < 10) {
+	        if(loginVO.getLevel()!=null && Integer.parseInt(loginVO.getLevel()) < 10) {
 	        	return false;
 	        }
+	        
 		    return true;
 	    }	
 	
@@ -128,5 +129,6 @@ public class AdminService {
 	 public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(int reward_sharing_id){
          return rewardSharingMapper.selectRewardSharingDetailListById(reward_sharing_id);
       }
+
 	 
 }

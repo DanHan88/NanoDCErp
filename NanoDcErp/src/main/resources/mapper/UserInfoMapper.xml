@@ -52,6 +52,20 @@
 		where user_id=#{user_id}
 	</select>
 	
+	<select id="selectDetailUserInfoByUserId"  parameterType="integer" resultType="com.nanoDc.erp.vo.UserInfoVO">
+		select 
+			u.user_id,
+			u.user_reg_date,
+			u.user_name,
+			u.user_email,
+			u.user_status,
+			u.phone_number,
+			u.profile_picture_url,
+			u.level
+		 from user_info u	
+		 where user_id=#{user_id}
+	</select>
+	
 	
 	<!-- Update -->
 	

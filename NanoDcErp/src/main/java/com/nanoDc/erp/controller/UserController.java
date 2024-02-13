@@ -4,23 +4,35 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.json.JSONObject;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.service.UserService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
+import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.TransactionVO;
 import com.nanoDc.erp.vo.UserInfoVO;
 import com.nanoDc.erp.vo.WalletVO;
@@ -31,13 +43,81 @@ public class UserController {
 	
 	 @Autowired
 	    private UserService userService;
-	 //로그인
-	 @GetMapping(value={"/login"})
-	    public ModelAndView login(HttpServletRequest request) {
-	        ModelAndView mav = new ModelAndView();
-	        mav.setViewName("views/user/login/sign-in");
+	 @Autowired
+	    private UserInfoMapper userInfoMapper;
+	 @Autowired
+	    private PasswordEncoder pwEncoder;
+	 
+	 /*로그인 페이지*/ 
+		@GetMapping(value={"/login"})
+		  public ModelAndView login(@ModelAttribute("loginError") String loginError,
+		    		@ModelAttribute LoginVO loginVO,
+		            HttpServletRequest request) {
+		        ModelAndView mav = new ModelAndView();
+		        Cookie[] cookies = request.getCookies();
+	        mav.setViewName("views/user/user_Login");
 	        return mav;
 	    }
+		/*로그 아웃 */
+		@GetMapping(value={"/logout"})
+	    public String logout(HttpServletRequest request, HttpServletResponse response) {
+	        HttpSession session = request.getSession();
+	        session.invalidate();
+	        
+	        Cookie[] cookies = request.getCookies();
+	        if (cookies != null) {
+	            for (Cookie cookie : cookies) {
+	                if ("userId".equals(cookie.getName())) {
+	                    cookie.setMaxAge(0); // Set the max age to zero to delete the cookie
+	                    response.addCookie(cookie);
+	                    break;
+	                }
+	            }
+	        }
+	        return "redirect:/user/login";
+	    }
+		 
+		 /*로그인 조건부*/
+		 @PostMapping(value={"/login.do"})
+		    private String doLogin(LoginVO loginVO, BindingResult result, RedirectAttributes redirect, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		        LoginVO lvo = new LoginVO();
+		        UserInfoVO userInfoVO = new UserInfoVO();     
+		        userInfoVO.setUser_email(loginVO.getId());
+		        userInfoVO = userInfoMapper.verifyUserInfoVO(userInfoVO);
+		        if (userInfoVO == null) {
+		        	redirect.addFlashAttribute("loginError", "아이디를 확인해주세요");
+		            return "redirect:/user/login";
+		        }
+		        if ("inactive".equals(userInfoVO.getUser_status())) {
+		        	redirect.addFlashAttribute("loginError", "유효하지 않은 아이디입니다.");
+		            return "redirect:/user/login";
+		        }
+		        if (Integer.parseInt(userInfoVO.getLevel()) == 10) {
+		        	redirect.addFlashAttribute("loginError", "관리자용 아이디 입니다.");
+		            return "redirect:/user/login";
+		        }
+		        
+		        HttpSession session = request.getSession();
+		        String rawPw = "";
+		        String encodePw = "";
+		        if (userInfoVO != null) {
+		        	lvo.setId(userInfoVO.getUser_name());
+		            lvo.setUserInfoVO(userInfoVO);
+		            lvo.setLevel(userInfoVO.getLevel());
+		        	rawPw = loginVO.getPassword();
+		            String value = pwEncoder.encode(rawPw);
+		            if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = userInfoMapper.getUserPassword(userInfoVO.getUser_id()))) {
+		                lvo.setPassword("");
+		                 Cookie rememberMeCookie = new Cookie("userId", String.valueOf(userInfoVO.getUser_id()));
+		                 rememberMeCookie.setMaxAge(7 * 24 * 60 * 60); // 30 days
+		                 response.addCookie(rememberMeCookie);
+		                session.setAttribute("user", (Object)lvo);
+		                return "redirect:/user/index";
+		            }
+		        }
+		        redirect.addFlashAttribute("loginError", "비밀번호를 확인해주세요");
+		        return "redirect:/user/login";
+		    }
 
 	//데시보드
 	@GetMapping(value={"/dashboard"})
