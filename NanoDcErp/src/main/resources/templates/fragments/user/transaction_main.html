@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content mt-7" th:fragment="MainContent">
+		<div class="modal fade" id="success_alert" tabindex="-1" role="dialog">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header bg-success">
+			        <h5 class="modal-title text-white dark__text-gray-1100" id="success_alert_title">성공!</h5>
+			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
+			      </div>
+			      <div class="modal-footer">
+			        <button class="btn btn-outline-success" type="button" data-bs-dismiss="modal">확인</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="modal fade" id="fail_alert" tabindex="-1" role="dialog">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header bg-danger">
+			        <h5 class="modal-title text-white dark__text-gray-1100" id="fail_alert_title">실패</h5>
+			        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-9 text-white dark__text-gray-1100"></span></button>
+			      </div>
+			      <div class="modal-footer">
+			        <button class="btn btn-outline-danger" type="button" data-bs-dismiss="modal">확인</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>	
 		<div class="modal fade" id="addNewTransactionPayout_modal" tabindex="-1" role="dialog">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -13,22 +39,23 @@
 					
 					    <label class="form-label fs-9" for="basic-form-name">신청 FIL 수량</label>
 					
-					    <input class="form-control" id="fil" type="number"/>
+					    <input class="form-control" id="new_transaction_fil_amount" type="number"/>
 					  </div>
 					  <div class="mb-2">
 
                           <label class="form-label fs-9" for="wallet">보낼지갑</label>
 
-                          <select class="form-select mb-1" id="wallet" aria-label="Default select example">
-                            <option value="1" selected="selected">f1111</option>
-                            <option value="2">f2222</option>
-                            <option value="3">f3333</option>
-                          </select>
+                          <select class="form-select mb-1" id="wallet_new_transaction_option">
+						     <option th:each="wallet, iterStat : ${walletList}" 
+						            th:value="${wallet.wallet_id}" 
+						            th:text="${wallet.address}" 
+						            th:selected="${iterStat.index == 0}"></option>
+						</select>
                         </div>
 				  </div>
 			      <div class="modal-footer">
 			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">닫기</button>
-			        <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">신청</button>
+			        <button id="addNewTransactionPayout_confirm" class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">신청</button>
 			      </div>
 			    </div>
 			  </div>
@@ -46,10 +73,10 @@
 					    <label class="form-label fs-9" for="basic-form-name">지갑 추가</label>
 						<div class="row">
 							<div class="col-8">
-								<input class="form-control" id="new_transaction_fil_amount" type="number"/>
+								<input class="form-control" id="new_wallet_addr" type="text"/>
 							</div>
 							<div class="col-4">
-								<button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">추가</button>	
+								<button class="btn btn-outline-primary" id='addNewWallet_confirm' type="button" data-bs-dismiss="modal">추가</button>	
 							</div>
 						</div>
 					    
@@ -59,14 +86,15 @@
                           <label class="form-label fs-9" for="wallet">지갑삭제</label>
                           <div class="row">
 							<div class="col-8">
-								<select class="form-select mb-1"  id="new_transaction_wallet " aria-label="Default select example" >
-	                            <option value="1" selected="selected">f1111</option>
-	                            <option value="2">f2222</option>
-	                            <option value="3">f3333</option>
-	                          </select>
+								 <select class="form-select mb-1" id="wallet_delete_option">
+								     <option th:each="wallet, iterStat : ${walletList}" 
+								            th:value="${wallet.wallet_id}" 
+								            th:text="${wallet.address}" 
+								            th:selected="${iterStat.index == 0}"></option>
+								</select>
 							</div>
 							<div class="col-4">
-								<button class="btn btn-outline-danger" type="button" data-bs-dismiss="modal">삭제</button>	
+								<button class="btn btn-outline-danger"  id='deleteWallet_confirm' type="button" data-bs-dismiss="modal">삭제</button>	
 							</div>
 						</div>
                         </div>

@@ -12,4 +12,8 @@ import com.nanoDc.erp.vo.WalletVO;
 @Mapper
 public interface WalletMapper {
 	public void addNewWallet(WalletVO walletVO);
+	public List<WalletVO> getWalletListByUser(int user_id);
+	public void deleteWalletByWalletId(long wallet_id);
+	
+
 }

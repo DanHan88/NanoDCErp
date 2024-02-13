@@ -137,6 +137,8 @@ public class UserController {
 	@GetMapping(value={"/cash"})
     public ModelAndView transaction(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        List<WalletVO> walletList = this.userService.getWalletListByUser(1);
+        mav.addObject("walletList", walletList);
         mav.setViewName("views/user/transaction");
         return mav;
     }
@@ -183,7 +185,7 @@ public class UserController {
     }
 	//유저엡 메인페이지
 	 @GetMapping(value={"/index"})
-	    public ModelAndView test(HttpServletRequest request,Integer init_page) {
+	    public ModelAndView index(HttpServletRequest request,Integer init_page) {
 
 		    String CURRENCY_PAIR = "fil_krw";
 	        String apiUrl = "https://api.korbit.co.kr/v1/ticker?currency_pair=" + CURRENCY_PAIR;
@@ -213,8 +215,8 @@ public class UserController {
 	 
 	 /* 송금신청 */
 	 @ResponseBody
-	 @PostMapping(value={"/addNewTransactionPayout"})
-	 public String addNewTransactionPayout(@RequestBody TransactionVO transactionVO, HttpServletRequest request) {
+	 @PostMapping(value={"/addNewTransaction"})
+	 public String addNewTransaction(@RequestBody TransactionVO transactionVO, HttpServletRequest request) {
 	    return userService.addNewTransaction(transactionVO);
 	    }   
 	 /* 유저지갑추가 */
@@ -223,5 +225,11 @@ public class UserController {
 	 public String addNewWallet(@RequestBody WalletVO walletVO, HttpServletRequest request) {
 	    return userService.addNewWallet(walletVO);
 	    }   
-	
+	 /* 유저지갑삭제 */
+	 @ResponseBody
+	 @PostMapping(value={"/deleteWalletByWalletId"})
+	 public String deleteWalletByWalletId(@RequestBody WalletVO walletVO, HttpServletRequest request) {
+	    return userService.deleteWalletByWalletId(walletVO.getWallet_id());
+	    }   
+	 
 }

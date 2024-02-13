@@ -14,5 +14,16 @@
 					   now()
 			   );
 	</insert>
+	<select id="getWalletListByUser" parameterType="integer" resultType="com.nanoDc.erp.vo.WalletVO">
+		SELECT wallet_id, address, user_id, status, reg_date
+			FROM filmountain.wallet
+			WHERE user_id=#{user_id} AND status='active';
+	</select>
+	
+	<update id="deleteWalletByWalletId" parameterType="long">
+		UPDATE filmountain.wallet
+			SET status='deleted'
+			WHERE wallet_id=#{wallet_id};
+	</update>
 	
 </mapper>

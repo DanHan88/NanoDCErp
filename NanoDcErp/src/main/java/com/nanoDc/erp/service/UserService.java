@@ -56,6 +56,16 @@ public class UserService {
 	       this.walletMapper.addNewWallet(walletVO);
 	       return "success";
 	    }
+	 public List<WalletVO> getWalletListByUser(int user_id){
+		 return this.walletMapper.getWalletListByUser(user_id);
+	 }
+	 public String deleteWalletByWalletId(long wallet_id){
+		 this.walletMapper.deleteWalletByWalletId(wallet_id);
+		 return "success";
+	 }
+	 
+	 
+	 
 	
 	 
 	 

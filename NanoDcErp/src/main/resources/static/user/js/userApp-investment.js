@@ -13,7 +13,6 @@
     getDefaultOptions,
     responsiveOptions
   ) => {
-	  debugger;
     const { breakpoints, resize } = window.phoenix.utils;
     const handleResize = options => {
       Object.keys(options).forEach(item => {
