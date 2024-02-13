@@ -55,9 +55,33 @@ public class UserController {
 		            HttpServletRequest request) {
 		        ModelAndView mav = new ModelAndView();
 		        Cookie[] cookies = request.getCookies();
-	        mav.setViewName("views/user/user_Login");
-	        return mav;
-	    }
+		        if (cookies != null) {
+		            for (Cookie cookie : cookies) {
+		                if ("userId".equals(cookie.getName())) {
+		                    String storedUserId = cookie.getValue();
+		                    UserInfoVO userInfoVO = userService.selectDetailUserInfoByUserId(Integer.parseInt(storedUserId));
+		                    if (userInfoVO != null) {
+		                    	HttpSession session = request.getSession();
+		                        LoginVO lvo = new LoginVO();
+		                        lvo.setId(userInfoVO.getUser_email());
+		                        lvo.setUserInfoVO(userInfoVO);
+		                        lvo.setPassword("");
+		                        lvo.setLevel(userInfoVO.getLevel());
+		                        session.setAttribute("user", (Object)lvo);
+		                        mav.setViewName("redirect:/user/index");
+		                        return mav;
+		                    }
+		                }
+		            }
+		            }
+		        if (!userService.checkSession(request)) {
+		            mav.setViewName("views/user/user_Login");
+		            mav.addObject("loginError", loginError);
+		            return mav;
+		        }
+		        mav.setViewName("redirect:/user/index");
+		        return mav;
+		}
 		/*로그 아웃 */
 		@GetMapping(value={"/logout"})
 	    public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -115,6 +139,7 @@ public class UserController {
 		                return "redirect:/user/index";
 		            }
 		        }
+		        
 		        redirect.addFlashAttribute("loginError", "비밀번호를 확인해주세요");
 		        return "redirect:/user/login";
 		    }
@@ -123,13 +148,26 @@ public class UserController {
 	@GetMapping(value={"/dashboard"})
     public ModelAndView dashboard(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if(!userService.checkSession(request)) {
+        	mav.setViewName("redirect:/user/login");
+            return mav;
+        }
+        LoginVO loginVO = (LoginVO)session.getAttribute("user");
         mav.setViewName("views/user/dashboard");
         return mav;
     }
 	//유저상품
 	@GetMapping(value={"/product"})
     public ModelAndView product(HttpServletRequest request) {
+		
         ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if(!userService.checkSession(request)) {
+        	mav.setViewName("redirect:/user/login");
+            return mav;
+        }
+        LoginVO loginVO = (LoginVO)session.getAttribute("user");
         mav.setViewName("views/user/product");
         return mav;
     }
@@ -137,6 +175,12 @@ public class UserController {
 	@GetMapping(value={"/cash"})
     public ModelAndView transaction(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if(!userService.checkSession(request)) {
+        	mav.setViewName("redirect:/user/login");
+            return mav;
+        }
+        LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<WalletVO> walletList = this.userService.getWalletListByUser(1);
         mav.addObject("walletList", walletList);
         mav.setViewName("views/user/transaction");
@@ -147,7 +191,12 @@ public class UserController {
 	@GetMapping(value={"/investment"})
     public ModelAndView investment(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        
+        HttpSession session = request.getSession();
+        if(!userService.checkSession(request)) {
+        	mav.setViewName("redirect:/user/login");
+            return mav;
+        }
+        LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<HardwareInvestmentVO> investmentList = this.userService.getInvestmentListByUser(1);
         mav.addObject("investmentList", investmentList);
         mav.setViewName("views/user/userApp_investment");
@@ -157,6 +206,12 @@ public class UserController {
 	@GetMapping(value={"/reward"})
     public ModelAndView reward(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession();
+        if(!userService.checkSession(request)) {
+        	mav.setViewName("redirect:/user/login");
+            return mav;
+        }
+        LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(1);
         
         Date lastRewardDate = rewardDetailList.get(0).getHardwareRewardSharingVO().getRegdate();
@@ -186,7 +241,7 @@ public class UserController {
 	//유저엡 메인페이지
 	 @GetMapping(value={"/index"})
 	    public ModelAndView index(HttpServletRequest request,Integer init_page) {
-
+		 	
 		    String CURRENCY_PAIR = "fil_krw";
 	        String apiUrl = "https://api.korbit.co.kr/v1/ticker?currency_pair=" + CURRENCY_PAIR;
 	        String last = "";
@@ -208,7 +263,14 @@ public class UserController {
 		 
 		 
 	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!userService.checkSession(request)) {
+	        	mav.setViewName("redirect:/user/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        mav.addObject("last",last);
+	        
 	        mav.setViewName("views/user/userApp_index");
 	        return mav;
 	    }

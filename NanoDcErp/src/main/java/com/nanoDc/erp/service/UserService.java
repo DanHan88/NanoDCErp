@@ -2,6 +2,9 @@ package com.nanoDc.erp.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,9 @@ import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.mapper.WalletMapper;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
+import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.TransactionVO;
+import com.nanoDc.erp.vo.UserInfoVO;
 import com.nanoDc.erp.vo.WalletVO;
 
 @Service
@@ -33,6 +38,22 @@ public class UserService {
 	TransactionMapper transactionMapper;
 	@Autowired
 	WalletMapper walletMapper;
+	
+	public boolean checkSession(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	LoginVO loginVO = (LoginVO)session.getAttribute("user");
+        if (session.getAttribute("user") == null || loginVO.getId() == "") {
+	        return false;
+	    }
+        if(loginVO.getLevel()==null) {
+        	return false;
+        }
+        
+	    return true;
+    }	
+	 public UserInfoVO selectDetailUserInfoByUserId(int user_id) {
+	    	return userInfoMapper.selectDetailUserInfoByUserId(user_id);
+	    }
 	
 	
 	/* 유저 투자 리스트 가져오기 */
