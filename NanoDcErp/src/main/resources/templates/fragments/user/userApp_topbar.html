@@ -2,18 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar navbar-top fixed-top" id="navbarTop" th:fragment="TopBar" style="background-color: #E5C71E; padding: 10px;">
         <div class="container">
-            <div class="row">
+            <div class="row w-100">
                 <div class="col-4 m-0 p-0">
                     <img src="/assets/img/filmountain/koala2.jpg" alt="profile picture" style=" height: 10vh; width: auto; border-radius: 50%;">
                 </div>
-                <div class="col-7  m-0 p-0">
+                <div class="col-4  m-0 p-0">
                     <span style="color: Black; display:block;" class="fs-7">Koala</span>
                     <span style="color: Black; display:block;" class="fs-7">koala@koala.com</span>
                 </div>
-                <div class="col-1  m-0 p-0" >
+                <div class="col-2  m-0 p-0" >
 				<img id="power_button" src="/assets/img/filmountain/powerButton.png" alt="power button" 
        					style="visibility:hidden; height: 10vh; width: auto; border-radius: 50%; cursor: pointer;"> 
             </div>
+             <div class="col-2 mt-4">
+			    <img id="logout_button" src="/assets/img/filmountain/logout.png" alt="logout_button" style="height: 4.5vh; width: auto; border-radius: 50%; cursor: pointer;" th:onclick="window.location.href='/user/logout'">
+			</div>
+
+            
+            
         </div>
     </nav>
 </html>
