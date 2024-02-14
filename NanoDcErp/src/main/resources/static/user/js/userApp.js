@@ -70,7 +70,7 @@ function resizeWebView() {
 							}
 						    resizeWebViewCalled = true;
 						    $('#userApp_view').css('visibility', 'visible').show();	  
-						    $('#power_button').css('visibility', 'visible').show();	  
+						    $('#power_button').css('display', 'block').show();		
 						    $('#debug').text('width: ' +imageWidth +'height: ' + imageHeight); 
 						    $('.panel_buttons').css('filter', 'brightness(0.50)');
 						    $('.app_text').css('filter', 'brightness(0.50)');

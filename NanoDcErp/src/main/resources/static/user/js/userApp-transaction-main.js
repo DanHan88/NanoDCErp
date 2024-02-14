@@ -2,6 +2,12 @@
 	$(document).ready(function() {
 	user_id = 1; //$('#user_id').val();
 
+
+		 $('#back_button').css('display', 'block');
+		 $(document).on('click', '#back_button', function() {
+		    window.history.back();
+		});
+		
 	$('#success_alert').on('hidden.bs.modal', function (e) {
 								 window.location.reload();
 					      });  
