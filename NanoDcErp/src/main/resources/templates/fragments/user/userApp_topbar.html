@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    		<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:10vh; background-color: #E5C71E;" id="navbarTop" th:fragment="TopBar">
+    		<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:12vh; background-color: #E5C71E;" id="navbarTop" th:fragment="TopBar">
         <div class="navbar-logo">
 				<img id="power_button" src="/assets/img/filmountain/powerButton.png" alt="power button" 
-       					style="visibility:hidden; height: 10vh; width: auto; border-radius: 50%; cursor: pointer;"> 
+       					style="visibility:hidden; height: 12vh; width: auto; border-radius: 50%; cursor: pointer;"> 
 
         </div>
         
@@ -21,17 +21,17 @@
             
           
           <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
-              <div class="avatar avatar-l ">
-                <img class="rounded-circle " src="/assets/img/filmountain/nanoDC_icon.png" alt="">
-
-              </div>
+              
+              <div class="avatar avatar-l" style="height: 10vh; width: 10vh; overflow: hidden; border-radius: 50%; border: 2px solid #fff;">
+			    <img class="rounded-circle" src="/assets/img/filmountain/dd.jpg" alt="" style="width: 100%;">
+			</div>
             </a>
             <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
               <div class="card position-relative border-0">
                 <div class="card-body p-0">
                   <div class="text-center pt-4 pb-3">
                     <div class="avatar avatar-xl ">
-                      <img class="rounded-circle " src="/assets/img/filmountain/nanoDC_icon.png" alt="">
+                      <img class="rounded-circle " src="/assets/img/filmountain/dd.jpg" alt="">
 
                     </div>
                     <h6 class="mt-2 text-body-emphasis" id = "user_name_top"></h6>

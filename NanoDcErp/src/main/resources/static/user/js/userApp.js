@@ -76,6 +76,7 @@ function resizeWebView() {
 						    $('.app_text').css('filter', 'brightness(0.50)');
 						}	
 						
+						
 $(document).ready(function() {
 	function buttonAnimation(button,img_list){
 		var intervalId = setInterval(function() {
@@ -86,6 +87,10 @@ $(document).ready(function() {
 		          }
 		        }, 200);
 	  }
+	  $(window).resize(function() {
+    		resizeWebView();
+    console.log('창 크기가 변경되었습니다.');
+	});
 	  function handleButtonClick(clickedObject) {
          
          if(!isRunning){
