@@ -126,6 +126,7 @@ public class UserController {
 		        String encodePw = "";
 		        if (userInfoVO != null) {
 		        	lvo.setId(userInfoVO.getUser_name());
+		        	userInfoVO=userInfoMapper.selectDetailUserInfoByUserId(userInfoVO.getUser_id());
 		            lvo.setUserInfoVO(userInfoVO);
 		            lvo.setLevel(userInfoVO.getLevel());
 		        	rawPw = loginVO.getPassword();
@@ -135,6 +136,8 @@ public class UserController {
 		                 Cookie rememberMeCookie = new Cookie("userId", String.valueOf(userInfoVO.getUser_id()));
 		                 rememberMeCookie.setMaxAge(7 * 24 * 60 * 60); // 30 days
 		                 response.addCookie(rememberMeCookie);
+		                
+		                 
 		                session.setAttribute("user", (Object)lvo);
 		                return "redirect:/user/index";
 		            }

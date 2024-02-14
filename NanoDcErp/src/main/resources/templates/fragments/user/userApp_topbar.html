@@ -1,25 +1,57 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <nav class="navbar navbar-top fixed-top" id="navbarTop" th:fragment="TopBar" style="background-color: #E5C71E; padding: 10px;">
-        <div class="container">
-            <div class="row w-100">
-                <div class="col-4 m-0 p-0">
-                    <img src="/assets/img/filmountain/dd.jpg" alt="profile picture" style=" height: 10vh; width: auto; border-radius: 50%;">
-                </div>
-                <div class="col-4  m-0 p-0">
-                    <span style="color: Black; display:block;" class="fs-7" id="admin_neme_top" th:text="${loginVO.userInfoVO.user_name}" ></span>
-                    <span style="color: Black; display:block;" class="fs-7" id="admin_id_top" th:text="${loginVO.userInfoVO.user_email}" ></span>
-                </div>
-                <div class="col-2  m-0 p-0" >
+    		<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:10vh; background-color: #E5C71E;" id="navbarTop" th:fragment="TopBar">
+        <div class="navbar-logo">
 				<img id="power_button" src="/assets/img/filmountain/powerButton.png" alt="power button" 
        					style="visibility:hidden; height: 10vh; width: auto; border-radius: 50%; cursor: pointer;"> 
+
+        </div>
+        
+        <ul class="navbar-nav navbar-nav-icons flex-row">
+          <li class="nav-item">
+            <div class="theme-control-toggle fa-icon-wait px-2">
+              <input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle">
+              <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" aria-label="Switch theme" data-bs-original-title="Switch theme"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></label>
+              <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" aria-label="Switch theme" data-bs-original-title="Switch theme"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></label>
             </div>
-             <div class="col-2 mt-4">
-			    <img id="logout_button" src="/assets/img/filmountain/logout.png" alt="logout_button" style="height: 4.5vh; width: auto; border-radius: 50%; cursor: pointer;" th:onclick="window.location.href='/user/logout'">
-			</div>
+          </li>
+        
 
             
-            
-        </div>
-    </nav>
+          
+          <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-l ">
+                <img class="rounded-circle " src="/assets/img/filmountain/nanoDC_icon.png" alt="">
+
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
+              <div class="card position-relative border-0">
+                <div class="card-body p-0">
+                  <div class="text-center pt-4 pb-3">
+                    <div class="avatar avatar-xl ">
+                      <img class="rounded-circle " src="/assets/img/filmountain/nanoDC_icon.png" alt="">
+
+                    </div>
+                    <h6 class="mt-2 text-body-emphasis" id = "user_name_top"></h6>
+                  </div>
+              
+                </div>
+                
+                <div class="card-footer p-0 border-top border-translucent">
+                  
+                  <hr>
+                  <div class="px-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100" th:href="@{/user/logout}"> <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out me-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>로그아웃</a></div>
+                
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <script>
+        var navbarVertical = document.querySelector('.navbar-vertical');
+        navbarVertical.remove();
+        navbarTop.removeAttribute('style');
+      </script>
 </html>
