@@ -29,17 +29,13 @@ public class UserInfoVO {
     private String original_password;
 	private double available_balance;
 	private double total_balance;
-	private long total_tb;
+	private double total_investment_fil;
+	private double total_reward_fil;
 	private String level;
 	
 	
     
-	public long getTotal_tb() {
-		return total_tb;
-	}
-	public void setTotal_tb(long total_tb) {
-		this.total_tb = total_tb;
-	}
+	
 	public String getOriginal_password() {
 		return original_password;
 	}
@@ -149,6 +145,19 @@ public class UserInfoVO {
 	public void setLevel(String level) {
 		this.level = level;
 	}
+	public double getTotal_investment_fil() {
+		return total_investment_fil;
+	}
+	public void setTotal_investment_fil(double total_investment_fil) {
+		this.total_investment_fil = total_investment_fil;
+	}
+	public double getTotal_reward_fil() {
+		return total_reward_fil;
+	}
+	public void setTotal_reward_fil(double total_reward_fil) {
+		this.total_reward_fil = total_reward_fil;
+	}
+	
 	
 }
 

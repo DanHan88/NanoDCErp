@@ -4,11 +4,11 @@
         <div class="container">
             <div class="row w-100">
                 <div class="col-4 m-0 p-0">
-                    <img src="/assets/img/filmountain/koala2.jpg" alt="profile picture" style=" height: 10vh; width: auto; border-radius: 50%;">
+                    <img src="/assets/img/filmountain/dd.jpg" alt="profile picture" style=" height: 10vh; width: auto; border-radius: 50%;">
                 </div>
                 <div class="col-4  m-0 p-0">
-                    <span style="color: Black; display:block;" class="fs-7">Koala</span>
-                    <span style="color: Black; display:block;" class="fs-7">koala@koala.com</span>
+                    <span style="color: Black; display:block;" class="fs-7" id="admin_neme_top" th:text="${loginVO.userInfoVO.user_name}" ></span>
+                    <span style="color: Black; display:block;" class="fs-7" id="admin_id_top" th:text="${loginVO.userInfoVO.user_email}" ></span>
                 </div>
                 <div class="col-2  m-0 p-0" >
 				<img id="power_button" src="/assets/img/filmountain/powerButton.png" alt="power button" 

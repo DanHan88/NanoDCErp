@@ -5,23 +5,26 @@
 	<!-- SELECT -->
 	<select id="selectUserInfoList"  resultType="com.nanoDc.erp.vo.UserInfoVO">
 		SELECT
-		    u.user_id,
-		    u.phone_number,
-		    u.user_status,
-		    u.user_reg_date,
-		    u.user_name,
-		    u.user_email,
-		    u.profile_picture_url,
-		    u.level,
-		    COUNT(i.hw_id) AS investment_count
+		    user.user_id,
+		    user.phone_number,
+		    user.user_status,
+		    user.user_reg_date,
+		    user.user_name,
+		    user.user_email,
+		    user.profile_picture_url,
+		    user.level,
+		    COUNT(invest.hw_id) AS investment_count,
+		    COALESCE(SUM(invest.hw_invest_fil), 0) AS total_investment_fil,
+		    (SELECT SUM(hrsd.reward_fil) from hw_reward_sharing_detail hrsd WHERE hrsd.user_id=user.user_id GROUP BY hrsd.user_id) as total_reward_fil
 		FROM
-		    user_info u
+		    user_info user
 		LEFT JOIN
-		    hw_investment i ON u.user_id = i.user_id
+		    hw_investment invest ON user.user_id = invest.user_id
 		WHERE
-		    u.user_status != 'inactive'
+		    user.user_status != 'inactive'
 		GROUP BY
-		    u.user_email
+		    user.user_email;
+		  
 
 	</select>
 	
@@ -53,17 +56,26 @@
 	</select>
 	
 	<select id="selectDetailUserInfoByUserId"  parameterType="integer" resultType="com.nanoDc.erp.vo.UserInfoVO">
-		select 
-			u.user_id,
-			u.user_reg_date,
-			u.user_name,
-			u.user_email,
-			u.user_status,
-			u.phone_number,
-			u.profile_picture_url,
-			u.level
-		 from user_info u	
-		 where user_id=#{user_id}
+		SELECT
+		    user.user_id,
+		    user.phone_number,
+		    user.user_status,
+		    user.user_reg_date,
+		    user.user_name,
+		    user.user_email,
+		    user.profile_picture_url,
+		    user.level,
+		    COUNT(invest.hw_id) AS investment_count,
+		    COALESCE(SUM(invest.hw_invest_fil), 0) AS total_investment_fil,
+		    (SELECT SUM(hrsd.reward_fil) from hw_reward_sharing_detail hrsd WHERE hrsd.user_id=user.user_id GROUP BY hrsd.user_id) as total_reward_fil
+		FROM
+		    user_info user
+		LEFT JOIN
+		    hw_investment invest ON user.user_id = invest.user_id
+		WHERE
+			user.user_id=#{user_id}
+			
+
 	</select>
 	
 	

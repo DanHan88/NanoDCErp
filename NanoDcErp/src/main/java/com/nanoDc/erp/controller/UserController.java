@@ -168,6 +168,7 @@ public class UserController {
             return mav;
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
+        mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/product");
         return mav;
     }
@@ -181,8 +182,9 @@ public class UserController {
             return mav;
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
-        List<WalletVO> walletList = this.userService.getWalletListByUser(1);
+        List<WalletVO> walletList = this.userService.getWalletListByUser(loginVO.getUserInfoVO().getUser_id());
         mav.addObject("walletList", walletList);
+        mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/transaction");
         return mav;
     }
@@ -197,8 +199,9 @@ public class UserController {
             return mav;
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
-        List<HardwareInvestmentVO> investmentList = this.userService.getInvestmentListByUser(1);
+        List<HardwareInvestmentVO> investmentList = this.userService.getInvestmentListByUser(loginVO.getUserInfoVO().getUser_id());
         mav.addObject("investmentList", investmentList);
+        mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/userApp_investment");
         return mav;
     }
@@ -212,7 +215,7 @@ public class UserController {
             return mav;
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
-        List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(1);
+        List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(loginVO.getUserInfoVO().getUser_id());
         
         Date lastRewardDate = rewardDetailList.get(0).getHardwareRewardSharingVO().getRegdate();
         Date firstRewardDate = rewardDetailList.get(rewardDetailList.size()-1).getHardwareRewardSharingVO().getRegdate();
@@ -235,6 +238,7 @@ public class UserController {
         }
         mav.addObject("dataList",dataList);
         mav.addObject("rewardDetailList", rewardDetailList);
+        mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/reward");
         return mav;
     }
@@ -270,7 +274,7 @@ public class UserController {
 	        }
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        mav.addObject("last",last);
-	        
+	        mav.addObject("loginVO", loginVO);
 	        mav.setViewName("views/user/userApp_index");
 	        return mav;
 	    }

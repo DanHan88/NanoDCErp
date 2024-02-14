@@ -16,13 +16,13 @@
             <!-- Buttons overlay -->
             <div class="row position-absolute top-50 start-50 translate-middle" style=" z-index: 3;">
                 <div class="col-12 text-center userApp_buttons" id="app_button1" value="investment" style="cursor: pointer;">
-                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">1,221TB</p>
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;" id = "total_invest" th:text="${loginVO.userInfoVO.total_investment_fil}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button2" value="reward" style="cursor: pointer;">
-                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">234FIL</p>
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;"id = "total_reward" th:text="${loginVO.userInfoVO.total_reward_fil}">234FIL</p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button3" value="cash" style="cursor: pointer;">
-                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">123FIL</p>
+                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;" id = "total_tb" th:text="${loginVO.userInfoVO.total_balance}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button4" value="status" style="cursor: pointer;">
                         <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">운영중</p>
