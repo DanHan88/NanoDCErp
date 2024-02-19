@@ -54,33 +54,9 @@ public class UserController {
 		    		@ModelAttribute LoginVO loginVO,
 		            HttpServletRequest request) {
 		        ModelAndView mav = new ModelAndView();
-		        Cookie[] cookies = request.getCookies();
-		        if (cookies != null) {
-		            for (Cookie cookie : cookies) {
-		                if ("userId".equals(cookie.getName())) {
-		                    String storedUserId = cookie.getValue();
-		                    UserInfoVO userInfoVO = userService.selectDetailUserInfoByUserId(Integer.parseInt(storedUserId));
-		                    if (userInfoVO != null) {
-		                    	HttpSession session = request.getSession();
-		                        LoginVO lvo = new LoginVO();
-		                        lvo.setId(userInfoVO.getUser_email());
-		                        lvo.setUserInfoVO(userInfoVO);
-		                        lvo.setPassword("");
-		                        lvo.setLevel(userInfoVO.getLevel());
-		                        session.setAttribute("user", (Object)lvo);
-		                        mav.setViewName("redirect:/user/index");
-		                        return mav;
-		                    }
-		                }
-		            }
-		            }
-		        if (!userService.checkSession(request)) {
 		            mav.setViewName("views/user/user_Login");
 		            mav.addObject("loginError", loginError);
 		            return mav;
-		        }
-		        mav.setViewName("redirect:/user/index");
-		        return mav;
 		}
 		/*로그 아웃 */
 		@GetMapping(value={"/logout"})
@@ -91,8 +67,8 @@ public class UserController {
 	        Cookie[] cookies = request.getCookies();
 	        if (cookies != null) {
 	            for (Cookie cookie : cookies) {
-	                if ("userId".equals(cookie.getName())) {
-	                    cookie.setMaxAge(0); // Set the max age to zero to delete the cookie
+	                if ("nanodc_userApp".equals(cookie.getName())) {
+	                    cookie.setMaxAge(0);
 	                    response.addCookie(cookie);
 	                    break;
 	                }
@@ -133,7 +109,7 @@ public class UserController {
 		            String value = pwEncoder.encode(rawPw);
 		            if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = userInfoMapper.getUserPassword(userInfoVO.getUser_id()))) {
 		                lvo.setPassword("");
-		                 Cookie rememberMeCookie = new Cookie("userId", String.valueOf(userInfoVO.getUser_id()));
+		                 Cookie rememberMeCookie = new Cookie("nanodc_userApp", String.valueOf(userInfoVO.getUser_id()));
 		                 rememberMeCookie.setMaxAge(7 * 24 * 60 * 60); // 30 days
 		                 response.addCookie(rememberMeCookie);
 		                
@@ -268,8 +244,32 @@ public class UserController {
 	            System.err.println("Error: " + responseEntity.getStatusCode());
 	        }
 		 
-		 
+	        
 	        ModelAndView mav = new ModelAndView();
+	        
+	        Cookie[] cookies = request.getCookies();
+	        
+	        if (cookies != null) {
+	            for (Cookie cookie : cookies) {
+	                if ("nanodc_userApp".equals(cookie.getName())) {
+	                    String storedUserId = cookie.getValue();
+	                    UserInfoVO userInfoVO = userService.selectDetailUserInfoByUserId(Integer.parseInt(storedUserId));
+	                    if (userInfoVO != null) {
+	                    	HttpSession session = request.getSession();
+	                        LoginVO lvo = new LoginVO();
+	                        lvo.setId(userInfoVO.getUser_email());
+	                        lvo.setUserInfoVO(userInfoVO);
+	                        lvo.setPassword("");
+	                        lvo.setLevel(userInfoVO.getLevel());
+	                        session.setAttribute("user", (Object)lvo);
+	                        mav.addObject("last",last);
+	            	        mav.addObject("loginVO", lvo);
+	                        mav.setViewName("views/user/userApp_index");
+	                        return mav;
+	                    }
+	                }
+	            }
+	            }
 	        HttpSession session = request.getSession();
 	        if(!userService.checkSession(request)) {
 	        	mav.setViewName("redirect:/user/login");
