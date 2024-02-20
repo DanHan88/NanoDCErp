@@ -1,52 +1,60 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    		<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:12vh; background-color: #E5C71E;" id="navbarTop" th:fragment="TopBar">
-        <div class="navbar-logo">
-				<img id="power_button" src="/assets/img/filmountain/powerButton.png" alt="power button" 
-       					style="display:none; height: 12vh; width: auto; border-radius: 50%; cursor: pointer;">
-       					<img id="back_button" src="/assets/img/filmountain/back.png" alt="back button" style="display:none; height: 5vh; width: auto; border-radius: 50%; cursor: pointer;"> 
-
-        </div>
-        
-        <ul class="navbar-nav navbar-nav-icons flex-row">
-          
-        
-
-            
-          
-          <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
-              
-              <div class="avatar avatar-l" style="height: 10vh; width: 10vh; overflow: hidden; border-radius: 50%; border: 2px solid #fff;">
-			    <img class="rounded-circle" src="/assets/img/filmountain/dd.jpg" alt="" style="width: 100%;">
-			</div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
-              <div class="card position-relative border-0">
-                <div class="card-body p-0">
-                  <div class="text-center pt-4 pb-3">
-                    <div class="avatar avatar-xl ">
-                      <img class="rounded-circle " src="/assets/img/filmountain/dd.jpg" alt="">
-
+	
+<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:12vh; background-color: black;
+            border-width: 7px; 
+			border-style: solid; 
+			border-color: #E5C71E; " id="navbarTop" th:fragment="TopBar">
+    <div style="position: absolute; left: 0;">
+        <ul class="navbar-nav navbar-nav-icons flex-row" style="justify-content: flex-start;">
+            <li class="nav-item dropdown">
+                <a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                    <div class="avatar avatar-l" style="height: 9vh; width: 9vh; overflow: hidden; border-radius: 50%; border: 2px solid #fff;">
+                        <img class="rounded-circle" src="/assets/img/filmountain/dd.jpg" alt="" style="width: 100%;">
                     </div>
-                    <h6 class="mt-2 text-body-emphasis" id = "user_name_top"></h6>
-                  </div>
-              
+                </a>
+                <div class="dropdown-menu dropdown-menu-start navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
+                    <div class="card position-relative border-0">
+                        <div class="card-body p-0">
+                            <div class="text-center pt-4 pb-3">
+                                <div class="avatar avatar-xl ">
+                                    <img class="rounded-circle " src="/assets/img/filmountain/dd.jpg" alt="">
+                                </div>
+                                <h6 class="mt-2 text-body-emphasis" id="user_name_top"></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer p-0 border-top border-translucent">
+                            <hr>
+                            <div class="px-3">
+                                <a class="btn btn-phoenix-secondary d-flex flex-center w-100" th:href="@{/user/logout}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out me-2">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg>로그아웃
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="card-footer p-0 border-top border-translucent">
-                  
-                  <hr>
-                  <div class="px-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100" th:href="@{/user/logout}"> <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out me-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>로그아웃</a></div>
-                
-              </div>
-            </div>
-          </li>
+            </li>
         </ul>
-      </nav>
-      <script>
-        var navbarVertical = document.querySelector('.navbar-vertical');
-        navbarVertical.remove();
-        navbarTop.removeAttribute('style');
-      </script>
+    </div>
+    <div style="position: absolute; top: 50%; left: 43%; transform: translate(-50%, -50%); margin-right: 1rem;">
+        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">Name :</span>
+        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">코알라</span><br>
+        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">Email :</span>
+         <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">koala@koala.net</span>
+    </div>
+    <div class="navbar-logo" style="position: absolute; right: 0;">
+        <img id="power_button" src="/assets/img/filmountain/power_button.png" alt="power button" 
+             style="display:none; height: 10vh; width: auto; border-radius: 50%; cursor: pointer;">
+        <img id="back_button" src="/assets/img/filmountain/back.png" alt="back button" style="display:none; height: 5vh; width: auto; border-radius: 50%; cursor: pointer;"> 
+    </div>
+</nav>
+<script>
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    navbarVertical.remove();
+    navbarTop.removeAttribute('style');
+</script>
 </html>
