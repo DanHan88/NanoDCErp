@@ -7,7 +7,7 @@
               <h2 class="mb-0">Orders</h2>
             </div>
           </div>
-          <div id="orderTable" data-list="{&quot;valueNames&quot;:[&quot;order&quot;,&quot;total&quot;,&quot;customer&quot;,&quot;payment_status&quot;,&quot;fulfilment_status&quot;,&quot;delivery_type&quot;,&quot;date&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
+          <div id="orderTable" data-list='{"valueNames":["investment_date","name","email","product","fil"],"page":10,"pagination":true}'>
             <div class="mb-4">
               <div class="row g-3">
                 <div class="col-auto">
@@ -41,21 +41,21 @@
                 <table class="table table-sm fs-9 mb-0">
                   <thead>
                     <tr>
-                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">투자일시</th>
-                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">회원명</th>
-                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">이메일</th>
-                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">투자상품</th>
-                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">투자FIL</th>
-                      <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
+                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="investment_date" style="width:10%;">투자일시</th>
+                      <th class="sort align-middle" scope="col" data-sort="name" style="width:10%;">회원명</th>
+                      <th class="sort align-middle ps-8" scope="col" data-sort="email" style="width:10%; min-width: 250px;">이메일</th>
+                      <th class="sort align-middle pe-3" scope="col" data-sort="product" style="width:10%;">투자상품</th>
+                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fil" style="width:10%; min-width: 200px;">투자FIL</th>
+                      <th class="sort align-middle text-end pe-0" scope="col" style="width:10%;"></th>
                     </tr>
                   </thead>
                   <tbody class="list" id="order-table-body">
-					 <tr th:each="investment : ${investmentList}"  class="hover-actions-trigger btn-reveal-trigger position-static">
-                      <td th:text="${#dates.format(investment.hw_reg_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${investment.user_name}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${investment.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${investment.hw_product_name}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${investment.hw_invest_fil}" class="total align-middle fw-semibold text-body-highlight"></td>
+					 <tr th:each="investment : ${investmentList}"  class="order hover-actions-trigger btn-reveal-trigger position-static">
+                      <td th:text="${#dates.format(investment.hw_reg_date, 'yyyy-MM-dd HH:mm:ss')}" class="investment_date fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+                      <td th:text="${investment.user_name}" class="name align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${investment.user_email}" class="email align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${investment.hw_product_name}" class="product align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${investment.hw_invest_fil}" class="fil align-middle fw-semibold text-body-highlight"></td>
                       <td class=" ps-10 total align-middle position-relative">
     					<!-- "상세" 버튼 -->
 					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_user" type="button" id="button-addon2" th:value="${investment.hw_id}">상세
