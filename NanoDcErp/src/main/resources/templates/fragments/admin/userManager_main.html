@@ -460,8 +460,7 @@
               <h2 class="mb-0"> 회원 관리</h2>
             </div>
           </div>
-          
-          <div id="orderTable" data-list="{&quot;valueNames&quot;:[&quot;order&quot;,&quot;total&quot;,&quot;customer&quot;,&quot;payment_status&quot;,&quot;fulfilment_status&quot;,&quot;delivery_type&quot;,&quot;date&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
+          <div id="orderTable" data-list='{"valueNames":["reg_date","name","email","phone","invest_cnt","status","level"],"page":10,"pagination":true}'>
             <div class="mb-4">
               <div class="row g-3">
                 <div class="col-auto">
@@ -490,13 +489,13 @@
             <input class="form-check-input" id="checkbox-bulk-order-select" type="checkbox" data-bulk-select="{&quot;body&quot;:&quot;order-table-body&quot;}">
         </div>
     </th>
-    <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:15%;">가입일시</th>
-    <th class="sort align-middle" scope="col" data-sort="total" style="width:15%;">회원명</th>
-    <th class="sort align-middle ps-3" scope="col" data-sort="customer" style="width:15%; min-width: 250px;">이메일</th>
-    <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:15%;">휴대폰번호</th>
-    <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:15%; min-width: 200px;">총투자상품</th>
-    <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:10%;">상태</th>
-    <th class="sort align-middle text-start ps-4" scope="col" style="width:5%;">레벨</th> <!-- 수정된 "레벨" 열 -->
+    <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="reg_date" style="width:15%;">가입일시</th>
+    <th class="sort align-middle" scope="col" data-sort="name" style="width:15%;">회원명</th>
+    <th class="sort align-middle ps-3" scope="col" data-sort="email" style="width:15%; min-width: 250px;">이메일</th>
+    <th class="sort align-middle pe-3" scope="col" data-sort="phone" style="width:15%;">휴대폰번호</th>
+    <th class="sort align-middle text-start pe-3" scope="col" data-sort="invest_cnt" style="width:15%; min-width: 200px;">총투자상품</th>
+    <th class="sort align-middle text-start" scope="col" data-sort="status" style="width:10%;">상태</th>
+    <th class="sort align-middle text-start ps-4" scope="col" data-sort="level" style="width:5%;">레벨</th> <!-- 수정된 "레벨" 열 -->
     <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:10%;"></th>
 </tr>
 
@@ -509,13 +508,13 @@
                           <input class="form-check-input" type="checkbox" data-bulk-select-row="{&quot;order&quot;:2453,&quot;total&quot;:87,&quot;customer&quot;:{&quot;avatar&quot;:&quot;/team/32.webp&quot;,&quot;name&quot;:&quot;Carry Anna&quot;},&quot;payment_status&quot;:{&quot;label&quot;:&quot;Complete&quot;,&quot;type&quot;:&quot;badge-phoenix-success&quot;,&quot;icon&quot;:&quot;check&quot;},&quot;fulfilment_status&quot;:{&quot;label&quot;:&quot;Cancelled&quot;,&quot;type&quot;:&quot;badge-phoenix-secondary&quot;,&quot;icon&quot;:&quot;x&quot;},&quot;delivery_type&quot;:&quot;Cash on delivery&quot;,&quot;date&quot;:&quot;Dec 12, 12:56 PM&quot;}">
                         </div>
                       </td>
-                      <td th:utext="${#dates.format(userInfo.user_reg_date, 'yyyy년 MM월 dd일 a h시 m분')}" class="order align-middle white-space-nowrap py-0"></td>
+                      <td th:utext="${#dates.format(userInfo.user_reg_date, 'yyyy년 MM월 dd일 a h시 m분')}" class="reg_date align-middle white-space-nowrap py-0"></td>
 
-                      <td th:text="${userInfo.user_name}" class="user_name total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_email}" class="user_email total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.phone_number}" class="user_phone total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight ps-5"></td>
-                      <td th:text="${userInfo.user_status}" class="user_status total align-middle fw-semibold text-body-highlight"  
+                      <td th:text="${userInfo.user_name}" class="user_name name align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.user_email}" class="user_email email align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.phone_number}" class="user_phone phone align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${userInfo.investment_count}" class="invest_cnt align-middle fw-semibold text-body-highlight ps-5"></td>
+                      <td th:text="${userInfo.user_status}" class="user_status status total align-middle fw-semibold text-body-highlight"  
                       	  th:style="${userInfo.user_status == 'active' ? 'color: green;' : 'color: red;'}"
 					      th:attr="data-user-id=${userInfo.user_id}"></td>
 					  <td th:text="${userInfo.level}" class="level total align-middle fw-semibold text-body-highlight" style="text-align: center;"></td>
