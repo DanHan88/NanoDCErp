@@ -54,6 +54,11 @@ public class UserController {
 		    		@ModelAttribute LoginVO loginVO,
 		            HttpServletRequest request) {
 		        ModelAndView mav = new ModelAndView();
+		        HttpSession session = request.getSession();
+		        if(userService.checkSession(request)==true) {
+		        	mav.setViewName("redirect:/user/index");
+		            return mav;
+		        }
 		            mav.setViewName("views/user/user_Login");
 		            mav.addObject("loginError", loginError);
 		            return mav;
@@ -64,7 +69,7 @@ public class UserController {
 	        HttpSession session = request.getSession();
 	        session.invalidate();
 	        
-	        Cookie[] cookies = request.getCookies();
+	       /* Cookie[] cookies = request.getCookies();
 	        if (cookies != null) {
 	            for (Cookie cookie : cookies) {
 	                if ("nanodc_userApp".equals(cookie.getName())) {
@@ -73,7 +78,7 @@ public class UserController {
 	                    break;
 	                }
 	            }
-	        }
+	        }*/
 	        return "redirect:/user/login";
 	    }
 		 
@@ -247,7 +252,7 @@ public class UserController {
 	        
 	        ModelAndView mav = new ModelAndView();
 	        
-	        Cookie[] cookies = request.getCookies();
+	       /* Cookie[] cookies = request.getCookies();
 	        
 	        if (cookies != null) {
 	            for (Cookie cookie : cookies) {
@@ -269,7 +274,7 @@ public class UserController {
 	                    }
 	                }
 	            }
-	            }
+	            }*/
 	        HttpSession session = request.getSession();
 	        if(!userService.checkSession(request)) {
 	        	mav.setViewName("redirect:/user/login");
