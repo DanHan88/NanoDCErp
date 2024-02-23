@@ -42,9 +42,14 @@
     </div>
     <div style="position: absolute; top: 50%; left: 43%; transform: translate(-50%, -50%); margin-right: 1rem;">
         <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">Name :</span>
-        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">코알라</span><br>
-        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">Email :</span>
-         <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">koala@koala.net</span>
+        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;" th:text="${loginVO.userInfoVO.user_name}"></span><br>
+        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;" >Email :</span>
+         <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;" th:text="${loginVO.userInfoVO.user_email}"></span>
+        <div>
+        <input type="hidden" th:value="${loginVO.userInfoVO.user_id}" id="user_id" class="hidden">
+    </div>
+     
+    
     </div>
     <div class="navbar-logo" style="position: absolute; right: 0;">
         <img id="power_button" src="/assets/img/filmountain/power_button.png" alt="power button" 

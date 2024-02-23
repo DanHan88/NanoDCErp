@@ -1,9 +1,12 @@
-	var user_id;
+
 	$(document).ready(function() {
-		user_id = 1;
+		var user_id =$("#user_id").val();
+		
 		 $('#back_button').css('display', 'block');
+
 		 $(document).on('click', '#back_button', function() {
 		    window.history.back();});	
+		    
 				$('#success_alert').on('hidden.bs.modal', function (e) {
 								 window.location.reload();});  
 				$('#addNewTransactionPayout').on('click', function() {
@@ -13,18 +16,22 @@
         			$('#addNewTransactionPayout_confirm').click(function(){
 						var wallet=$('#wallet_new_transaction_option').val();
 						var fil_amount=$('#new_transaction_fil_amount').val();
+	
             			$.ajax({
 						    type: "POST",
 						    url: "/user/addNewTransaction",
 						    contentType: "application/json", 
 						    data: JSON.stringify({
-						        fil_amount:fil_amount,
-						        user_id:user_id,
-						        status:'출금신청',
-						        wallet:wallet,
-						        type:'출금신청'
+						        fil_amount: fil_amount,
+						        user_id: user_id,
+						        status: "출금신청",
+						        wallet_id: wallet,
+						        type: "출금신청"
 						    }),
+						    
+						    
 						    success: function (data) {
+								
 						        $("#detail_product_modal").modal('hide');
 						        if (data === 'success') {
 						            $('#success_alert_title').text('송금신청 완료');
@@ -72,7 +79,9 @@
 							        address: address,
 							        user_id: user_id
 							    }),
+							    
 			                    success: function (data) {
+										
 									$("#detail_product_modal").modal('hide');	 
 									if(data=='success'){
 										$('#success_alert_title').text('유저 새지갑 등록 성공');
