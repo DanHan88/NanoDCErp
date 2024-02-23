@@ -2,8 +2,11 @@ package com.nanoDc.erp.vo;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
 import com.google.type.DateTime;
 
+@Repository(value="WalletVO")
 public class WalletVO {
 	private long wallet_id;
 	private String address;

@@ -3,6 +3,9 @@ package com.nanoDc.erp.vo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository(value="TokenPaidVO")
 public class TokenPaidVO {
 
 	private double token_paid_id;

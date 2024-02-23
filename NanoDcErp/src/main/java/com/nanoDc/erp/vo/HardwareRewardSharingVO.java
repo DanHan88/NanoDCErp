@@ -2,6 +2,9 @@ package com.nanoDc.erp.vo;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
+@Repository(value="HardwareRewardSharingVO")
 public class HardwareRewardSharingVO {
 
 	private int reward_sharing_id;

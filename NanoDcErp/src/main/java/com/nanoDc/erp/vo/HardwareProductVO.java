@@ -2,6 +2,9 @@ package com.nanoDc.erp.vo;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Repository;
+
+@Repository(value="HardwareProductVO")
 public class HardwareProductVO {
 	private int hw_product_id;
 	private String hw_product_name;

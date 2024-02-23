@@ -28,8 +28,6 @@
 						        wallet_id: wallet,
 						        type: "출금신청"
 						    }),
-						    
-						    
 						    success: function (data) {
 								
 						        $("#detail_product_modal").modal('hide');

@@ -73,6 +73,14 @@ public class UserService {
 	       this.transactionMapper.addNewTransaction(transcationVO);
 	       return "success";
 	    }
+	 public List<TransactionVO> selectTransactionsByUser(int user_id) {
+	       
+	       return this.transactionMapper.selectTransactionsByUser(user_id);
+	    }
+	 
+	 
+	 
+	 
 	 public String addNewWallet(WalletVO walletVO) {
 	       this.walletMapper.addNewWallet(walletVO);
 	       return "success";

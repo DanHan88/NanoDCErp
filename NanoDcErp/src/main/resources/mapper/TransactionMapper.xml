@@ -22,5 +22,10 @@
 		    #{message}
 		  )
 	</insert>
-	
+	<select id="selectTransactionsByUser" parameterType="integer" resultType="com.nanoDc.erp.vo.TransactionVO">
+		  	SELECT transaction_id, fil_amount, user_id, status, wallet_id, type, reg_date, message
+			FROM transaction
+			WHERE user_id =#{user_id}
+	</select>
+
 </mapper>

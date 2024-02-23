@@ -11,4 +11,6 @@ import com.nanoDc.erp.vo.TransactionVO;
 @Mapper
 public interface TransactionMapper {
 	public void addNewTransaction(TransactionVO transactionVO);
+	public List<TransactionVO> selectTransactionsByUser(int user_id);
+
 }
