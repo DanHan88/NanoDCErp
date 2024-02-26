@@ -136,6 +136,20 @@ public class AdminService {
 	 public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(int reward_sharing_id){
          return rewardSharingMapper.selectRewardSharingDetailListById(reward_sharing_id);
       }
-
+	 /*송금 신청 승인*/
+	 public String approveFundRequest(TransactionVO transactionVO) {
+			
+			
+		    
+		 	transactionMapper.updateStatus(transactionVO);
+		    return "success";  
+		}
+	 /*송금 신청 거절*/
+	 public String declineFundRequest(TransactionVO transactionVO) {
+			// TODO Auto-generated method stub
+		 transactionMapper.updateStatus(transactionVO);
+		    // 조회된 행이 존재하고 상태가 '신청'인 경우에만 업데이트
+			return "success";	
+		}
 	 
 }

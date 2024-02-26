@@ -122,18 +122,7 @@ $(document).ready(function() {
 			                    	}
 			                	});  
 							});
-							// user_investment_update 버튼 클릭 시 호출되는 함수
-							 $(document).on('click', '.update_user_investment_button', function() {
-						        var hw_id = $(this).val();
-						      	var clicked= $(this).parent().parent();
-						        $('#update_user_investment').modal('show');
-						        // 나머지 필요한 값들을 가져와서 처리하는 로직을 추가해야 합니다.
-						        // 그 후 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
-						         $('#datetimepicker_invst_a').val(clicked.find('#update_purchase_date').text());
-								$('#selectBox_status_update').val(clicked.find('#update_status').text());
-								$('#node_fil_update').val(clicked.find('#update_fil_invested').text());
-								$('#selectupdate_product').val(hw_id);
-						    });
+							
 								
 
 							
@@ -145,7 +134,7 @@ $(document).ready(function() {
 						       var level = $("#level").val();
 						       var user_id = $('#user_edit_1_btn').val(); 
 						       //var fileInput = $('#fileInput')[0].files[0];
-							   debugger;
+					
 						       var formData = new FormData();
 						      
 								formData.append('user_email', user_email);
@@ -200,11 +189,12 @@ $(document).ready(function() {
 						      var clicked= $(this).parent().parent();
 
  						        $('#update_user_investment').modal('show');
-						         $('#datetimepicker_invst_a').val(clicked.find('#update_purchase_date').text());
+						          $('#datetimepicker_invst_a').val(clicked.find('#update_purchase_date').text());
 								$('#selectBox_status_update').val(clicked.find('#update_status').text());
+								$('#selectupdate_product').val(clicked.find('#update_product_name').data('user_id'));
 								$('#node_fil_update').val(clicked.find('#update_fil_invested').text());
-								$('#selectupdate_product').val(hw_id);
-								
+								$('#user_investment_update').data('hw_id', hw_id);
+			
 					
  						        // 나머지 필요한 값들을 가져와서 처리하는 로직을 추가해야 합니다.
  						        // 그 후 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
@@ -213,10 +203,10 @@ $(document).ready(function() {
 							$('#user_investment_update').on('click', function() {
 							   var hw_reg_date = $("#datetimepicker_invst_a").val();
 						       var fil_invested = $('#node_fil_update').val();
-						       var hw_product_id = $('#selectBox_product').val();
+						       var hw_product_id = $('#selectupdate_product').val();
 						       var hw_status = $('#selectBox_status_update').val();
-						       var user_hw_id = $('#selectupdate_product').val();
-						     	debugger;
+						       var user_hw_id = $(this).data('hw_id');
+								debugger;
 						       	   		
 							   if(hw_reg_date==""||hw_product_id==""){
 										if ($('#alert_header_user').hasClass("bg-success")) 

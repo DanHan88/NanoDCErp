@@ -22,6 +22,7 @@
 		    #{message}
 		  )
 	</insert>
+	
 	<select id="getTransactionList" resultType="com.nanoDc.erp.vo.TransactionVO">
 		SELECT 
 	    user.user_name,
@@ -40,11 +41,18 @@
 	WHERE 
 	    user.user_status = 'active';
 	</select>
+	
 	<select id="selectTransactionsByUser" parameterType="integer" resultType="com.nanoDc.erp.vo.TransactionVO">
 		  	SELECT transaction.transaction_id, transaction.fil_amount, transaction.user_id, transaction.status, transaction.wallet_id, transaction.type, transaction.reg_date, transaction.message,wallet.address
 			FROM transaction transaction
 			inner join wallet wallet on wallet.wallet_id = transaction.wallet_id
 			WHERE transaction.user_id =#{user_id}
 	</select>
+	
+	 <update id="updateStatus" parameterType="com.nanoDc.erp.vo.TransactionVO">
+		 update transaction
+		 SET status = #{status}
+		 Where transaction_id = #{transaction_id}
+	 </update>
 
 </mapper>

@@ -460,6 +460,23 @@ public class AdminController {
      List<HardwareRewardSharingDetailVO> resultList = adminService.selectRewardSharingDetailListById(reward_sharing_id);
         return resultList;
      }
+	 /*---------------------------------------------*/
+	 /* -----------HardwareRewardmanger 기능 ----------*/
+	 /* --------------------------------------------*/
+	 @ResponseBody  
+	    @PostMapping(value={"/updateFundRequest"})
+	    public String updateFundRequest(@RequestBody TransactionVO transactionVO, HttpServletRequest request) {
+	        
+	        
+	        if ("출금승인".equals(transactionVO.getStatus())) {
+	            return adminService.approveFundRequest(transactionVO);
+	        } else if ("출금거절".equals(transactionVO.getStatus())) {
+	            return adminService.declineFundRequest(transactionVO);
+	        }
+
+	        return "failed:invalid_request_state";
+	    	}
+	    
 }
 
 	 

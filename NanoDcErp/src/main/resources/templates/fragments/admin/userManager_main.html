@@ -276,9 +276,9 @@
 								<label class="col-md-4 form-control-label" style="margin-top:5px;"><b>상품명</b></label>
 								<div class="col-md-8">
 									    <select class="form-control" id="selectupdate_product" name="selectedItem">
-									           <option th:each="product : ${productList}" th:value="${product.hw_product_id}" th:text="${product.hw_product_name}"></option>
+										    <option th:each="product : ${productList}" th:value="${product.hw_product_id}" th:text="${product.hw_product_name}"></option>
+										</select>
 
-							            </select>
 							    </div>
 							</div>
 							<div class="form-group row">
@@ -302,6 +302,7 @@
 						<div class="modal-footer">
 							<button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">닫기</button>
 							<button id="user_investment_update" type="button" class="btn btn-primary">수정</button>
+							<input type="hidden" id="hidden_hw_id" name="hw_id" value="${productList.hw_id}"></option>
 						</div>
 					</div>
 				</div>

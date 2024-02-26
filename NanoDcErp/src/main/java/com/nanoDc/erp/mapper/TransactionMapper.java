@@ -13,5 +13,5 @@ public interface TransactionMapper {
 	public void addNewTransaction(TransactionVO transactionVO);
 	public List<TransactionVO> selectTransactionsByUser(int user_id);
 	public List<TransactionVO> getTransactionList();
-	
+	public void updateStatus(TransactionVO transactionVO);
 }
