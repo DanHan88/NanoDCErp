@@ -160,7 +160,7 @@ public class UserController {
 	@GetMapping(value={"/cash"})
     public ModelAndView transaction(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
-        HttpSession session = request.getSession();
+        HttpSession session = userService.userVOsessionUpdate(request);
         if(!userService.checkSession(request)) {
         	mav.setViewName("redirect:/user/login");
             return mav;
@@ -222,6 +222,7 @@ public class UserController {
 	        	dataList.add(data+rewardDetailList.get(rewardDetailList.size()-1).getReward_fil());
 	        }
         }
+        userService.userVOsessionUpdate(request);
         mav.addObject("dataList",dataList);
         mav.addObject("rewardDetailList", rewardDetailList);
         mav.addObject("loginVO", loginVO);
@@ -277,12 +278,14 @@ public class UserController {
 	                }
 	            }
 	            }*/
-	        HttpSession session = request.getSession();
+	        
 	        if(!userService.checkSession(request)) {
 	        	mav.setViewName("redirect:/user/login");
 	            return mav;
 	        }
+	        HttpSession session =  userService.userVOsessionUpdate(request);
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        
 	        mav.addObject("last",last);
 	        mav.addObject("loginVO", loginVO);
 	        mav.setViewName("views/user/userApp_index");
@@ -306,6 +309,8 @@ public class UserController {
 	 @PostMapping(value={"/deleteWalletByWalletId"})
 	 public String deleteWalletByWalletId(@RequestBody WalletVO walletVO, HttpServletRequest request) {
 	    return userService.deleteWalletByWalletId(walletVO.getWallet_id());
-	    }   
+	    }  
+	 
+	
 	 
 }

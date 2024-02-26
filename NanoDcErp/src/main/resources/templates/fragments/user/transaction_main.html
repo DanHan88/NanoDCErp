@@ -130,19 +130,19 @@
                   <div class="col-4 col-xl-4">
                     <div class="d-flex flex-column flex-center align-items-sm-start flex-md-row justify-content-md-between flex-xxl-column p-3 ps-sm-3 ps-md-4 p-md-3 h-100 border-1 border-bottom border-end border-translucent">
                       <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-square fs-11 me-2 text-primary" data-fa-transform="up-2"></span><span class="mb-0 fs-9 text-body">송금가능FIL</span></div>
-                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3">80</h3>
+                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3" id="total_reward_fil" th:text="${loginVO.userInfoVO.total_reward_fil}">80</h3>
                     </div>
                   </div>
                   <div class="col-4 col-xl-4">
                     <div class="d-flex flex-column flex-center align-items-sm-start flex-md-row justify-content-md-between flex-xxl-column p-3 ps-sm-3 ps-md-4 p-md-3 h-100 border-1 border-bottom border-end border-end-xl border-translucent">
                       <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-square fs-11 me-2 text-warning" data-fa-transform="up-2"></span><span class="mb-0 fs-9 text-body">처리중인FIL</span></div>
-                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3">65</h3>
+                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3" id="processed_fil" th:text="${loginVO.userInfoVO.processed_fil}">65</h3>
                     </div>
                   </div>
                   <div class="col-4 col-xl-4">
                     <div class="d-flex flex-column flex-center align-items-sm-start flex-md-row justify-content-md-between flex-xxl-column p-3 ps-sm-3 ps-md-4 p-md-3 h-100 border-1 border-bottom border-end-md-0 border-end-xl border-translucent">
                       <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-square fs-11 me-2 text-info" data-fa-transform="up-2"></span><span class="mb-0 fs-9 text-body">송금완료FIL</span></div>
-                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3">40</h3>
+                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3" id="paid_fil" th:text="${loginVO.userInfoVO.paid_fil}">40</h3>
                     </div>
                   </div>
                 </div>
@@ -160,100 +160,35 @@
         
         
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xxl-3 g-3 mb-9">
-          <div class="col">
+          <div class="col"  th:each="transaction : ${transactionList}">
             <div class="card h-100 hover-actions-trigger">
               <div class="card-body">
                 <div class="d-flex align-items-center">
                   <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">FIL 출금</h4>
-                </div><span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-success">승인</span>
+                </div><span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-success" th:text="${transaction.status}">승인</span>
                 <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M512 32C547.3 32 576 60.65 576 96V128H0V96C0 60.65 28.65 32 64 32H512zM576 416C576 451.3 547.3 480 512 480H64C28.65 480 0 451.3 0 416V224H576V416zM112 352C103.2 352 96 359.2 96 368C96 376.8 103.2 384 112 384H176C184.8 384 192 376.8 192 368C192 359.2 184.8 352 176 352H112zM240 384H368C376.8 384 384 376.8 384 368C384 359.2 376.8 352 368 352H240C231.2 352 224 359.2 224 368C224 376.8 231.2 384 240 384z"></path></svg><!-- <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 lh-1">출금 : <span class="ms-1 text-body-emphasis">100 FIL</span></p>
+                  <p class="fw-bold mb-0 lh-1">출금 : <span class="ms-1 text-body-emphasis"  th:text="${transaction.fil_amount}">100 FIL</span></p>
                 </div>
                 <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
                   <p class="fw-bold mb-0 text-truncate lh-1">
-				    지갑 : <a href="https://filfox.info/en/address/f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq" class="fw-semibold text-primary ms-1" target="_blank">
+				    지갑 : <a href="https://filfox.info/en/address/f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq" class="fw-semibold text-primary ms-1" target="_blank" th:text="${transaction.address}">
 				        f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq
 				    </a>
 				</p>
                 </div>
                 <div class="d-flex align-items-center mb-4"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
                   <p class="fw-bold mb-0 text-truncate lh-1">
-					    주소 : <a href="https://filfox.info/en/message/bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6?t=1" class="fw-semibold text-primary ms-1" target="_blank">
+					    주소 : <a href="https://filfox.info/en/message/bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6?t=1" class="fw-semibold text-primary ms-1" target="_blank" th:text="${transaction.message}">
 					        bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6
 					    </a>
 					</p>
                 </div>
                 <div class="d-flex align-items-center mt-4">
-                  <p class="mb-0 fw-bold fs-9">송금일 :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1">	17th Nov. 2020</span></p>
+                  <p class="mb-0 fw-bold fs-9">신청일 :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1" th:text="${#dates.format(transaction.reg_date, 'yyyy년 MM월 dd일 HH:mmm:ss')}">	17th Nov. 2020</span></p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 hover-actions-trigger">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">FIL 출금</h4>
-                </div><span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-warning">거부</span>
-                <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M512 32C547.3 32 576 60.65 576 96V128H0V96C0 60.65 28.65 32 64 32H512zM576 416C576 451.3 547.3 480 512 480H64C28.65 480 0 451.3 0 416V224H576V416zM112 352C103.2 352 96 359.2 96 368C96 376.8 103.2 384 112 384H176C184.8 384 192 376.8 192 368C192 359.2 184.8 352 176 352H112zM240 384H368C376.8 384 384 376.8 384 368C384 359.2 376.8 352 368 352H240C231.2 352 224 359.2 224 368C224 376.8 231.2 384 240 384z"></path></svg><!-- <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 lh-1">출금 : <span class="ms-1 text-body-emphasis">100 FIL</span></p>
-                </div>
-                <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 text-truncate lh-1">
-				    지갑 : <a href="https://filfox.info/en/address/f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq"
-				           class="fw-semibold text-primary ms-1" target="_blank">
-				        f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq
-				    </a>
-				</p>
-                </div>
-                <div class="d-flex align-items-center mb-4"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 text-truncate lh-1">
-					    주소 : <a href="https://filfox.info/en/message/bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6?t=1"
-					           class="fw-semibold text-primary ms-1" target="_blank">
-					        bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6
-					    </a>
-					</p>
-                </div>
-                <div class="d-flex align-items-center mt-4">
-                  <p class="mb-0 fw-bold fs-9">송금일 :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1">	8th Mar. 2021</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 hover-actions-trigger">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">FIL 출금</h4>
-                </div><span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-primary">승인대기</span>
-                <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M512 32C547.3 32 576 60.65 576 96V128H0V96C0 60.65 28.65 32 64 32H512zM576 416C576 451.3 547.3 480 512 480H64C28.65 480 0 451.3 0 416V224H576V416zM112 352C103.2 352 96 359.2 96 368C96 376.8 103.2 384 112 384H176C184.8 384 192 376.8 192 368C192 359.2 184.8 352 176 352H112zM240 384H368C376.8 384 384 376.8 384 368C384 359.2 376.8 352 368 352H240C231.2 352 224 359.2 224 368C224 376.8 231.2 384 240 384z"></path></svg><!-- <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 lh-1">출금 : <span class="ms-1 text-body-emphasis">100 FIL</span></p>
-                </div>
-                <div class="d-flex align-items-center mb-2"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                  <p class="fw-bold mb-0 text-truncate lh-1">
-				    지갑 : <a href="https://filfox.info/en/address/f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq"
-				           class="fw-semibold text-primary ms-1" target="_blank">
-				        f133akvdrqovhrfjqshdnitcns5pz3vhl66cafgaq
-				    </a>
-				</p>
-                </div>
-                <div class="d-flex align-items-center mb-4"><svg class="svg-inline--fa fa-user me-2 text-body-tertiary fs-9 fw-extra-bold" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"></path></svg><!-- <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span> Font Awesome fontawesome.com -->
-                 <p class="fw-bold mb-0 text-truncate lh-1">
-					    주소 : <a href="https://filfox.info/en/message/bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6?t=1"
-					           class="fw-semibold text-primary ms-1" target="_blank">
-					        bafy2bzacealvixtwn5xc7hcabchn5la3gt3kwkesbikkncfpvr5wbmwh6dpb6
-					    </a>
-					</p>
-                </div>
-                <div class="d-flex align-items-center mt-4">
-                  <p class="mb-0 fw-bold fs-9">송금일 :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1">	17th Nov. 2020</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
-         
-          
-          
         </div>	
       </div>    	
 </html>

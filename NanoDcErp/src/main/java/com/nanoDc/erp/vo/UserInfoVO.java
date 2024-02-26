@@ -32,10 +32,24 @@ public class UserInfoVO {
 	private double total_investment_fil;
 	private double total_reward_fil;
 	private String level;
+	private double processed_fil;
+	private double paid_fil;
 	
 	
     
 	
+	public double getProcessed_fil() {
+		return processed_fil;
+	}
+	public void setProcessed_fil(double processed_fil) {
+		this.processed_fil = processed_fil;
+	}
+	public double getPaid_fil() {
+		return paid_fil;
+	}
+	public void setPaid_fil(double paid_fil) {
+		this.paid_fil = paid_fil;
+	}
 	public String getOriginal_password() {
 		return original_password;
 	}

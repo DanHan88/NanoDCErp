@@ -23,9 +23,10 @@
 		  )
 	</insert>
 	<select id="selectTransactionsByUser" parameterType="integer" resultType="com.nanoDc.erp.vo.TransactionVO">
-		  	SELECT transaction_id, fil_amount, user_id, status, wallet_id, type, reg_date, message
-			FROM transaction
-			WHERE user_id =#{user_id}
+		  	SELECT transaction.transaction_id, transaction.fil_amount, transaction.user_id, transaction.status, transaction.wallet_id, transaction.type, transaction.reg_date, transaction.message,wallet.address
+			FROM transaction transaction
+			inner join wallet wallet on wallet.wallet_id = transaction.wallet_id
+			WHERE transaction.user_id =#{user_id}
 	</select>
 
 </mapper>

@@ -16,7 +16,15 @@ public class TransactionVO {
 	private Date reg_date;
 	private String message;
 	private long wallet_id;
+	private String address;
 	
+
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public long getTransaction_id() {
 		return transaction_id;
 	}

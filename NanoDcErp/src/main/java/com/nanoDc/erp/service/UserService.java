@@ -93,7 +93,14 @@ public class UserService {
 		 return "success";
 	 }
 	 
-	 
+	 public HttpSession userVOsessionUpdate( HttpServletRequest request) {
+		 HttpSession session = request.getSession();
+		 LoginVO loginVO = (LoginVO) session.getAttribute("user");
+		 UserInfoVO updatedUserInfoVO = userInfoMapper.selectDetailUserInfoByUserId(loginVO.getUserInfoVO().getUser_id());
+		 loginVO.setUserInfoVO(updatedUserInfoVO);
+		 session.setAttribute("loginVO", loginVO);
+		 return session;
+	 }
 	 
 	
 	 
