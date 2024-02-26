@@ -1,10 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 		<div class="content" th:fragment="MainContent">
+			<!--modal -->
+			<!-- 승인 모달 -->
+<div class="modal fade" id="confirm_modal" tabindex="-1" role="dialog">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header bg-primary" id="alert_header_user_update">
+				        <h5 class="modal-title text-white " id="alert_title_user_update">출금 승인 하시겠습니까?</h5>
+				        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm_approve">확인</button>
+				      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="cancel_approve">취소</button>
+				      </div>
+				    </div>
+				  </div>
+			</div>
+<!--승인 확인 모달 -->
+<div class="modal fade" id="alert_modal_user" tabindex="-1" role="dialog">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header bg-success" id="alert_header_user">
+				        <h5 class="modal-title text-white " id="alert_title_user">송금 성공</h5>
+				        <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg class="svg-inline--fa fa-xmark fs-9 text-white dark__text-gray-1100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                </button>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="receipt_update">확인</button>
+				      </div>
+				    </div>
+				  </div>
+			</div>
+    <div class="modal fade" id="loadingModal_fund" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h5 class="modal-title text-dark" id="loadingModalLabel">송금 진행중</h5>
+			            </div>
+			            <div class="modal-body text-center">
+			                <div class="spinner-border text-primary" role="status">
+			                    <span class="sr-only">송금 진행중</span>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+    
+    
+   	 <div class="modal fade" id="confirmSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success" id="success_header_fundRequest">
+                    <h5 class="modal-title text-white" id="success_title_fundRequest">승인 완료</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="text-dark" id="success_body_fundRequest"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="declineModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger" id="decline_modal_header">
+                <h5 class="modal-title text-white" id="decline_title_user">거절 사유 입력</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea id="declineReason" rows="4" cols="50" placeholder="거절 사유를 입력하세요..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="declineConfirmBtn">확인</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+	</div>
+	<div class="modal fade" id="declineSuccessModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success" id="declineSuccess_header_fundRequest">
+                    <h5 class="modal-title text-white" id="declineSuccess_title_fundRequest">거절 완료</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">확인</button>
+                </div>
+            </div>
+        </div>        
+    </div>
+		<!-- 신청 리스트 -->
         <div class="mb-9">
           <div class="row g-3 mb-4">
             <div class="col-auto">
-              <h2 class="mb-0">Orders</h2>
+              <h2 class="mb-0">출금신청 목록</h2>
             </div>
           </div>
           <div id="orderTable" data-list="{&quot;valueNames&quot;:[&quot;order&quot;,&quot;total&quot;,&quot;customer&quot;,&quot;payment_status&quot;,&quot;fulfilment_status&quot;,&quot;delivery_type&quot;,&quot;date&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
@@ -30,32 +131,33 @@
             <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis border-top border-bottom border-translucent position-relative top-1">
               <div class="table-responsive scrollbar mx-n1 px-1">
                 <table class="table table-sm fs-9 mb-0">
-                  <thead>
-                    <tr>
-                      <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">가입일시</th>
-                      <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">회원명</th>
-                      <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:10%; min-width: 250px;">이메일</th>
-                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">휴대폰번호</th>
-                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">투자상품</th>
-                      <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:25%;">상태</th>
-                      <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:25%;"></th>
-                    </tr>
-                  </thead>
-                  <tbody class="list" id="order-table-body">
-					 <tr th:each="userInfo : ${userInfoList}" th:attr="data-picture=${userInfo.profile_picture_url}" class="hover-actions-trigger btn-reveal-trigger position-static">
-                      <td th:text="${#dates.format(userInfo.user_reg_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${userInfo.user_name}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.phone_number}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td th:text="${userInfo.investment_count}" class="total align-middle fw-semibold text-body-highlight"></td>
-                      <td class=" ps-10 total align-middle position-relative">
-    					<!-- "상세" 버튼 -->
-					    <button class="btn btn-secondary mr-2 mt-0 mb-0 detail_user" type="button" id="button-addon2">상세
-					    </button>
-					</td>
-                    </tr></tbody>
-                </table>
+    <thead>
+        <tr>
+            <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="order" style="width:10%;">신청일</th>
+            <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">회원명</th>
+            <th class="sort align-middle ps-8" scope="col" data-sort="customer" style="width:15%; min-width: 250px;">이메일</th>
+            <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:15%;">신청FIL</th>
+            <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:20%; min-width: 200px;">지갑주소</th>
+            <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:10%; min-width: 200px;">상태</th>
+            <th class="sort align-middle text-end pe-0" scope="col" data-sort="date" style="width:25%;"></th>
+        </tr>
+    </thead>
+    <tbody class="list" id="order-table-body">
+        <tr th:each="transactionlist : ${transactionlist}" class="hover-actions-trigger btn-reveal-trigger position-static">
+            <td th:text="${#dates.format(transactionlist.reg_date, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0"></td>
+            <td th:text="${transactionlist.user_name}" class="total align-middle fw-semibold text-body-highlight"></td>
+            <td th:text="${transactionlist.user_email}" class="total align-middle fw-semibold text-body-highlight"></td>
+            <td th:text="${transactionlist.fil_amount}" class="total align-middle fw-semibold text-body-highlight" id="fil_amount"></td>
+            <td th:text="${transactionlist.address}" class="total align-middle fw-semibold text-body-highlight" id="wallet_address"></td>
+            <td th:text="${transactionlist.status}" class="total align-middle fw-semibold text-body-highlight" id="status"></td>
+            <td class="total align-middle fw-semibold text-body-highlight text-end">
+                <button th:if="${transactionlist.status eq '출금신청'}" th:data-tx-id="${transactionlist.transaction_id}" id="approve_button" class="btn btn-info">승인</button>
+                <button th:if="${transactionlist.status eq '출금신청'}" th:data-tx-id="${transactionlist.transaction_id}" id="decline_button" class="btn btn-danger">거절</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
               </div>
               <div class="row align-items-center justify-content-between py-2 pe-0 fs-9">
                 <div class="col-auto d-flex">

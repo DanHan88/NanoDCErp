@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 
+import com.nanoDc.erp.mapper.TransactionMapper;
 import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.service.AdminService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
@@ -36,6 +37,7 @@ import com.nanoDc.erp.vo.HardwareProductVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
+import com.nanoDc.erp.vo.TransactionVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.UserInfoVO;
 
@@ -50,6 +52,8 @@ public class AdminController {
 	    private AdminService adminService;
 	 @Autowired
 	    private UserInfoMapper userInfoMapper;
+	 @Autowired
+	    private TransactionMapper transactionMapper;
 	
 	 /*----------------------------------*/
 	 /* -----------GetMapping----------*/
@@ -184,8 +188,8 @@ public class AdminController {
 	            return mav;
 	        }
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
-	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
-	        mav.addObject("userInfoList", userInfoList);
+	        List<TransactionVO> transactionlist= this.adminService.getTransactionList();
+	        mav.addObject("transactionlist", transactionlist);
 	        mav.setViewName("views/admin/transactionManager");
 	        return mav;
 	    }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.nanoDc.erp.mapper.HardwareInvestmentMapper;
 import com.nanoDc.erp.mapper.HardwareProductMapper;
 import com.nanoDc.erp.mapper.HardwareRewardSharingMapper;
+import com.nanoDc.erp.mapper.TransactionMapper;
 import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
@@ -19,6 +20,7 @@ import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingVO;
 import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
+import com.nanoDc.erp.vo.TransactionVO;
 import com.nanoDc.erp.vo.UserInfoVO;
 
 @Service
@@ -33,6 +35,8 @@ public class AdminService {
 	HardwareProductMapper productMapper;
 	@Autowired
 	HardwareRewardSharingMapper rewardSharingMapper;
+	@Autowired
+	TransactionMapper transactionMapper;
 
 	 public boolean checkSession(HttpServletRequest request) {
 	    	HttpSession session = request.getSession();
@@ -62,6 +66,9 @@ public class AdminService {
 	    }
 	 public UserInfoVO selectDetailUserInfoByUserId(int user_id) {
 	    	return userInfoMapper.selectDetailUserInfoByUserId(user_id);
+	    }
+	 public List<TransactionVO> getTransactionList() {
+	        return this.transactionMapper.getTransactionList();
 	    }
 	 
 	 /*새로운 유저 추가*/

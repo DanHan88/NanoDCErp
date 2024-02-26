@@ -17,14 +17,9 @@ public class TransactionVO {
 	private String message;
 	private long wallet_id;
 	private String address;
+	private String user_name;
+	private String user_email;
 	
-
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	public long getTransaction_id() {
 		return transaction_id;
 	}
@@ -72,6 +67,24 @@ public class TransactionVO {
 	}
 	public void setWallet_id(long wallet_id) {
 		this.wallet_id = wallet_id;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
 
 	
