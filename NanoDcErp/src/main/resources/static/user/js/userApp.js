@@ -46,27 +46,34 @@ function resizeWebView() {
 						    var imageWidth = $('.custom_container').width();	    
 						    $('.userApp_buttons').css('margin-left',imageWidth/3);
 						    $('.userApp_buttons').css('padding-left',imageWidth/15);
-						    $('.app_text').css('font-size',imageHeight/50);
+						    $('.app_text').css('font-size',imageHeight/70);
 							$('#footer_title').css('font-size',imageHeight/60);
-							$('.footer_text').css('font-size',imageHeight/70);  
+							$('.footer_text').css('font-size',imageHeight/70); 
+							
+							$('.text_fil').each(function() {
+							    var textValue = $(this).text(); 
+							    var roundedValue = Math.round(parseFloat(textValue)); 
+							    $(this).text(roundedValue + ' FIL');
+							});
+							 
 						    if(imageHeight<700){
 								$('#app_button1').css('padding-top',imageHeight/40);
-							     $('#app_button2').css('padding-top',imageHeight/18);
-							     $('#app_button3').css('padding-top',imageHeight/18);
-							     $('#app_button4').css('padding-top',imageHeight/18);
-							     $('#app_button5').css('padding-top',imageHeight/18);   
+							     $('#app_button2').css('padding-top',imageHeight/16);
+							     $('#app_button3').css('padding-top',imageHeight/16);
+							     $('#app_button4').css('padding-top',imageHeight/16);
+							     $('#app_button5').css('padding-top',imageHeight/16);   
 							}else if (imageHeight<800){
 								$('#app_button1').css('padding-top',imageHeight/50);
-							     $('#app_button2').css('padding-top',imageHeight/17.5);
-							     $('#app_button3').css('padding-top',imageHeight/17.5);
-							     $('#app_button4').css('padding-top',imageHeight/17.5);
-							     $('#app_button5').css('padding-top',imageHeight/17.5);
+							     $('#app_button2').css('padding-top',imageHeight/15.5);
+							     $('#app_button3').css('padding-top',imageHeight/15.5);
+							     $('#app_button4').css('padding-top',imageHeight/15.5);
+							     $('#app_button5').css('padding-top',imageHeight/15.5);
 							}else{
-								$('#app_button1').css('padding-top',imageHeight/55);
-							     $('#app_button2').css('padding-top',imageHeight/16.5);
-							     $('#app_button3').css('padding-top',imageHeight/16.5);
-							     $('#app_button4').css('padding-top',imageHeight/16.5);
-							     $('#app_button5').css('padding-top',imageHeight/16.5);
+								$('#app_button1').css('padding-top',imageHeight/60);
+							     $('#app_button2').css('padding-top',imageHeight/14);
+							     $('#app_button3').css('padding-top',imageHeight/14.5);
+							     $('#app_button4').css('padding-top',imageHeight/14.5);
+							     $('#app_button5').css('padding-top',imageHeight/14.5);
 							}
 						    resizeWebViewCalled = true;
 						    $('#userApp_view').css('visibility', 'visible').show();	  

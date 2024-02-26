@@ -128,13 +128,13 @@
     if (chartEl) {
       const userOptions = getData(chartEl, 'echarts');
       const chart = window.echarts.init(chartEl);
-      var total_reward_fil=document.getElementById('total_reward_fil').textContent;
+      var available_fil=document.getElementById('total_reward_fil').textContent;
       var processed_fil=document.getElementById('processed_fil').textContent;
       var paid_fil=document.getElementById('paid_fil').textContent;
       
       
       const data = [
-        { value: Math.round(parseFloat(total_reward_fil-processed_fil)), name: '송금가능FIL' },
+        { value: Math.round(parseFloat(available_fil)), name: '송금가능FIL' },
         { value: Math.round(parseFloat(processed_fil)), name: '처리중인FIL' },	
         { value: Math.round(parseFloat(paid_fil)), name: '송금완료' }
       ];

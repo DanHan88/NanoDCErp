@@ -16,19 +16,19 @@
             <!-- Buttons overlay -->
             <div class="row position-absolute top-50 start-50 translate-middle" style=" z-index: 3;">
                 <div class="col-12 text-center userApp_buttons" id="app_button1" value="investment" style="cursor: pointer;">
-                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${loginVO.userInfoVO.total_investment_fil}"></p>
+                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${loginVO.userInfoVO.total_investment_fil}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button2" value="reward" style="cursor: pointer;">
-                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${loginVO.userInfoVO.total_reward_fil}"></p>
+                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${loginVO.userInfoVO.total_reward_fil}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button3" value="cash" style="cursor: pointer;">
-                        <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">0</p>
+                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${loginVO.userInfoVO.total_reward_fil - loginVO.userInfoVO.processed_fil}">0</p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button4" value="status" style="cursor: pointer;">
                         <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">운영중</p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button5" value="price" style="cursor: pointer;">
-                    <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${last}"></p>
+                    <p class="app_text text_won" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${last} + '원'"></p>
                 </div>
             </div>
         </div>

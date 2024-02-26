@@ -130,7 +130,7 @@
                   <div class="col-4 col-xl-4">
                     <div class="d-flex flex-column flex-center align-items-sm-start flex-md-row justify-content-md-between flex-xxl-column p-3 ps-sm-3 ps-md-4 p-md-3 h-100 border-1 border-bottom border-end border-translucent">
                       <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-square fs-11 me-2 text-primary" data-fa-transform="up-2"></span><span class="mb-0 fs-9 text-body">송금가능FIL</span></div>
-                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3" id="total_reward_fil" th:text="${loginVO.userInfoVO.total_reward_fil}">80</h3>
+                      <h3 class="fw-semibold ms-xl-3 ms-xxl-0 pe-md-2 pe-xxl-0 mb-0 mb-sm-3" id="total_reward_fil" th:text="${loginVO.userInfoVO.total_reward_fil - loginVO.userInfoVO.processed_fil}">80</h3>
                     </div>
                   </div>
                   <div class="col-4 col-xl-4">
