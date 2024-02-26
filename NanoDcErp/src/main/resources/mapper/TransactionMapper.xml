@@ -51,7 +51,7 @@
 	
 	 <update id="updateStatus" parameterType="com.nanoDc.erp.vo.TransactionVO">
 		 update transaction
-		 SET status = #{status}
+		 SET status = #{status},message = #{message}
 		 Where transaction_id = #{transaction_id}
 	 </update>
 
