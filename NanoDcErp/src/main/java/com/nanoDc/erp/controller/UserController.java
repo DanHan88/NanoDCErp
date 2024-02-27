@@ -96,11 +96,11 @@ public class UserController {
 		        if ("inactive".equals(userInfoVO.getUser_status())) {
 		        	redirect.addFlashAttribute("loginError", "유효하지 않은 아이디입니다.");
 		            return "redirect:/user/login";
-		        }
+		        }/*
 		        if (Integer.parseInt(userInfoVO.getLevel()) == 10) {
 		        	redirect.addFlashAttribute("loginError", "관리자용 아이디 입니다.");
 		            return "redirect:/user/login";
-		        }
+		        }*/
 		        
 		        HttpSession session = request.getSession();
 		        String rawPw = "";
