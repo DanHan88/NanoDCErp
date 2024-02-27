@@ -153,6 +153,11 @@
             <td class="total align-middle fw-semibold text-body-highlight text-end">
                 <button th:if="${transactionlist.status eq '출금신청'}" th:data-tx-id="${transactionlist.transaction_id}" id="approve_button" class="btn btn-info">승인</button>
                 <button th:if="${transactionlist.status eq '출금신청'}" th:data-tx-id="${transactionlist.transaction_id}" id="decline_button" class="btn btn-danger">거절</button>
+                <span th:if="${transactionlist.status eq '출금거절'}" th:data-tx-id="${transactionlist.transaction_id}">
+    <span style="color: red;">거절사유: </span>
+    <span style="color: red;" th:text="${transactionlist.message}"></span>
+</span>
+
             </td>
         </tr>
     </tbody>

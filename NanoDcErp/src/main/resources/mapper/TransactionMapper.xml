@@ -31,6 +31,7 @@
 	    transaction.status,
 	    transaction.reg_date,
 	    transaction.fil_amount,
+	    transaction.message,
 	    wallet.address
 	FROM 
 	    filmountain.transaction AS transaction
