@@ -5,24 +5,25 @@
     <div class="container-fluid p-0 m-0" id="userApp_view" style="visibility:hidden;">
         <div class="d-flex align-items-center">
             <div class="custom_container">
-  <img class="p-0" id="main_yellow" src="/assets/img/filmountain/main_yellow.png" alt="main_yellow">
+  <img class="p-0" id="main_yellow" src="/assets/img/filmountain/main_bg_3.png" alt="main_yellow">
   <img class="p-0" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" id="panel" alt="panel">
   <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/investment1.png" id="panel_investment" alt="panel">
   <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/reward1.png" id="panel_reward" alt="panel">
   <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/cash1.png" id="panel_cash" alt="panel">
   <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/status1.png" id="panel_status" alt="panel">
   <img class="p-0 panel_buttons" src="/assets/img/filmountain/serverImg/price1.png" id="panel_price" alt="panel">
+  <img class="p-0 panel_buttons_progress" th:src="${progress_src}" id="panel_hw_progress" alt="panel">
 </div>
             <!-- Buttons overlay -->
             <div class="row position-absolute top-50 start-50 translate-middle" style=" z-index: 3;">
                 <div class="col-12 text-center userApp_buttons" id="app_button1" value="investment" style="cursor: pointer;">
-                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${loginVO.userInfoVO.total_investment_fil}"></p>
+                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${investDetailForHw.total_investment_fil}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button2" value="reward" style="cursor: pointer;">
-                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${loginVO.userInfoVO.total_reward_fil}"></p>
+                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${investDetailForHw.total_reward_fil}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button3" value="cash" style="cursor: pointer;">
-                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${loginVO.userInfoVO.total_reward_fil - loginVO.userInfoVO.processed_fil}">0</p>
+                        <p class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${investDetailForHw.paid_fil}">0</p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button4" value="status" style="cursor: pointer;">
                         <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">운영중</p>

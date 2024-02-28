@@ -10,7 +10,8 @@
 		   	type,
 		    user_id,
 		    wallet_id,
-		    message
+		    message,
+		    hw_product_id
 		  )
 		  VALUES (
 		    #{fil_amount},
@@ -19,7 +20,8 @@
 		    #{type},
 		    #{user_id},
 		    #{wallet_id},
-		    #{message}
+		    #{message},
+		    #{hw_product_id}
 		  )
 	</insert>
 	
@@ -32,7 +34,8 @@
 	    transaction.reg_date,
 	    transaction.fil_amount,
 	    transaction.message,
-	    wallet.address
+	    wallet.address,
+	    transaction.hw_product_id
 	FROM 
 	    filmountain.transaction AS transaction
 	INNER JOIN 
@@ -44,7 +47,7 @@
 	</select>
 	
 	<select id="selectTransactionsByUser" parameterType="integer" resultType="com.nanoDc.erp.vo.TransactionVO">
-		  	SELECT transaction.transaction_id, transaction.fil_amount, transaction.user_id, transaction.status, transaction.wallet_id, transaction.type, transaction.reg_date, transaction.message,wallet.address
+		  	SELECT transaction.transaction_id, transaction.fil_amount, transaction.user_id, transaction.status, transaction.wallet_id, transaction.type, transaction.reg_date, transaction.message,transaction.hw_product_id,wallet.address
 			FROM transaction transaction
 			inner join wallet wallet on wallet.wallet_id = transaction.wallet_id
 			WHERE transaction.user_id =#{user_id}

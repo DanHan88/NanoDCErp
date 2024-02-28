@@ -19,7 +19,15 @@ public class TransactionVO {
 	private String address;
 	private String user_name;
 	private String user_email;
+	private int hw_product_id;
 	
+	
+	public int getHw_product_id() {
+		return hw_product_id;
+	}
+	public void setHw_product_id(int hw_product_id) {
+		this.hw_product_id = hw_product_id;
+	}
 	public long getTransaction_id() {
 		return transaction_id;
 	}

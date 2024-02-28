@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	
-<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:12vh; background-color: black;
-            border-width: 7px; 
-			border-style: solid; 
-			border-color: #E5C71E; " id="navbarTop" th:fragment="TopBar">
+<nav class="navbar navbar-top fixed-top navbar-expand-lg" style="height:12vh; background-color:  #E5C71E;" id"navbarTop" th:fragment="TopBar">
     <div style="position: absolute; left: 0;">
         <ul class="navbar-nav navbar-nav-icons flex-row" style="justify-content: flex-start;">
             <li class="nav-item dropdown">
                 <a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-l" style="height: 9vh; width: 9vh; overflow: hidden; border-radius: 50%; border: 2px solid #fff;">
-                        <img class="rounded-circle" src="/assets/img/filmountain/dd.jpg" alt="" style="width: 100%;">
+                        <img class="rounded-circle" src="/assets/img/filmountain/koala2.jpg" alt="" style="width: 100%;">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-start navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
@@ -18,7 +15,7 @@
                         <div class="card-body p-0">
                             <div class="text-center pt-4 pb-3">
                                 <div class="avatar avatar-xl ">
-                                    <img class="rounded-circle " src="/assets/img/filmountain/dd.jpg" alt="">
+                                    <img class="rounded-circle " src="/assets/img/filmountain/koala2.jpg" alt="">
                                 </div>
                                 <h6 class="mt-2 text-body-emphasis" id="user_name_top"></h6>
                             </div>
@@ -41,13 +38,11 @@
         </ul>
     </div>
     <div style="position: absolute; top: 50%; left: 43%; transform: translate(-50%, -50%); margin-right: 1rem;">
-        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;">Name :</span>
-        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;" th:text="${loginVO.userInfoVO.user_name}"></span><br>
-        <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;" >Email :</span>
-         <span style="margin-left: 0.5rem; color: white; position: relative; top: -2vh;" th:text="${loginVO.userInfoVO.user_email}"></span>
-        <div>
+		<p class="m-1" th:text="'유저이름 : '+${loginVO.userInfoVO.user_name}"></p>
+		<p class="m-1" th:text="'이메일 : '+${loginVO.userInfoVO.user_email}"></p>
+		<p class="m-1" th:text="'총투자 : '+${loginVO.userInfoVO.total_investment_fil+'FIL'}"></p>
+		<p class="m-1" th:text="'총보상 : '+${loginVO.userInfoVO.total_reward_fil+'FIL'}"></p>
         <input type="hidden" th:value="${loginVO.userInfoVO.user_id}" id="user_id" class="hidden">
-    </div>
      
     
     </div>

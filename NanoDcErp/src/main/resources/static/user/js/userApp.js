@@ -38,6 +38,7 @@ var reward_img = [
         '/assets/img/filmountain/serverImg/reward4.png',
         '/assets/img/filmountain/serverImg/reward5.png'
       ];  
+
     
  var currentStage = 0;
 
@@ -211,11 +212,10 @@ $('#power_button')
     });
 	
 	
-	 setTimeout(function () {
         if (!resizeWebViewCalled) {
             resizeWebView();
         }
-    }, 1000);
+
 		 function runServer() {
          playBGM();
          playServerOnSound();

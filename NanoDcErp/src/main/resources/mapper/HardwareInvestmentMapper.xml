@@ -40,6 +40,16 @@
 			INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
 			WHERE investment.hw_status='active' AND user.user_status='active' AND user.user_id = #{user_id}
 	</select>
+	<select id="selectUserDefaultProductId" parameterType="integer" resultType="integer">
+			SELECT investment.hw_product_id	   
+				FROM filmountain.hw_investment AS investment
+				INNER JOIN filmountain.hw_product AS product ON investment.hw_product_id = product.hw_product_id
+				INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
+				WHERE investment.hw_status='active' AND user.user_status='active' AND user.user_id = #{user_id}
+				GROUP BY investment.hw_product_id
+				ORDER BY MIN(investment.hw_reg_date)
+			LIMIT 1;
+	</select>
 	
 	<!-- insert -->
 	<insert id="addNewinvestmentUser" parameterType="com.nanoDc.erp.vo.HardwareInvestmentVO">
@@ -54,7 +64,6 @@
 		#{hw_status},
 		#{hw_product_id}, 
 		#{user_id}, 
-		
 		#{hw_invest_fil})
 	</insert>
 	

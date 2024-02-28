@@ -10,6 +10,7 @@ public interface HardwareProductMapper {
 	public List<HardwareProductVO> getProductList();
 	public void updateProduct(HardwareProductVO hardwareProductVO);
 	public void addProduct(HardwareProductVO hardwareProductVO);
+	public List<HardwareProductVO> getProductListByUserId(int user_id);
 	
 	
 	

@@ -16,6 +16,22 @@
 			   picture_url
 		FROM filmountain.hw_product
 	</select>
+	<select id="getProductListByUserId" parameterType="integer" resultType="com.nanoDc.erp.vo.HardwareProductVO">
+				SELECT product.hw_product_id, 
+			   product.hw_product_name, 
+			   product.hw_product_status, 
+			   product.recruitment_start_date, 
+			   product.preparation_start_date, 
+			   product.service_start_date, 
+			   product.service_end_date, 
+			   product.total_budget_fil,
+			   product.city,
+			   product.details,
+			   product.picture_url
+		FROM filmountain.hw_product product
+		INNER JOIN hw_investment investment ON investment.hw_product_id = product.hw_product_id
+		where investment.user_id = #{user_id}
+	</select>
 	<update id="updateProduct" parameterType="com.nanoDc.erp.vo.HardwareProductVO">
 		  UPDATE hw_product
 		  <set>

@@ -24,13 +24,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.nanoDc.erp.mapper.HardwareInvestmentMapper;
+import com.nanoDc.erp.mapper.HardwareProductMapper;
 import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.service.UserService;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
+import com.nanoDc.erp.vo.HardwareProductVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.TransactionVO;
@@ -45,6 +49,10 @@ public class UserController {
 	    private UserService userService;
 	 @Autowired
 	    private UserInfoMapper userInfoMapper;
+	 @Autowired
+	 	private HardwareInvestmentMapper hardwareInvestmentMapper;
+	 @Autowired
+	 	private HardwareProductMapper hardwareProductMapper;
 	 @Autowired
 	    private PasswordEncoder pwEncoder;
 	 
@@ -231,7 +239,7 @@ public class UserController {
     }
 	//유저엡 메인페이지
 	 @GetMapping(value={"/index"})
-	    public ModelAndView index(HttpServletRequest request,Integer init_page) {
+	    public ModelAndView index(HttpServletRequest request,@RequestParam(required = false) Integer hw_product_id) {
 		 	
 		    String CURRENCY_PAIR = "fil_krw";
 	        String apiUrl = "https://api.korbit.co.kr/v1/ticker?currency_pair=" + CURRENCY_PAIR;
@@ -251,34 +259,9 @@ public class UserController {
 	        } else {
 	            System.err.println("Error: " + responseEntity.getStatusCode());
 	        }
-		 
-	        
+		  
 	        ModelAndView mav = new ModelAndView();
-	        
-	       /* Cookie[] cookies = request.getCookies();
-	        
-	        if (cookies != null) {
-	            for (Cookie cookie : cookies) {
-	                if ("nanodc_userApp".equals(cookie.getName())) {
-	                    String storedUserId = cookie.getValue();
-	                    UserInfoVO userInfoVO = userService.selectDetailUserInfoByUserId(Integer.parseInt(storedUserId));
-	                    if (userInfoVO != null) {
-	                    	HttpSession session = request.getSession();
-	                        LoginVO lvo = new LoginVO();
-	                        lvo.setId(userInfoVO.getUser_email());
-	                        lvo.setUserInfoVO(userInfoVO);
-	                        lvo.setPassword("");
-	                        lvo.setLevel(userInfoVO.getLevel());
-	                        session.setAttribute("user", (Object)lvo);
-	                        mav.addObject("last",last);
-	            	        mav.addObject("loginVO", lvo);
-	                        mav.setViewName("views/user/userApp_index");
-	                        return mav;
-	                    }
-	                }
-	            }
-	            }*/
-	        
+	           
 	        if(!userService.checkSession(request)) {
 	        	mav.setViewName("redirect:/user/login");
 	            return mav;
@@ -286,6 +269,33 @@ public class UserController {
 	        HttpSession session =  userService.userVOsessionUpdate(request);
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        
+	        if(hw_product_id==null) hw_product_id=hardwareInvestmentMapper.selectUserDefaultProductId(loginVO.getUserInfoVO().getUser_id());
+	        loginVO.getUserInfoVO().setHw_product_id(hw_product_id);
+
+	        UserInfoVO investDetailForHw = userInfoMapper.selectInvestDetailInfoByUserIdAndProductId(loginVO.getUserInfoVO());
+	        
+	        List<HardwareProductVO> hardwareProductList =  hardwareProductMapper.getProductListByUserId(loginVO.getUserInfoVO().getUser_id());
+	        List<List<HardwareProductVO>> dividedList = new ArrayList<>();
+	        HardwareProductVO selectedhardwareProduct = new HardwareProductVO();
+	        
+	        
+	        for (int i = 0; i < hardwareProductList.size(); i += 2) {
+	            dividedList.add(hardwareProductList.subList(i, Math.min(i + 2, hardwareProductList.size())));
+	        }
+	        for (int i = 0; i < hardwareProductList.size(); i ++) {
+	            if(hw_product_id==hardwareProductList.get(i).getHw_product_id()) {
+	            	selectedhardwareProduct = hardwareProductList.get(i);
+	            }
+	        }
+	       
+	       
+	        int progress_int = (int)(investDetailForHw.getTotal_investment_fil()/ selectedhardwareProduct.getTotal_budget_fil()*10)+1;
+	        if(progress_int>11) progress_int= 11;
+	        if(progress_int<1) progress_int=1;
+	        String progress_src = "/assets/img/filmountain/hw_progress/"+progress_int+".png";
+	        mav.addObject("progress_src",progress_src);
+	        mav.addObject("dividedList",dividedList);
+	        mav.addObject("investDetailForHw",investDetailForHw);
 	        mav.addObject("last",last);
 	        mav.addObject("loginVO", loginVO);
 	        mav.setViewName("views/user/userApp_index");

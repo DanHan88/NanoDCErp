@@ -16,4 +16,6 @@ public interface UserInfoMapper {
 	public UserInfoVO verifyUserInfoVO(UserInfoVO userInfoVO);
 	public String getUserPassword(int i);
 	public UserInfoVO selectDetailUserInfoByUserId(int user_id);
+	public UserInfoVO selectInvestDetailInfoByUserIdAndProductId(UserInfoVO userInfoVO);
+	
 }

@@ -34,10 +34,17 @@ public class UserInfoVO {
 	private String level;
 	private double processed_fil;
 	private double paid_fil;
+	private int hw_product_id;
 	
 	
     
 	
+	public int getHw_product_id() {
+		return hw_product_id;
+	}
+	public void setHw_product_id(int hw_product_id) {
+		this.hw_product_id = hw_product_id;
+	}
 	public double getProcessed_fil() {
 		return processed_fil;
 	}
