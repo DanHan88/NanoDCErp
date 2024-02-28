@@ -57,25 +57,21 @@ public class UserService {
 	
 	
 	/* 유저 투자 리스트 가져오기 */
-	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id){
-	    	return investmentMapper.selectInvestmentListForUser(user_id);
+	 public List<HardwareInvestmentVO> selectInvestmentListForUser(UserInfoVO userInfoVO){
+	    	return investmentMapper.selectInvestmentListForUser(userInfoVO);
 	    }
 	 
-	 public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListByUser(int user_id){
-         return rewardSharingMapper.selectRewardSharingDetailListByUser(user_id);
+	 public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListByUser(UserInfoVO userInfoVO){
+         return rewardSharingMapper.selectRewardSharingDetailListByUser(userInfoVO);
       }
-	 
-	 public List<HardwareInvestmentVO> getInvestmentListByUser(int user_id) {
-	        return this.investmentMapper.selectInvestmentListForUser(user_id);
-	    }
 	 
 	 public String addNewTransaction(TransactionVO transcationVO) {
 	       this.transactionMapper.addNewTransaction(transcationVO);
 	       return "success";
 	    }
-	 public List<TransactionVO> selectTransactionsByUser(int user_id) {
+	 public List<TransactionVO> selectTransactionsByUser(UserInfoVO userInfoVO) {
 	       
-	       return this.transactionMapper.selectTransactionsByUser(user_id);
+	       return this.transactionMapper.selectTransactionsByUser(userInfoVO);
 	    }
 	 
 	 
@@ -96,7 +92,9 @@ public class UserService {
 	 public HttpSession userVOsessionUpdate( HttpServletRequest request) {
 		 HttpSession session = request.getSession();
 		 LoginVO loginVO = (LoginVO) session.getAttribute("user");
+		 int hw_product_id= loginVO.getUserInfoVO().getHw_product_id();
 		 UserInfoVO updatedUserInfoVO = userInfoMapper.selectDetailUserInfoByUserId(loginVO.getUserInfoVO().getUser_id());
+		 updatedUserInfoVO.setHw_product_id(hw_product_id);
 		 loginVO.setUserInfoVO(updatedUserInfoVO);
 		 session.setAttribute("loginVO", loginVO);
 		 return session;

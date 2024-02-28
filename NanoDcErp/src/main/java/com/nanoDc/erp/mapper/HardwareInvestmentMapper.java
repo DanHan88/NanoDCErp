@@ -10,7 +10,7 @@ import com.nanoDc.erp.vo.UserInfoVO;
 @Mapper
 public interface HardwareInvestmentMapper {
 	 public List<HardwareInvestmentVO> getInvestmentList();
-	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id);
+	 public List<HardwareInvestmentVO> selectInvestmentListForUser(UserInfoVO userInfoVO);
 	 public void addNewinvestmentUser(HardwareInvestmentVO hardwareInvestmentVO);
 	 public void updateinvestmentUser(HardwareInvestmentVO hardwareInvestmentVO);
 	 public Integer selectUserDefaultProductId(int user_id);

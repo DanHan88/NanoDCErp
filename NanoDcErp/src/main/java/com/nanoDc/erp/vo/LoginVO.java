@@ -20,12 +20,6 @@ public class LoginVO {
     private String password;
     private UserInfoVO userInfoVO;
     private String level;
-    
-    
-    
-  
-
-	
 
 	public UserInfoVO getUserInfoVO() {
 		return userInfoVO;

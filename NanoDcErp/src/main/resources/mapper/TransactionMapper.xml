@@ -50,7 +50,7 @@
 		  	SELECT transaction.transaction_id, transaction.fil_amount, transaction.user_id, transaction.status, transaction.wallet_id, transaction.type, transaction.reg_date, transaction.message,transaction.hw_product_id,wallet.address
 			FROM transaction transaction
 			inner join wallet wallet on wallet.wallet_id = transaction.wallet_id
-			WHERE transaction.user_id =#{user_id}
+			WHERE transaction.user_id =#{user_id} AND transaction.hw_product_id =#{hw_product_id}
 	</select>
 	
 	 <update id="updateStatus" parameterType="com.nanoDc.erp.vo.TransactionVO">

@@ -117,7 +117,7 @@
 		INNER JOIN user_info u ON d.user_id = u.user_id
 		INNER JOIN hw_reward_sharing r ON r.reward_sharing_id = d.hw_reward_sharing_id
 		INNER JOIN hw_product p ON r.hw_product_id = p.hw_product_id
-		WHERE r.status = 'active' AND u.user_id= #{user_id}
+		WHERE r.status = 'active' AND u.user_id= #{user_id} AND p.hw_product_id = #{hw_product_id}
 		ORDER BY r.regdate DESC
 		</select>
 		

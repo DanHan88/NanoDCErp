@@ -166,7 +166,7 @@
                 <div class="d-flex align-items-center">
                   <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">FIL 출금</h4>
                 </div><span class="badge badge-phoenix fs-10 mb-4"
-					      th:class="${transaction.status == '출금승인'} ? 'badge-phoenix-success' : 
+					      th:class="${transaction.status == '출금완료'} ? 'badge-phoenix-success' : 
 					                (${transaction.status == '출금신청'} ? 'badge-phoenix-warning' :
 					                (${transaction.status == '출금거절'} ? 'badge-phoenix-danger' : ''))"
 					      th:text="${transaction.status}">

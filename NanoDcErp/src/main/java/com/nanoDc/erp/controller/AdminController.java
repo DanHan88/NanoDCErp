@@ -326,8 +326,10 @@ public class AdminController {
 	 /* 유저 투자리스트 가져오기 */
 	 @ResponseBody
 	    @PostMapping(value={"/selectInvestmentListForUser"})
-	    public List<HardwareInvestmentVO> selectInvestmentListForUser(@RequestBody int user_id) {
-	    	return adminService.selectInvestmentListForUser(user_id);
+	    public List<HardwareInvestmentVO> selectInvestmentListForUser(@RequestBody int user_id) { 
+		 UserInfoVO userInfoVO = new UserInfoVO();
+		 userInfoVO.setUser_id(user_id);
+	    	return adminService.selectInvestmentListForUser(userInfoVO);
 	    }
 	 /* 유저 투자등록 */
 	 @ResponseBody
@@ -468,7 +470,7 @@ public class AdminController {
 	    public String updateFundRequest(@RequestBody TransactionVO transactionVO, HttpServletRequest request) {
 	        
 	        
-	        if ("출금승인".equals(transactionVO.getStatus())) {
+	        if ("출금완료".equals(transactionVO.getStatus())) {
 	            return adminService.approveFundRequest(transactionVO);
 	        } else if ("출금거절".equals(transactionVO.getStatus())) {
 	            return adminService.declineFundRequest(transactionVO);

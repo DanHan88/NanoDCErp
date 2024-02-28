@@ -173,9 +173,10 @@ public class UserController {
         	mav.setViewName("redirect:/user/login");
             return mav;
         }
+        
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<WalletVO> walletList = this.userService.getWalletListByUser(loginVO.getUserInfoVO().getUser_id());
-        List<TransactionVO> transactionList = this.userService.selectTransactionsByUser(loginVO.getUserInfoVO().getUser_id());
+        List<TransactionVO> transactionList = this.userService.selectTransactionsByUser(loginVO.getUserInfoVO());
         mav.addObject("transactionList", transactionList);
         mav.addObject("walletList", walletList);
         mav.addObject("loginVO", loginVO);
@@ -193,7 +194,7 @@ public class UserController {
             return mav;
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
-        List<HardwareInvestmentVO> investmentList = this.userService.getInvestmentListByUser(loginVO.getUserInfoVO().getUser_id());
+        List<HardwareInvestmentVO> investmentList = this.userService.selectInvestmentListForUser(loginVO.getUserInfoVO());
         mav.addObject("investmentList", investmentList);
         mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/userApp_investment");
@@ -209,13 +210,14 @@ public class UserController {
             return mav;
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
-        List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(loginVO.getUserInfoVO().getUser_id());
+        List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(loginVO.getUserInfoVO());
         
+       
+        List<Double> dataList = new ArrayList<Double>();
+        if(!rewardDetailList.isEmpty()) {
         Date lastRewardDate = rewardDetailList.get(0).getHardwareRewardSharingVO().getRegdate();
         Date firstRewardDate = rewardDetailList.get(rewardDetailList.size()-1).getHardwareRewardSharingVO().getRegdate();
-        
         long  interval = (lastRewardDate.getTime() - firstRewardDate.getTime())/30;
-        List<Double> dataList = new ArrayList<Double>();
         for(long i= firstRewardDate.getTime();i<lastRewardDate.getTime();i += interval) {
         	double data=0;
 	        for(int j = rewardDetailList.size()-1;j>=0;j--) {
@@ -229,7 +231,7 @@ public class UserController {
 	        if(i + interval >= lastRewardDate.getTime()) {
 	        	dataList.add(data+rewardDetailList.get(rewardDetailList.size()-1).getReward_fil());
 	        }
-        }
+        }}
         userService.userVOsessionUpdate(request);
         mav.addObject("dataList",dataList);
         mav.addObject("rewardDetailList", rewardDetailList);
@@ -268,10 +270,11 @@ public class UserController {
 	        }
 	        HttpSession session =  userService.userVOsessionUpdate(request);
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	       
 	        
 	        if(hw_product_id==null) hw_product_id=hardwareInvestmentMapper.selectUserDefaultProductId(loginVO.getUserInfoVO().getUser_id());
 	        loginVO.getUserInfoVO().setHw_product_id(hw_product_id);
-
+	        session.setAttribute("user", (Object)loginVO);
 	        UserInfoVO investDetailForHw = userInfoMapper.selectInvestDetailInfoByUserIdAndProductId(loginVO.getUserInfoVO());
 	        
 	        List<HardwareProductVO> hardwareProductList =  hardwareProductMapper.getProductListByUserId(loginVO.getUserInfoVO().getUser_id());
@@ -279,8 +282,8 @@ public class UserController {
 	        HardwareProductVO selectedhardwareProduct = new HardwareProductVO();
 	        
 	        
-	        for (int i = 0; i < hardwareProductList.size(); i += 2) {
-	            dividedList.add(hardwareProductList.subList(i, Math.min(i + 2, hardwareProductList.size())));
+	        for (int i = 0; i < hardwareProductList.size(); i += 3) {
+	            dividedList.add(hardwareProductList.subList(i, Math.min(i + 3, hardwareProductList.size())));
 	        }
 	        for (int i = 0; i < hardwareProductList.size(); i ++) {
 	            if(hw_product_id==hardwareProductList.get(i).getHw_product_id()) {
@@ -293,6 +296,9 @@ public class UserController {
 	        if(progress_int>11) progress_int= 11;
 	        if(progress_int<1) progress_int=1;
 	        String progress_src = "/assets/img/filmountain/hw_progress/"+progress_int+".png";
+	        String main_bg_src = "/assets/img/filmountain/nanodc_racks/"+hw_product_id+".png";
+	        
+	        mav.addObject("main_bg_src",main_bg_src);
 	        mav.addObject("progress_src",progress_src);
 	        mav.addObject("dividedList",dividedList);
 	        mav.addObject("investDetailForHw",investDetailForHw);
@@ -306,6 +312,9 @@ public class UserController {
 	 @ResponseBody
 	 @PostMapping(value={"/addNewTransaction"})
 	 public String addNewTransaction(@RequestBody TransactionVO transactionVO, HttpServletRequest request) {
+		  HttpSession session =  userService.userVOsessionUpdate(request);
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        transactionVO.setHw_product_id(loginVO.getUserInfoVO().getHw_product_id());
 	    return userService.addNewTransaction(transactionVO);
 	    }   
 	 /* 유저지갑추가 */

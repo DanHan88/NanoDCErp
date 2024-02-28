@@ -107,8 +107,8 @@ public class AdminService {
 	    	return "success";
 	    }
 	 /* 유저 투자 리스트 가져오기 */
-	 public List<HardwareInvestmentVO> selectInvestmentListForUser(int user_id){
-	    	return investmentMapper.selectInvestmentListForUser(user_id);
+	 public List<HardwareInvestmentVO> selectInvestmentListForUser(UserInfoVO userInfoVO){
+	    	return investmentMapper.selectInvestmentListForUser(userInfoVO);
 	    }
 	 /* 유저 투자 등록 */
 	 public String addNewInvestment(HardwareInvestmentVO hardwareInvestmentVO, HttpServletRequest request) {
