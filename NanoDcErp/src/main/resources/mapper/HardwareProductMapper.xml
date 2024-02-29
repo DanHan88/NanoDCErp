@@ -78,6 +78,21 @@
 		    #{service_end_date}
 		  )
 	</insert>
+	<select id="getProductById" parameterType="integer" resultType="com.nanoDc.erp.vo.HardwareProductVO">
+				SELECT product.hw_product_id, 
+			   product.hw_product_name, 
+			   product.hw_product_status, 
+			   product.recruitment_start_date, 
+			   product.preparation_start_date, 
+			   product.service_start_date, 
+			   product.service_end_date, 
+			   product.total_budget_fil,
+			   product.city,
+			   product.details,
+			   product.picture_url
+		FROM filmountain.hw_product product
+		where product.hw_product_id = #{hw_product_id}
+	</select>
 	
 	
 	

@@ -196,6 +196,9 @@ public class UserController {
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<HardwareInvestmentVO> investmentList = this.userService.selectInvestmentListForUser(loginVO.getUserInfoVO());
+        
+        HardwareProductVO product_detail = hardwareProductMapper.getProductById(loginVO.getUserInfoVO().getHw_product_id()); 
+        mav.addObject("product_detail",product_detail);
         mav.addObject("investmentList", investmentList);
         mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/userApp_investment");
