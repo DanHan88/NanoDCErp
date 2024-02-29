@@ -3,6 +3,7 @@ var href = '/user/';
 var src = "/assets/img/filmountain/";
 var isRunning = false;
 var isClicked = false;
+var buttonIndex=0;
 var investment_img = [
         '/assets/img/filmountain/serverImg/investment1.png',
         '/assets/img/filmountain/serverImg/investment2.png',
@@ -311,10 +312,11 @@ $('#power_button')
 	   $('#buttonSound')[0].play();
   }
    function playDingSound(){
-	   $('#ding')[0].currentTime=0;
-	   $('#ding')[0].play();
+	   $('.ding')[buttonIndex].play();
+	   buttonIndex= (buttonIndex +1) % ($('.ding').length);
   }
    function playServerOnSound(){
+	   
 	   $('#serverOnSound')[0].currentTime = 0;
 	   $('#serverOnSound')[0].play();
   }
