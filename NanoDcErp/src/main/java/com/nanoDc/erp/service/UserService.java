@@ -111,8 +111,12 @@ public class UserService {
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	       
 	        MainIndexMapper mainIndexMapper = new MainIndexMapper();
-	        if(hw_product_id==null) hw_product_id=investmentMapper.selectUserDefaultProductId(loginVO.getUserInfoVO().getUser_id());
-	        
+	        if(hw_product_id==null) {
+	        	hw_product_id=loginVO.getUserInfoVO().getHw_product_id();
+	        }
+	        if(hw_product_id==0) {
+	        	hw_product_id=investmentMapper.selectUserDefaultProductId(loginVO.getUserInfoVO().getUser_id());
+	        }
 	        if(hw_product_id==null) {
 	        	hw_product_id=0;
 	        	mainIndexMapper.setError("No Investment");

@@ -24,7 +24,7 @@
                         <p id="total_reward_fil_main" class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;"  th:text="${investDetailForHw.total_reward_fil}"></p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button3" value="cash" style="cursor: pointer;">
-                        <p id="paid_fil_main" class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${investDetailForHw.paid_fil}">0</p>
+                        <p id="paid_fil_main" class="app_text text_fil" style=" font-weight: bold; color: white; text-decoration: none;" th:text="${investDetailForHw.total_reward_fil-investDetailForHw.processed_fil-investDetailForHw.paid_fil}">0</p>
                 </div>
                 <div class="col-12 text-center userApp_buttons" id="app_button4" value="status" style="cursor: pointer;">
                         <p class="app_text" style=" font-weight: bold; color: white; text-decoration: none;">운영중</p>

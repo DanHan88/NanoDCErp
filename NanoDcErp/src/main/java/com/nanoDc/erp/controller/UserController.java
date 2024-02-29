@@ -178,6 +178,8 @@ public class UserController {
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<WalletVO> walletList = this.userService.getWalletListByUser(loginVO.getUserInfoVO().getUser_id());
         List<TransactionVO> transactionList = this.userService.selectTransactionsByUser(loginVO.getUserInfoVO());
+        UserInfoVO investDetailForHw = userInfoMapper.selectInvestDetailInfoByUserIdAndProductId(loginVO.getUserInfoVO());
+        mav.addObject("investDetailForHw", investDetailForHw);
         mav.addObject("transactionList", transactionList);
         mav.addObject("walletList", walletList);
         mav.addObject("loginVO", loginVO);
