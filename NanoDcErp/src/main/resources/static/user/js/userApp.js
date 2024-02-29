@@ -242,6 +242,7 @@ $('#power_button')
       }
       
 		$('.bottomProductBtn').click(function() {
+			playDingSound();
 		    var $btn = $(this);
 		    $btn.fadeTo(100, 0.3, function() { 
 		        var hw_product_id = parseInt($btn.data("product-id"));
@@ -308,6 +309,10 @@ $('#power_button')
   }
   function playButtonSound(){
 	   $('#buttonSound')[0].play();
+  }
+   function playDingSound(){
+	   $('#ding')[0].currentTime=0;
+	   $('#ding')[0].play();
   }
    function playServerOnSound(){
 	   $('#serverOnSound')[0].currentTime = 0;
