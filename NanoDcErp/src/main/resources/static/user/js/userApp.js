@@ -37,11 +37,9 @@ var reward_img = [
         '/assets/img/filmountain/serverImg/reward3.png',
         '/assets/img/filmountain/serverImg/reward4.png',
         '/assets/img/filmountain/serverImg/reward5.png'
-      ];  
-
-    
+      ]; 
+ 
  var currentStage = 0;
-
 function resizeWebView() {
 						    var imageHeight = $('.custom_container').height();
 						    var imageWidth = $('.custom_container').width();	    
@@ -77,15 +75,23 @@ function resizeWebView() {
 							     $('#app_button5').css('padding-top',imageHeight/14.5);
 							}
 						    resizeWebViewCalled = true;
-						    $('#userApp_view').css('visibility', 'visible').show();	  
+						    if($('#main_error').val()==""){
+								 $('#userApp_view').css('visibility', 'visible').show();	  
+							} 
+						    $('.bottomProductBtn').css('visibility', 'visible').show();
 						    $('#power_button').css('display', 'block').show();		
 						    $('#debug').text('width: ' +imageWidth +'height: ' + imageHeight); 
 						    $('.panel_buttons').css('filter', 'brightness(0.50)');
 						    $('.app_text').css('filter', 'brightness(0.50)');
 						}	
-						
+						     var productId =$('#hw_product_id').val();
+    
 						
 $(document).ready(function() {
+	   var $imgs = $('img[data-product-id="' + productId + '"]');
+      var newImageUrl = '/assets/img/filmountain/nanodc/' + productId+'_on.png';
+      $imgs.attr('src', newImageUrl);
+      
 	function buttonAnimation(button,img_list){
 		var intervalId = setInterval(function() {
 		          button.attr('src', img_list[currentStage]);
@@ -102,8 +108,8 @@ $(document).ready(function() {
 	  function handleButtonClick(clickedObject) {
          
          if(!isRunning){
-				runServer();
-				isRunning = true;
+				//runServer();
+				//isRunning = true;
 				return;
 			}
 			if(isClicked){
@@ -133,14 +139,16 @@ $(document).ready(function() {
 			buttonAnimation($("#panel_cash"),cash_img);
 		}else if($(clickedObject).attr('id') == 'app_button4'){
 			src +="status.png";
-			href = 'https://filfox.info/ko/address/f02368818';
+			//href = 'https://filfox.info/ko/address/f02368818';
+			href += 'index'; 
 			currentStage =1;
 			$('#panel_status').css('filter', 'brightness(1.5)'); 
 			buttonAnimation($("#panel_status"),status_img);
 		}
 		else if($(clickedObject).attr('id') == 'app_button5'){
 			src +="price.png";
-			href = 'https://lightning.korbit.co.kr/trade/?market=fil-krw';
+			//href = 'https://lightning.korbit.co.kr/trade/?market=fil-krw';
+			href += 'index';
 			currentStage =1;
 			$('#panel_price').css('filter', 'brightness(1.5)'); 
 			buttonAnimation($("#panel_price"),price_img);
@@ -176,20 +184,19 @@ $(document).ready(function() {
 		  if(!isRunning){
 			runServer();
 			isRunning = true;
+			$('#power_button').attr('src', '/assets/img/filmountain/buttons/on.png');
 			}
 			else{
 				offServer();
 				playServerOnSound();
 				isRunning = false;
+				$('#power_button').attr('src', '/assets/img/filmountain/buttons/off.png');
 			}
 			$('#power_button').css('filter', 'brightness(1.5)'); 
 		}
 		 function resetPowerButton() {
 		  $('#power_button').css('filter', 'brightness(1)'); 
-		}
-      
-      
-      
+		} 
       
 	 $('.userApp_buttons')
     .on('mousedown touchstart', function(event) {
@@ -233,6 +240,48 @@ $('#power_button')
 			    }, index * 200);
 			});
       }
+      
+		$('.bottomProductBtn').click(function() {
+		    var $btn = $(this);
+		    $btn.fadeTo(100, 0.3, function() { 
+		        var hw_product_id = parseInt($btn.data("product-id"));
+		        setTimeout(function() {
+		            $.ajax({
+		                type: "POST",
+		                url: "/user/userAppMainInfoBuilder",
+		                contentType: "application/json",
+		                data: JSON.stringify({ hw_product_id: hw_product_id }),  
+		                success: function (data) {
+							
+							if(data.error=="session closed"){
+								window.location.href = "/user/login";
+							};
+		                    $btn.fadeTo(100, 1); 
+		                    $('#hw_product_id').val(hw_product_id);
+		                    $('#main_yellow').attr("src", data.main_bg_src);
+		                    $('#panel_hw_progress').attr("src", data.progress_src);
+		                      $('.bottomProductBtn').each(function() {
+						            var originalSrc = $(this).attr('src');
+						            var newSrc = originalSrc.replace('_on.png', '.png');
+						            $(this).attr('src', newSrc);
+						        });    
+		                      var $imgs = $('img[data-product-id="' + hw_product_id + '"]');
+						      var newImageUrl = '/assets/img/filmountain/nanodc/' + hw_product_id+'_on.png';
+						      $imgs.attr('src', newImageUrl);
+						      $('#total_investment_fil_main').text(data.investDetailForHw.total_investment_fil);
+						      $('#total_reward_fil_main').text(data.investDetailForHw.total_reward_fil);
+						      $('#paid_fil_main').text(data.investDetailForHw.paid_fil);			        
+		                },
+		                error: function(xhr, status, error) {
+		                    $btn.fadeTo(100, 1);
+		                }
+		            });  
+		        }, 200); 
+		    });
+		});
+		      
+      
+      
       function offServer() {
          stopBGM();
 			var elements = $('.panel_buttons');
@@ -264,6 +313,12 @@ $('#power_button')
 	   $('#serverOnSound')[0].currentTime = 0;
 	   $('#serverOnSound')[0].play();
   }
+  
+
+  
+  
+  
+  
   
   
   

@@ -68,25 +68,19 @@
 			                	});  
        						});
         			$('#addNewWallet_confirm').click(function(){
-						var address=$('#new_wallet_addr').val();
+						var hw_product_id=$('#hw_product_id').val();
             			$.ajax({
 			                    type: "POST",
-			                    url: "/user/addNewWallet",
+			                    url: "/user/userAppMainInfoBuilder",
 			                    contentType: "application/json",
 			                    data: JSON.stringify({
-							        address: address,
-							        user_id: user_id
-							    }),
-							    
-			                    success: function (data) {
-										
+							        hw_product_id: hw_product_id
+							    }),    
+			                    success: function (data) {	
 									$("#detail_product_modal").modal('hide');	 
 									if(data=='success'){
 										$('#success_alert_title').text('유저 새지갑 등록 성공');
 										$('#success_alert').modal('show');}
-			                        else if(data='failed:session_closed'){
-										$('#fail_alert').text('로그인을 다시해 주십시오.');
-										$("#fail_alert").modal('show');}
 			                        else{
 										$('#success_alert_title').text('유저 새지갑 등록 실패');
 										$("#fail_alert").modal('show');}

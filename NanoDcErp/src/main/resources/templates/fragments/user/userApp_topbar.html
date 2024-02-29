@@ -37,9 +37,9 @@
             </li>
         </ul>
     </div>
-    <div class="col-8 p-0">
+    <div class="col-8 p-0 ps-1">
 		<p class="m-0">
-		    <span class="fw-bold text-black fs-10">유저이름 :</span> 
+		    <span class="fw-bold text-black fs-10">사용자 :</span> 
 		    <span class="fs-10" th:text="${loginVO.userInfoVO.user_name}"></span>
 		</p>
 		<p class="m-0">
@@ -55,12 +55,13 @@
 		    <span class="fs-10" th:text="${loginVO.userInfoVO.total_reward_fil+'FIL'}"></span>
 		</p>
         <input type="hidden" th:value="${loginVO.userInfoVO.user_id}" id="user_id" class="hidden">
+        <input type="hidden" th:value="${loginVO.userInfoVO.hw_product_id}" id="hw_product_id" class="hidden">
     </div>
     <div class="col-2 p-0">
     <div class="navbar-logo">
-        <img id="power_button" src="/assets/img/filmountain/power_button.png" alt="power button" 
-             style="display:none; height: 5vh; width: auto; border-radius: 50%; cursor: pointer;">
-        <img id="back_button" src="/assets/img/filmountain/back.png" alt="back button" style="display:none; height: 5vh; width: auto; border-radius: 50%; cursor: pointer;"> 
+        <img id="power_button" src="/assets/img/filmountain/buttons/off.png" alt="power button" 
+             style="display:none; height: 6vh; width: auto; border-radius: 50%; cursor: pointer;">
+        <img id="back_button" src="/assets/img/filmountain/buttons/back.png" alt="back button" style="display:none; height: 6vh; width: auto; border-radius: 50%; cursor: pointer;"> 
     </div>
     </div>
 </nav>

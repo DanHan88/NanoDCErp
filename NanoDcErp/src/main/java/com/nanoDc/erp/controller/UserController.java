@@ -37,6 +37,7 @@ import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.LoginVO;
+import com.nanoDc.erp.vo.MainIndexMapper;
 import com.nanoDc.erp.vo.TransactionVO;
 import com.nanoDc.erp.vo.UserInfoVO;
 import com.nanoDc.erp.vo.WalletVO;
@@ -263,50 +264,36 @@ public class UserController {
 	        }
 		  
 	        ModelAndView mav = new ModelAndView();
-	           
 	        if(!userService.checkSession(request)) {
 	        	mav.setViewName("redirect:/user/login");
 	            return mav;
 	        }
-	        HttpSession session =  userService.userVOsessionUpdate(request);
-	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
-	       
-	        
-	        if(hw_product_id==null) hw_product_id=hardwareInvestmentMapper.selectUserDefaultProductId(loginVO.getUserInfoVO().getUser_id());
-	        loginVO.getUserInfoVO().setHw_product_id(hw_product_id);
-	        session.setAttribute("user", (Object)loginVO);
-	        UserInfoVO investDetailForHw = userInfoMapper.selectInvestDetailInfoByUserIdAndProductId(loginVO.getUserInfoVO());
-	        
-	        List<HardwareProductVO> hardwareProductList =  hardwareProductMapper.getProductListByUserId(loginVO.getUserInfoVO().getUser_id());
-	        List<List<HardwareProductVO>> dividedList = new ArrayList<>();
-	        HardwareProductVO selectedhardwareProduct = new HardwareProductVO();
-	        
-	        
-	        for (int i = 0; i < hardwareProductList.size(); i += 3) {
-	            dividedList.add(hardwareProductList.subList(i, Math.min(i + 3, hardwareProductList.size())));
+	        MainIndexMapper mainIndexMapper = userService.userAppMainInfoBuilder(request, hw_product_id);
+	        String error="";
+	        if(mainIndexMapper.getError().equals("No Investment")) {
+	        	error="No Investment";
 	        }
-	        for (int i = 0; i < hardwareProductList.size(); i ++) {
-	            if(hw_product_id==hardwareProductList.get(i).getHw_product_id()) {
-	            	selectedhardwareProduct = hardwareProductList.get(i);
-	            }
-	        }
-	       
-	       
-	        int progress_int = (int)(investDetailForHw.getTotal_investment_fil()/ selectedhardwareProduct.getTotal_budget_fil()*10)+1;
-	        if(progress_int>11) progress_int= 11;
-	        if(progress_int<1) progress_int=1;
-	        String progress_src = "/assets/img/filmountain/hw_progress/"+progress_int+".png";
-	        String main_bg_src = "/assets/img/filmountain/nanodc_racks/"+hw_product_id+".png";
-	        
-	        mav.addObject("main_bg_src",main_bg_src);
-	        mav.addObject("progress_src",progress_src);
-	        mav.addObject("dividedList",dividedList);
-	        mav.addObject("investDetailForHw",investDetailForHw);
+	        mav.addObject("error",error);
+	        mav.addObject("main_bg_src",mainIndexMapper.getMain_bg_src());
+	        mav.addObject("progress_src",mainIndexMapper.getProgress_src());
+	        mav.addObject("dividedList",mainIndexMapper.getDividedList());
+	        mav.addObject("investDetailForHw",mainIndexMapper.getInvestDetailForHw());
 	        mav.addObject("last",last);
-	        mav.addObject("loginVO", loginVO);
+	        mav.addObject("loginVO", mainIndexMapper.getLoginVO());
 	        mav.setViewName("views/user/userApp_index");
 	        return mav;
 	    }
+	 @ResponseBody
+	 @PostMapping(value={"/userAppMainInfoBuilder"})
+	 public MainIndexMapper userAppMainInfoBuilder(@RequestBody MainIndexMapper mainIndexMapper, HttpServletRequest request) {
+		 HttpSession session = request.getSession();
+	        if(!userService.checkSession(request)) {
+	        	MainIndexMapper mainIndexMapper_temp = new MainIndexMapper();
+	        	mainIndexMapper_temp.setError("session closed");
+	        	return mainIndexMapper_temp;
+	        }
+	    return userService.userAppMainInfoBuilder(request,mainIndexMapper.getHw_product_id());
+	    }   
 	 
 	 /* 송금신청 */
 	 @ResponseBody
