@@ -140,8 +140,7 @@ $(document).ready(function() {
 			buttonAnimation($("#panel_cash"),cash_img);
 		}else if($(clickedObject).attr('id') == 'app_button4'){
 			src +="status.png";
-			//href = 'https://filfox.info/ko/address/f02368818';
-			href += 'index'; 
+			href += 'status'; 
 			currentStage =1;
 			$('#panel_status').css('filter', 'brightness(1.5)'); 
 			buttonAnimation($("#panel_status"),status_img);

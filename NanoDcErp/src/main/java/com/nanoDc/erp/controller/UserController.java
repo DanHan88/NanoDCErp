@@ -289,6 +289,21 @@ public class UserController {
 	        mav.setViewName("views/user/price");
 	        return mav;
 	    }
+		//FIL 가격 현황 페이지
+				@GetMapping(value={"/status"})
+			    public ModelAndView status(HttpServletRequest request) {
+			        ModelAndView mav = new ModelAndView();
+			        HttpSession session = request.getSession();
+			        if(!userService.checkSession(request)) {
+			        	mav.setViewName("redirect:/user/login");
+			            return mav;
+			        }
+			        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+			        userService.userVOsessionUpdate(request);
+			        mav.addObject("loginVO", loginVO);
+			        mav.setViewName("views/user/status");
+			        return mav;
+			    }
 	//유저엡 메인페이지
 	 @GetMapping(value={"/index"})
 	    public ModelAndView index(HttpServletRequest request,@RequestParam(required = false) Integer hw_product_id) {
