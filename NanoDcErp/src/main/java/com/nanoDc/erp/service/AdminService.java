@@ -106,6 +106,12 @@ public class AdminService {
 	    	userInfoMapper.userPwReset(userInfoVO);
 	    	return "success";
 	    }
+	 
+	 public String updatePwd(UserInfoVO userInfoVO, HttpServletRequest request) {
+		 	userInfoMapper.update_Password(userInfoVO);
+	    	return "success";
+	    }
+	 
 	 /* 유저 투자 리스트 가져오기 */
 	 public List<HardwareInvestmentVO> selectInvestmentListForUser(UserInfoVO userInfoVO){
 	    	return investmentMapper.selectInvestmentListForUser(userInfoVO);

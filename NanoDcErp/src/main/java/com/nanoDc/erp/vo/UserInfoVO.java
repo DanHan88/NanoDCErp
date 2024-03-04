@@ -35,6 +35,7 @@ public class UserInfoVO {
 	private double processed_fil;
 	private double paid_fil;
 	private int hw_product_id;
+	private String new_password;
 	
 	
     
@@ -177,6 +178,12 @@ public class UserInfoVO {
 	}
 	public void setTotal_reward_fil(double total_reward_fil) {
 		this.total_reward_fil = total_reward_fil;
+	}
+	public String getNew_password() {
+		return new_password;
+	}
+	public void setNew_password(String new_password) {
+		this.new_password = new_password;
 	}
 	
 	

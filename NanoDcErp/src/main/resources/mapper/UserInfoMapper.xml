@@ -121,6 +121,13 @@
 
 	</update>
 	
+	<update id="update_Password" parameterType="com.nanoDc.erp.vo.UserInfoVO">
+		  UPDATE password
+		  set password=#{new_password}
+		  WHERE user_id = #{user_id}
+
+	</update>
+	
 	<!-- INSERT -->
 	
 	<insert id="addNewUser" parameterType="com.nanoDc.erp.vo.UserInfoVO">

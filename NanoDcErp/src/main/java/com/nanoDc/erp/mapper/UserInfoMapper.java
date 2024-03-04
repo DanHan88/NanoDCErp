@@ -17,5 +17,6 @@ public interface UserInfoMapper {
 	public String getUserPassword(int i);
 	public UserInfoVO selectDetailUserInfoByUserId(int user_id);
 	public UserInfoVO selectInvestDetailInfoByUserIdAndProductId(UserInfoVO userInfoVO);
+	public void update_Password (UserInfoVO userInfoVO);
 	
 }

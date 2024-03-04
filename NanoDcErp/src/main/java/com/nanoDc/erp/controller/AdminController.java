@@ -159,7 +159,22 @@ public class AdminController {
 	        redirect.addFlashAttribute("loginError", "비밀번호를 확인해주세요");
 	        return "redirect:/admin/login";
 	    }
-	
+	 
+	//**>>>>>   관리자 비밀번호 변경   <<<<<**// 
+	    @GetMapping(value={"/adminPwdUpdate"})
+	    public  ModelAndView adminPwdUpdate(HttpServletRequest request,String sb) {
+	    	ModelAndView mav = new ModelAndView();
+	    	HttpSession session = request.getSession();
+	        if(!adminService.checkSession(request)) {
+	        	mav.setViewName("redirect:/admin/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        mav.addObject("loginVO", loginVO);
+	        mav.setViewName("views/admin/adminpwdchange");
+	        return mav;
+	    }
+	    
 	/*회원 관리 페이지*/ 
 	 @GetMapping(value={"/userManager"})
 	    public ModelAndView userManager(HttpServletRequest request,Integer init_page) {
@@ -331,6 +346,28 @@ public class AdminController {
 
 	        return adminService.userPwReset(userInfoVO, request);
 	    }
+	 
+	 @ResponseBody
+	    @PostMapping(value = { "/DOadminPwdUpdate" })
+	    public String DOadminPwdUpdate(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
+		 String uvo = this.userInfoMapper.getUserPassword(userInfoVO.getUser_id());
+		 if(!adminService.checkSession(request)) {
+	    		return "failed:session_closed";
+	    	}
+		   String rawPw = "";
+	       String encodePw = "";
+	      
+	       int user_id = userInfoVO.getUser_id();   		
+	       rawPw = userInfoVO.getPassword();
+	        if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = uvo)) {
+	        	userInfoVO.setNew_password(pwEncoder.encode(userInfoVO.getNew_password()));
+	        	HttpSession session = request.getSession();
+	        	session.invalidate();
+	            	return  adminService.updatePwd(userInfoVO, request);
+	           }
+	            else{
+	            	return "비밀번호가 일치하지 않습니다";}
+	    }
 	 /* 유저 투자리스트 가져오기 */
 	 @ResponseBody
 	    @PostMapping(value={"/selectInvestmentListForUser"})
@@ -353,6 +390,11 @@ public class AdminController {
 	    
 	    return adminService.updateinvestmentUser(hardwareInvestmentVO,request);
 	    }   
+	 
+	  
+	    	
+	    
+	    
 	 
 	 /*----------------------------------*/
 	 /* -----------productmanager 기능----------*/
