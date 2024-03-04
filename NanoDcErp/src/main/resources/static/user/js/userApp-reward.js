@@ -82,7 +82,6 @@
 		endDate.setMinutes(0);
 		endDate.setSeconds(0);
 		endDate.setMilliseconds(0);*/
-		debugger;
     const dates = getDates(
       startDate,
       endDate,
