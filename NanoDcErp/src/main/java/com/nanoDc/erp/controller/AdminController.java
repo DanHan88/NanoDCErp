@@ -175,6 +175,7 @@ public class AdminController {
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/userManager");
 	        mav.addObject("productList", productList);
+	        mav.addObject("loginVO",loginVO);
 	        return mav;
 	    }
 	 
@@ -191,6 +192,7 @@ public class AdminController {
 	        List<TransactionVO> transactionlist= this.adminService.getTransactionList();
 	        mav.addObject("transactionlist", transactionlist);
 	        mav.setViewName("views/admin/transactionManager");
+	        mav.addObject("loginVO",loginVO);
 	        return mav;
 	    }
 	 /*수익 관리 페이지*/ 
@@ -206,6 +208,7 @@ public class AdminController {
 	        List<HardwareRewardSharingVO> rewardList = this.adminService.getRewardSharingList();
 	        mav.addObject("rewardList", rewardList);
 	        mav.setViewName("views/admin/rewardManager");
+	        mav.addObject("loginVO",loginVO);
 	        return mav;
 	    }
 	 
@@ -224,6 +227,7 @@ public class AdminController {
 	        mav.addObject("productList", productList);
 	        mav.addObject("investmentList", investmentList);
 	        mav.setViewName("views/admin/investmentManager");
+	        mav.addObject("loginVO",loginVO);
 	        return mav;
 	    }
 	 /*공지 사항 페이지*/ 
@@ -239,6 +243,7 @@ public class AdminController {
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/announcementManager");
+	        mav.addObject("loginVO",loginVO);
 	        return mav;
 	    }
 	 /*이벤트  페이지*/ 
@@ -254,6 +259,7 @@ public class AdminController {
 	        List<UserInfoVO> userInfoList = this.adminService.selectUserInfoList();
 	        mav.addObject("userInfoList", userInfoList);
 	        mav.setViewName("views/admin/eventManager");
+	        mav.addObject("loginVO",loginVO);
 	        return mav;
 	    }
 	 /*상품 관리 페이지*/ 
@@ -270,6 +276,8 @@ public class AdminController {
 	        
 	        mav.addObject("productList", productList);
 	        mav.setViewName("views/admin/productManager");
+	        mav.addObject("loginVO",loginVO);
+	        
 	       
 	        return mav;
 	    }

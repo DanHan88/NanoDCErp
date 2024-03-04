@@ -6,7 +6,7 @@
           <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopCollapse" aria-controls="navbarTopCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
           <a class="navbar-brand me-1 me-sm-3" href="/admin/userManager">
             <div class="d-flex align-items-center">
-              <div class="d-flex align-items-center"><img src="/assets/img/filmountain/nanoDC_icon.png" alt="phoenix" width="100" height:"100">
+              <div class="d-flex align-items-center"><img src="/assets/img/filmountain/nanoDC_icon.png" alt="phoenix" width="90">
              
               </div>
             </div>
@@ -16,19 +16,19 @@
           <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
             <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center" id="navbarTopCollapse">
           <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-            <a class="nav-link lh-1" href="/admin/userManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>회원관리</a>
+            <a class="nav-link lh-1" href="/admin/userManager/" role="button"><span class="uil fs-8 me-2 uil-user"></span>회원관리</a>
           </ul>
           <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-            <a class="nav-link lh-1" href="/admin/productManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>상품관리</a>
+            <a class="nav-link lh-1" href="/admin/productManager/" role="button"><span class="uil fs-8 me-2 uil-server"></span>상품관리</a>
           </ul>
           <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-            <a class="nav-link lh-1" href="/admin/investmentManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>투자내역</a>
+            <a class="nav-link lh-1" href="/admin/investmentManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>투자 내역</a>
           </ul>
           <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-            <a class="nav-link lh-1" href="/admin/rewardManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>분배내역 관리</a>
+            <a class="nav-link lh-1" href="/admin/rewardManager/" role="button"><span class="uil fs-8 me-2 uil-dollar-sign"></span>분배 내역 관리</a>
           </ul>
           <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-            <a class="nav-link lh-1" href="/admin/transactionManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>출금신청 관리</a>
+            <a class="nav-link lh-1" href="/admin/transactionManager/" role="button"><span class="uil fs-8 me-2 uil-credit-card"></span>출금신청 관리</a>
           </ul>
          <!--  <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
             <a class="nav-link lh-1" href="/admin/announcementManager/" role="button"><span class="uil fs-8 me-2 uil-chart-pie"></span>공지사항</a>
@@ -65,7 +65,8 @@
                       <img class="rounded-circle " src="/assets/img/filmountain/nanoDC_icon.png" alt="">
 
                     </div>
-                    <h6 class="mt-2 text-body-emphasis" id = "user_name_top"></h6>
+                 	<h6 class="mt-2 text-body-emphasis" th:text= "${loginVO.userInfoVO.user_name}"></h6>
+                 	<h6 class="mt-2 text-body-emphasis" th:text= "${loginVO.userInfoVO.user_email}"></h6>
                   </div>
               
                 </div>
