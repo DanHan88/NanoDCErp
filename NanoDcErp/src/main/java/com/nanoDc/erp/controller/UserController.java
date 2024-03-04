@@ -1,5 +1,6 @@
 package com.nanoDc.erp.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,10 +30,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.nanoDc.erp.mapper.FilPriceMapper;
 import com.nanoDc.erp.mapper.HardwareInvestmentMapper;
 import com.nanoDc.erp.mapper.HardwareProductMapper;
 import com.nanoDc.erp.mapper.UserInfoMapper;
 import com.nanoDc.erp.service.UserService;
+import com.nanoDc.erp.vo.FilPriceVO;
 import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
@@ -54,6 +57,8 @@ public class UserController {
 	 	private HardwareInvestmentMapper hardwareInvestmentMapper;
 	 @Autowired
 	 	private HardwareProductMapper hardwareProductMapper;
+	 @Autowired
+	 	private FilPriceMapper filPriceMapper;
 	 @Autowired
 	    private PasswordEncoder pwEncoder;
 	 
@@ -217,13 +222,14 @@ public class UserController {
         }
         LoginVO loginVO = (LoginVO)session.getAttribute("user");
         List<HardwareRewardSharingDetailVO> rewardDetailList = userService.selectRewardSharingDetailListByUser(loginVO.getUserInfoVO());
-        
-       
+        Date lastRewardDate = new Date();
+        Date firstRewardDate= new Date();
+        long  interval =0;
         List<Double> dataList = new ArrayList<Double>();
         if(!rewardDetailList.isEmpty()) {
-        Date lastRewardDate = rewardDetailList.get(0).getHardwareRewardSharingVO().getRegdate();
-        Date firstRewardDate = rewardDetailList.get(rewardDetailList.size()-1).getHardwareRewardSharingVO().getRegdate();
-        long  interval = (lastRewardDate.getTime() - firstRewardDate.getTime())/30;
+        lastRewardDate = rewardDetailList.get(0).getHardwareRewardSharingVO().getRegdate();
+        firstRewardDate = rewardDetailList.get(rewardDetailList.size()-1).getHardwareRewardSharingVO().getRegdate();
+        interval = (lastRewardDate.getTime() - firstRewardDate.getTime())/30;
         for(long i= firstRewardDate.getTime();i<lastRewardDate.getTime();i += interval) {
         	double data=0;
 	        for(int j = rewardDetailList.size()-1;j>=0;j--) {
@@ -238,36 +244,55 @@ public class UserController {
 	        	dataList.add(data+rewardDetailList.get(rewardDetailList.size()-1).getReward_fil());
 	        }
         }}
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         userService.userVOsessionUpdate(request);
         mav.addObject("dataList",dataList);
+        mav.addObject("firstDate",dateFormat.format(firstRewardDate));
+        mav.addObject("lastDate",dateFormat.format(lastRewardDate));
+        mav.addObject("dataSize",dataList.size());
         mav.addObject("rewardDetailList", rewardDetailList);
         mav.addObject("loginVO", loginVO);
         mav.setViewName("views/user/reward");
         return mav;
     }
+	//FIL 가격 현황 페이지
+		@GetMapping(value={"/price"})
+	    public ModelAndView price(HttpServletRequest request) {
+	        ModelAndView mav = new ModelAndView();
+	        HttpSession session = request.getSession();
+	        if(!userService.checkSession(request)) {
+	        	mav.setViewName("redirect:/user/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        List<FilPriceVO> filPriceList = filPriceMapper.getFilPriceDataForMonth();
+	        
+	        Date lastDate = new Date();
+	        Date firstDate= new Date();
+	        long interval=0;
+	        List<Integer> dataList = new ArrayList<Integer>();
+	        if(!filPriceList.isEmpty()) {
+		        lastDate = filPriceMapper.getLatestFilPrice().getReg_date();
+		        firstDate = filPriceList.get(0).getReg_date();
+		        interval = (lastDate.getTime() - firstDate.getTime())/30;
+		        for(int i=0;i<filPriceList.size();i++) {
+		        	dataList.add(filPriceList.get(i).getFil_last());
+		        }
+	        }
+	        userService.userVOsessionUpdate(request);
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	        mav.addObject("firstDate",dateFormat.format(firstDate));
+	        mav.addObject("lastDate",dateFormat.format(lastDate));
+	        mav.addObject("dataList",dataList);
+	        mav.addObject("dataSize",dataList.size());
+	        mav.addObject("loginVO", loginVO);
+	        mav.setViewName("views/user/price");
+	        return mav;
+	    }
 	//유저엡 메인페이지
 	 @GetMapping(value={"/index"})
 	    public ModelAndView index(HttpServletRequest request,@RequestParam(required = false) Integer hw_product_id) {
 		 	
-		    String CURRENCY_PAIR = "fil_krw";
-	        String apiUrl = "https://api.korbit.co.kr/v1/ticker?currency_pair=" + CURRENCY_PAIR;
-	        String last = "";
-	        long timestamp=0;
-	        RestTemplate restTemplate = new RestTemplate();
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.set("accept", "application/json");
-	        HttpEntity<String> entity = new HttpEntity<>(headers);
-	        ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
-	        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-	            String responseData = responseEntity.getBody();
-	            
-	            JSONObject jsonObject = new JSONObject(responseData);
-	            timestamp = jsonObject.getLong("timestamp");
-	            last = jsonObject.getString("last");
-	        } else {
-	            System.err.println("Error: " + responseEntity.getStatusCode());
-	        }
-		  
 	        ModelAndView mav = new ModelAndView();
 	        if(!userService.checkSession(request)) {
 	        	mav.setViewName("redirect:/user/login");
@@ -283,7 +308,7 @@ public class UserController {
 	        mav.addObject("progress_src",mainIndexMapper.getProgress_src());
 	        mav.addObject("dividedList",mainIndexMapper.getDividedList());
 	        mav.addObject("investDetailForHw",mainIndexMapper.getInvestDetailForHw());
-	        mav.addObject("last",last);
+	        mav.addObject("last", filPriceMapper.getLatestFilPrice().getFil_last());
 	        mav.addObject("loginVO", mainIndexMapper.getLoginVO());
 	        mav.setViewName("views/user/userApp_index");
 	        return mav;

@@ -149,7 +149,7 @@ $(document).ready(function() {
 		else if($(clickedObject).attr('id') == 'app_button5'){
 			src +="price.png";
 			//href = 'https://lightning.korbit.co.kr/trade/?market=fil-krw';
-			href += 'index';
+			href += 'price';
 			currentStage =1;
 			$('#panel_price').css('filter', 'brightness(1.5)'); 
 			buttonAnimation($("#panel_price"),price_img);
@@ -272,7 +272,7 @@ $('#power_button')
 						      $imgs.attr('src', newImageUrl);
 						      $('#total_investment_fil_main').text(data.investDetailForHw.total_investment_fil);
 						      $('#total_reward_fil_main').text(data.investDetailForHw.total_reward_fil);
-						      $('#paid_fil_main').text(data.investDetailForHw.paid_fil);			        
+						      $('#paid_fil_main').text(data.investDetailForHw.total_reward_fil-data.investDetailForHw.paid_fil-data.investDetailForHw.processed_fil);			        
 		                },
 		                error: function(xhr, status, error) {
 		                    $btn.fadeTo(100, 1);

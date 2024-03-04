@@ -67,12 +67,26 @@
     const { getColor, getData, getDates } = window.phoenix.utils;
     const $totalSalesChart = document.querySelector('#totalRewardChart');
 
-	var startDate = new Date('5/1/2020');
-	var endDate = new Date('5/1/2021')
+	//var startDate = new Date('5/1/2020');
+	//var endDate = new Date('5/1/2021');
+	var stringStartDate = $('#firstDate').val();
+	var stringLastDate = $('#lastDate').val();
+	var startDate = new Date(stringStartDate);
+	var endDate = new Date(stringLastDate);
+	var dataSize = $('#dataSize').val()-1;
+		/*startDate.setHours(0);
+		startDate.setMinutes(0);
+		startDate.setSeconds(0);
+		startDate.setMilliseconds(0);
+		endDate.setHours(0);
+		endDate.setMinutes(0);
+		endDate.setSeconds(0);
+		endDate.setMilliseconds(0);*/
+		debugger;
     const dates = getDates(
       startDate,
       endDate,
-     Math.floor((endDate-startDate)/30)
+     Math.floor((endDate-startDate)/dataSize)
     );
 	//Math.floor((startDate-endDate)/(1000 * 60 * 60)/30)*1000 * 60 * 60
 	//1000 * 60 * 60 * 24 *30
@@ -125,7 +139,7 @@
             type: 'category',
             data: dates,
             axisLabel: {
-              formatter: value => window.dayjs(value).format('DD MMM'),
+              formatter: value => window.dayjs(value).format('DD MMM hh:mm'),
               interval: 13,
               showMinLabel: true,
               showMaxLabel: false,
@@ -161,7 +175,7 @@
             position: 'bottom',
             data: dates,
             axisLabel: {
-              formatter: value => window.dayjs(value).format('DD MMM'),
+              formatter: value => window.dayjs(value).format('DD MMM hh:mm'),
               interval: 130,
               showMaxLabel: true,
               showMinLabel: false,
