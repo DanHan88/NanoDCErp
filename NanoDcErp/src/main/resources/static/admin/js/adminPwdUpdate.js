@@ -34,6 +34,10 @@ $(document).ready(function () {
             }),
            success: function(data) {
                 // Handle success response
+                if (data == "비밀번호가 일치하지 않습니다"){
+					$("#alert_span").text("현재 비밀번호가 일치하지 않습니다.")
+					return;
+				}
                 $('#completionModal').modal('show');
             },
             error: function (error) {

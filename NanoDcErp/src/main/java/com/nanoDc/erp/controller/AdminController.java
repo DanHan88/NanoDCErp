@@ -355,9 +355,9 @@ public class AdminController {
 	    		return "failed:session_closed";
 	    	}
 		   String rawPw = "";
-	       String encodePw = "";
+ 	       String encodePw = "";
 	      
-	       int user_id = userInfoVO.getUser_id();   		
+ 	       int user_id = userInfoVO.getUser_id();   		
 	       rawPw = userInfoVO.getPassword();
 	        if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = uvo)) {
 	        	userInfoVO.setNew_password(pwEncoder.encode(userInfoVO.getNew_password()));
