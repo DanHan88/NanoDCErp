@@ -129,7 +129,7 @@
             data: dates,
             axisLabel: {
               formatter: value => window.dayjs(value).format('MM/DD'),
-              interval: Math.floor(dataSize/8),
+              interval: Math.floor(dataSize/5),
               showMinLabel: true,
               showMaxLabel: false,
               color: getColor('secondary-color'),
@@ -165,7 +165,7 @@
             data: dates,
             axisLabel: {
               formatter: value => window.dayjs(value).format('MM/DD'),
-              interval: Math.floor(dataSize/8)*10,
+              interval: Math.floor(dataSize/5)*10,
               showMaxLabel: true,
               showMinLabel: false,
               color: getColor('secondary-color'),
