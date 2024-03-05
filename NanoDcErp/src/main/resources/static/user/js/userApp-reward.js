@@ -66,26 +66,16 @@
   const totalRewardChartInit = () => {
     const { getColor, getData, getDates } = window.phoenix.utils;
     const $totalSalesChart = document.querySelector('#totalRewardChart');
-
-	//var startDate = new Date('5/1/2020');
-	//var endDate = new Date('5/1/2021');
 	var stringStartDate = $('#firstDate').val();
 	var stringLastDate = $('#lastDate').val();
 	var startDate = new Date(stringStartDate);
 	var endDate = new Date(stringLastDate);
 	var dataSize = $('#dataSize').val()-1;
-		/*startDate.setHours(0);
-		startDate.setMinutes(0);
-		startDate.setSeconds(0);
-		startDate.setMilliseconds(0);
-		endDate.setHours(0);
-		endDate.setMinutes(0);
-		endDate.setSeconds(0);
-		endDate.setMilliseconds(0);*/
+	var interval = Math.floor((endDate-startDate)/dataSize);
     const dates = getDates(
       startDate,
       endDate,
-     Math.floor((endDate-startDate)/dataSize)
+     interval
     );
 	//Math.floor((startDate-endDate)/(1000 * 60 * 60)/30)*1000 * 60 * 60
 	//1000 * 60 * 60 * 24 *30
@@ -106,7 +96,7 @@
         tooltipItem += `<h6 class="fs-9 text-body-tertiary ${
         index > 0 && 'mb-0'
       }"><span class="fas fa-circle me-2" style="color:${el.color}"></span>
-      ${el.date.format('MMM DD')} : ${el.value}
+      [${el.date.format('YYYY/MM/DD hh:mm')}] ${el.value} 원
     </h6>`;
       });
       return `<div class='ms-1'>
@@ -138,8 +128,8 @@
             type: 'category',
             data: dates,
             axisLabel: {
-              formatter: value => window.dayjs(value).format('DD MMM hh:mm'),
-              interval: 13,
+              formatter: value => window.dayjs(value).format('MM/DD'),
+              interval: Math.floor(dataSize/8),
               showMinLabel: true,
               showMaxLabel: false,
               color: getColor('secondary-color'),
@@ -174,8 +164,8 @@
             position: 'bottom',
             data: dates,
             axisLabel: {
-              formatter: value => window.dayjs(value).format('DD MMM hh:mm'),
-              interval: 130,
+              formatter: value => window.dayjs(value).format('MM/DD'),
+              interval: Math.floor(dataSize/8)*10,
               showMaxLabel: true,
               showMinLabel: false,
               color: getColor('secondary-color'),
