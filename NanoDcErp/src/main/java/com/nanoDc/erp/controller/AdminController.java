@@ -528,6 +528,16 @@ public class AdminController {
 
 	        return "failed:invalid_request_state";
 	    	}
+	 
+	 //**>>>>>   새로운 배분 추가   <<<<<**//
+	    @ResponseBody
+	    @PostMapping(value={"/payout"})
+	    public String payout(@RequestBody InvestmentCategoryVO investmentCategoryVO , HttpServletRequest request) {
+	    	if(!adminService.checkSession(request)) {
+	    		return "failed:session_closed";
+	    	}
+	        return null;//investmentService.addNewTokenPaidInfo(listInvestment ,request);
+	    }
 	    
 }
 
