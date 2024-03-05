@@ -158,6 +158,11 @@ public class UserService {
 	        mainIndexMapper.setSelectedhardwareProduct(selectedhardwareProduct); 
 	        return mainIndexMapper;    
 	 }
+	 
+	 public String updateProfile(UserInfoVO userInfoVO, HttpServletRequest request) {
+		 	userInfoMapper.update_Password(userInfoVO);
+	    	return "success";
+	    }
 
 	 
 	

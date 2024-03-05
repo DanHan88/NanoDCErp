@@ -346,7 +346,7 @@ public class AdminController {
 
 	        return adminService.userPwReset(userInfoVO, request);
 	    }
-	 
+	 /* 비밀번호 변경 */
 	 @ResponseBody
 	    @PostMapping(value = { "/DOadminPwdUpdate" })
 	    public String DOadminPwdUpdate(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {

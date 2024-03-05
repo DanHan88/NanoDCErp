@@ -141,7 +141,8 @@ public class UserController {
 		        redirect.addFlashAttribute("loginError", "비밀번호를 확인해주세요");
 		        return "redirect:/user/login";
 		    }
-
+		 
+		 
 	//데시보드
 	@GetMapping(value={"/dashboard"})
     public ModelAndView dashboard(HttpServletRequest request) {
@@ -155,6 +156,20 @@ public class UserController {
         mav.setViewName("views/user/dashboard");
         return mav;
     }
+	//유저프로필편집
+	@GetMapping(value={"/profileEdit"})
+	 public  ModelAndView profileEdit(HttpServletRequest request,String sb) {
+	    ModelAndView mav = new ModelAndView();
+	    HttpSession session = request.getSession();
+		    if(!userService.checkSession(request)) {
+	        	mav.setViewName("redirect:/user/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        mav.addObject("loginVO", loginVO);
+	        mav.setViewName("views/user/userApp_profileEdit");
+	        return mav;
+	    }
 	//유저상품
 	@GetMapping(value={"/product"})
     public ModelAndView product(HttpServletRequest request) {
@@ -339,7 +354,28 @@ public class UserController {
 	        }
 	    return userService.userAppMainInfoBuilder(request,mainIndexMapper.getHw_product_id());
 	    }   
-	 
+	 /*유저 프로필 편집 기능 */
+	 @ResponseBody
+	    @PostMapping(value = { "/DOuserprofileEdit" })
+	    public String DOadminPwdUpdate(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
+		 String uvo = this.userInfoMapper.getUserPassword(userInfoVO.getUser_id());
+		 if(!userService.checkSession(request)) {
+	    		return "failed:session_closed";
+	    	}
+		   String rawPw = "";
+	       String encodePw = "";
+	      
+	       int user_id = userInfoVO.getUser_id();   		
+	       rawPw = userInfoVO.getPassword();
+	        if (this.pwEncoder.matches((CharSequence)rawPw, encodePw = uvo)) {
+	        	userInfoVO.setNew_password(pwEncoder.encode(userInfoVO.getNew_password()));
+	        	HttpSession session = request.getSession();
+	        	session.invalidate();
+	            	return  userService.updateProfile(userInfoVO, request);
+	           }
+	            else{
+	            	return "비밀번호가 일치하지 않습니다";}
+	    }
 	 /* 송금신청 */
 	 @ResponseBody
 	 @PostMapping(value={"/addNewTransaction"})
