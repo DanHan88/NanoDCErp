@@ -31,6 +31,7 @@
 		FROM filmountain.hw_product product
 		INNER JOIN hw_investment investment ON investment.hw_product_id = product.hw_product_id
 		where investment.user_id = #{user_id}
+		GROUP BY product.hw_product_id
 	</select>
 	<update id="updateProduct" parameterType="com.nanoDc.erp.vo.HardwareProductVO">
 		  UPDATE hw_product
