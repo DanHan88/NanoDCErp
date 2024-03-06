@@ -19,7 +19,6 @@ $(document).ready(function() {
                     success: function(data) {
                                $("#detail_product_modal").modal('hide');	 
 									if(data=='success'){
-										$('#success_alert_title').text('제품수정 성공!');
 										$('#success_alert').modal('show');
 			                        }
 			                        else if(data='failed:session_closed'){
@@ -27,7 +26,7 @@ $(document).ready(function() {
 										$("#fail_alert").modal('show');	 	
 									}
 			                        else{
-										$('#success_alert_title').text('제품수정 실패');
+										$('#success_alert_title').text('보상 지급 실패');
 										$("#fail_alert").modal('show');	 
 									}
                             },
