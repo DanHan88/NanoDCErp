@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>zetacube</groupId>
-	<artifactId>FilMountainErp</artifactId>
-	<version>0.0.1</version>
-	<name>FilMountainErp</name>
+	<artifactId>NanoDCErp</artifactId>
+	<version>1.0.1</version>
+	<name>NanoDcErp</name>
 	<description>zetacube</description>
 	<properties>
 		<java.version>1.8</java.version>
