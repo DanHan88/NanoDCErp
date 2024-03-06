@@ -156,6 +156,26 @@ public class AdminService {
 		 transactionMapper.updateStatus(transactionVO);
 		    // 조회된 행이 존재하고 상태가 '신청'인 경우에만 업데이트
 			return "success";	
-		}
+		} 
+	 //**>>>>>   유저 배분 추가   <<<<<**//
+	    	public String payout(HardwareRewardSharingVO hardwareRewardSharingVO, HttpServletRequest request) {
+	
+	    	rewardSharingMapper.insertHardwareRewardSharing(hardwareRewardSharingVO);
+	    	int lastRewardShare_id = rewardSharingMapper.selectLastShareId();
+	    	List<HardwareInvestmentVO> hardwareInvestmentList = investmentMapper.selectInvestmentListForProduct(hardwareRewardSharingVO.getHw_product_id());
+	    	double totalInvestment = 0;
+	    	for(int i=0;i<hardwareInvestmentList.size();i++) {
+	    		totalInvestment += hardwareInvestmentList.get(i).getHw_invest_fil();
+	    	}
+	    	HardwareRewardSharingDetailVO rewardSharingDetail = new HardwareRewardSharingDetailVO();
+	    	
+	    	for(int i=0;i<hardwareInvestmentList.size();i++) {
+	    		rewardSharingDetail.setReward_fil(hardwareInvestmentList.get(i).getHw_invest_fil()/totalInvestment*hardwareRewardSharingVO.getTotal_fil());
+	    		rewardSharingDetail.setUser_id(hardwareInvestmentList.get(i).getUser_id());
+	    		rewardSharingDetail.setHw_reward_sharing_id(lastRewardShare_id);
+	    		rewardSharingMapper.insertHardwareRewardSharingDetail(rewardSharingDetail);
+	    	} 		
+	    	return "success";
+	    }
 	 
 }

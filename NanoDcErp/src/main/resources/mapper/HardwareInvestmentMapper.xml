@@ -43,6 +43,18 @@
         	AND product.hw_product_id = #{hw_product_id}
     		</if>
 	</select>
+	<select id="selectInvestmentListForProduct" parameterType="integer" resultType="com.nanoDc.erp.vo.HardwareInvestmentVO">
+			SELECT investment.hw_id, 
+		   		   investment.hw_status, 
+		   		   investment.hw_reg_date,
+		   		   investment.user_id,
+		   		   investment.hw_invest_fil
+			FROM filmountain.hw_investment AS investment
+			INNER JOIN filmountain.hw_product AS product ON investment.hw_product_id = product.hw_product_id
+			INNER JOIN filmountain.user_info AS user ON investment.user_id = user.user_id
+			WHERE investment.hw_status='active' AND user.user_status='active'
+        	AND product.hw_product_id = #{hw_product_id}
+	</select>
 	
 	
 	<select id="selectUserDefaultProductId" parameterType="integer" resultType="integer">

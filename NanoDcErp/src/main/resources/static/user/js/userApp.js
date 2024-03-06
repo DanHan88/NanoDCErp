@@ -269,9 +269,9 @@ $('#power_button')
 		                      var $imgs = $('img[data-product-id="' + hw_product_id + '"]');
 						      var newImageUrl = '/assets/img/filmountain/nanodc/' + hw_product_id+'_on.png';
 						      $imgs.attr('src', newImageUrl);
-						      $('#total_investment_fil_main').text(data.investDetailForHw.total_investment_fil);
-						      $('#total_reward_fil_main').text(data.investDetailForHw.total_reward_fil);
-						      $('#paid_fil_main').text(data.investDetailForHw.total_reward_fil-data.investDetailForHw.paid_fil-data.investDetailForHw.processed_fil);			        
+						      $('#total_investment_fil_main').text(Math.round(data.investDetailForHw.total_investment_fil));
+							  $('#total_reward_fil_main').text(Math.round(data.investDetailForHw.total_reward_fil));
+							  $('#paid_fil_main').text(Math.round(data.investDetailForHw.total_reward_fil - data.investDetailForHw.paid_fil - data.investDetailForHw.processed_fil));
 		                },
 		                error: function(xhr, status, error) {
 		                    $btn.fadeTo(100, 1);

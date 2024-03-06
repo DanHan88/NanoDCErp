@@ -13,5 +13,8 @@ public interface HardwareRewardSharingMapper {
 	public List<HardwareRewardSharingVO> getRewardSharingList();
 	public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListById(int reward_sharing_id);
 	public List<HardwareRewardSharingDetailVO> selectRewardSharingDetailListByUser(UserInfoVO userInfoVO);
+	public void insertHardwareRewardSharing(HardwareRewardSharingVO hardwareRewardSharingVO);
+	public void insertHardwareRewardSharingDetail(HardwareRewardSharingDetailVO hardwareRewardSharingDetailVO);
+	public int selectLastShareId();
 	
 }

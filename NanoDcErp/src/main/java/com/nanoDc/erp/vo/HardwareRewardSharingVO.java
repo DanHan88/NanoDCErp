@@ -12,12 +12,19 @@ public class HardwareRewardSharingVO {
 	private Date regdate;
 	private double fil_paid_per_tb;
 	private String status;	
+	private double total_fil;
 	private HardwareProductVO hardwareProductVO;
 	public HardwareProductVO getHardwareProductVO() {
 		return hardwareProductVO;
 	}
 	public void setHardwareProductVO(HardwareProductVO hardwareProductVO) {
 		this.hardwareProductVO = hardwareProductVO;
+	}
+	public double getTotal_fil() {
+		return total_fil;
+	}
+	public void setTotal_fil(double total_fil) {
+		this.total_fil = total_fil;
 	}
 	public int getReward_sharing_id() {
 		return reward_sharing_id;

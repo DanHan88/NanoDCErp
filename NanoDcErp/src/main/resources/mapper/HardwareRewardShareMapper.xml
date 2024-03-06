@@ -19,6 +19,7 @@
 	    <result property="hw_product_id" column="hw_product_id"/>
 	    <result property="regdate" column="regdate"  javaType="java.util.Date" jdbcType="TIMESTAMP"/>
 	    <result property="fil_paid_per_tb" column="fil_paid_per_tb"/>
+		<result property="total_fil" column="total_fil"/>
 	    <result property="status" column="status"/>
 	    <association property="hardwareProductVO" resultMap="hardwareProductMap"/>
 	</resultMap>
@@ -47,6 +48,7 @@
 		    r.hw_product_id,
 		    r.regdate,
 		    r.fil_paid_per_tb,
+		    r.total_fil,
 		    r.status,
 		    p.hw_product_name,
 		    p.hw_product_status,
@@ -120,6 +122,32 @@
 		WHERE r.status = 'active' AND u.user_id= #{user_id} AND p.hw_product_id = #{hw_product_id}
 		ORDER BY r.regdate DESC
 		</select>
+		<insert id="insertHardwareRewardSharing" parameterType = "com.nanoDc.erp.vo.HardwareRewardSharingVO">
+			INSERT INTO filmountain.hw_reward_sharing
+			(hw_product_id, regdate, status, total_fil)
+			VALUES(#{hw_product_id}, NOW(), #{status}, #{total_fil})
+		</insert>
+		<insert id="insertHardwareRewardSharingDetail" parameterType = "com.nanoDc.erp.vo.HardwareRewardSharingDetailVO">
+			INSERT INTO filmountain.hw_reward_sharing_detail
+				(hw_reward_sharing_id, user_id, reward_fil)
+				VALUES(#{hw_reward_sharing_id}, #{user_id}, #{reward_fil})
+		</insert>
+		
+			<select id="selectLastShareId" resultType="integer">
+				SELECT reward_sharing_id
+				FROM hw_reward_sharing
+				ORDER BY reward_sharing_id DESC
+				LIMIT 1
+			</select>
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

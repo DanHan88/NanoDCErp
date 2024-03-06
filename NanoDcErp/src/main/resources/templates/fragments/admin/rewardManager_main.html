@@ -74,7 +74,6 @@
                   <thead>
                     <tr>
                       <th class="fs-9 align-middle py-3 order align-middle white-space-nowrap py-0" scope="col" data-sort="reg_date" style="width:20%;">배분날짜</th>
-                      <th class="sort align-middle" scope="col" data-sort="fil_tb" style="width:20%;">FIL/TB</th>
                       <th class="sort align-middle ps-0" scope="col" data-sort="fil_paid" style="width:20%;">FIL총배분</th>
                       <th class="sort align-middle pe-3" scope="col" data-sort="product" style="width:20%;">지급상품</th>
                       <th class="sort align-middle text-start pe-3" scope="col" data-sort="status" style="width:10%; min-width: 200px;">상태</th>
@@ -84,8 +83,7 @@
                   <tbody class="list" id="order-table-body">
 					  <tr th:each="reward : ${rewardList}" class="hover-actions-trigger btn-reveal-trigger position-static">
                       <td th:text="${#dates.format(reward.regdate, 'yyyy-MM-dd HH:mm:ss')}" class="fs-9 align-middle py-3 reg_date align-middle white-space-nowrap py-0"></td>
-                      <td th:text="${reward.fil_paid_per_tb}" class="fil_tb align-middle fw-semibold text-body-highlight ps-2"></td>
-                      <td th:text="${reward.fil_paid_per_tb}" class="fil_paid align-middle fw-semibold text-body-highlight"></td>
+                      <td th:text="${reward.total_fil}" class="fil_tb align-middle fw-semibold text-body-highlight ps-2"></td>
                       <td th:text="${reward.hardwareProductVO.hw_product_name}" class="product align-middle fw-semibold text-body-highlight"></td>
                       <td th:text="${reward.status}" class="status align-middle fw-semibold text-body-highlight"></td>
                       <td class="ps-10 total align-middle position-relative">
