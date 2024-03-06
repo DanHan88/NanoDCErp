@@ -17,11 +17,12 @@
                                 <div class="avatar avatar-xl ">
                                     <img class="rounded-circle " src="/assets/img/filmountain/profile_1.png" alt="">
                                 </div>
-                                <h6 class="mt-2 text-body-emphasis" id="user_name_top"></h6>
+                                <h6 class="mt-2 text-body-emphasis" th:text= "${loginVO.userInfoVO.user_name}"></h6>
+                 				<h6 class="mt-2 text-body-emphasis" th:text= "${loginVO.userInfoVO.user_email}"></h6>
                             </div>
                         </div>
                         <div class="card-footer p-0 border-top border-translucent">
-                            <hr>
+                           
                             <div class="px-3">
                                 <a class="btn btn-phoenix-secondary d-flex flex-center w-100" th:href="@{/user/logout}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out me-2">
