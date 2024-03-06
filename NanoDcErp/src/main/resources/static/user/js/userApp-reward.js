@@ -72,6 +72,7 @@
 	var endDate = new Date(stringLastDate);
 	var dataSize = $('#dataSize').val()-1;
 	var interval = Math.floor((endDate-startDate)/dataSize);
+	var currency = $('#currency').val();
     const dates = getDates(
       startDate,
       endDate,
@@ -96,8 +97,8 @@
         tooltipItem += `<h6 class="fs-9 text-body-tertiary ${
         index > 0 && 'mb-0'
       }"><span class="fas fa-circle me-2" style="color:${el.color}"></span>
-      [${el.date.format('YYYY/MM/DD hh:mm')}] ${el.value} 원
-    </h6>`;
+      [${el.date.format('YYYY/MM/DD hh:mm')}] ${el.value} `+currency+
+    `</h6>`;
       });
       return `<div class='ms-1'>
               ${tooltipItem}

@@ -3,6 +3,9 @@
 		var user_id =$("#user_id").val();
 		
 		 $('#back_button').css('display', 'block');
+		var total_reward_fil = Math.floor($('#total_reward_fil').text());
+		$('#total_reward_fil').text(total_reward_fil);
+		$('#total_reward_fil').show();
 
 		 $(document).on('click', '#back_button', function() {
 		    window.history.back();});	
