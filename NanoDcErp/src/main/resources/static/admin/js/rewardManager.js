@@ -5,7 +5,7 @@ $(document).ready(function() {
 								 location.reload(true);
 							 } 
 					      });			
-						$('.detail_reward').on('click', function() {
+						$(document).on('click', '.detail_reward', function() {
 							var reward_sharing_id = $(this).val();
 							$.ajax({
 			                    type: "POST",

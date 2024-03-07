@@ -18,7 +18,7 @@ $(document).ready(function() {
        
     });
     
-  	$('.detail_user').on('click', function() {
+$(document).on('click', '.detail_user', function() {
 							var clickedButton = $(this);
 							$('#join_date_p').text(clickedButton.parent().parent().find('.user_reg_date').text());
 							$('#user_name_span').text(clickedButton.parent().parent().find('.user_name').text());

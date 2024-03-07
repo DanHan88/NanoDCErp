@@ -19,8 +19,7 @@ $(document).ready(function() {
 				                $('#profilePicture').hide();
 				            }
 				        });
-				        
-  		$('.detail_product').on('click', function() {
+		$(document).on('click', '.detail_product', function() {		        
 			 var clickedButton = $(this).parent().parent();
 			$('#hw_product_name').val(clickedButton.find('.hw_product_name').text());
 			$('#city').val(clickedButton.find('.city').text());
