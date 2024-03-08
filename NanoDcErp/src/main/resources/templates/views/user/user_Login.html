@@ -88,7 +88,7 @@
     <div class="mb-3 text-start">
         <label class="form-label" for="email">Email</label>
         <div class="form-icon-container">
-            <input class="form-control form-icon-input" th:field="*{id}" id="id" type="email" placeholder="name@example.com" autocomplete="username" />
+            <input class="form-control form-icon-input" th:field="*{id}" id="username" type="email" placeholder="name@example.com" autocomplete="username" />
             <span class="fas fa-user text-body fs-9 form-icon"></span>
         </div>
     </div>
@@ -129,7 +129,49 @@
         }
       </script>
    
-    
+    <script src="/vendors/jquery/jquery.min.js"></script>
+    <script src="/vendors/jquery-easing/jquery.easing.min.js"></script> 
+ 	 	<script>
+		$(document).ready(function() {
+		    var username = '';
+		    var password = '';
+		    var inputTimeout;
+		    var InputLength=0;
+		
+		   $('#username, #password').on('change', function() { 
+		        username = $('#username').val();
+		        password = $('#password').val();
+		        var newInputLength= username.length+password.length;
+		        if(newInputLength>5+InputLength&&username.length >= 5 && password.length >= 5){
+					console.log('자동 입력으로 간주됩니다.');
+					if($('#login_error').text()==""){
+						$('#loginbutton').click();
+					}
+				}else{
+					console.log('수동 입력입니다.');
+				}
+		        InputLength=newInputLength;
+		        //checkForAutofill();
+		    });
+		
+		    function checkForAutofill() {
+		        clearTimeout(inputTimeout);
+		        username=$('#username').val();
+		        password=$('#password').val();
+		        inputTimeout = setTimeout(function() {
+		            if (username.length >= 5 && password.length >= 5) {
+		                console.log('자동 입력으로 간주됩니다.');
+		            } else {
+		                console.log('수동 입력입니다.');
+		            }
+		        }, 1000); // 1초 후에 자동 입력 여부를 확인합니다.
+		    }
+		});
+
+
+			    
+			
+				 </script>
 
 
     <!-- ===============================================-->
