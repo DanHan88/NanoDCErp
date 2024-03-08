@@ -245,20 +245,26 @@ public class UserController {
         lastRewardDate = rewardDetailList.get(0).getHardwareRewardSharingVO().getRegdate();
         firstRewardDate = rewardDetailList.get(rewardDetailList.size()-1).getHardwareRewardSharingVO().getRegdate();
         interval = (lastRewardDate.getTime() - firstRewardDate.getTime())/30;
-        for(long i= firstRewardDate.getTime();i<lastRewardDate.getTime();i += interval) {
+        for(long i= firstRewardDate.getTime() + interval;i<lastRewardDate.getTime()+interval;i += interval) {
         	double data=0;
 	        for(int j = rewardDetailList.size()-1;j>=0;j--) {
 	        	if(rewardDetailList.get(j).getHardwareRewardSharingVO().getRegdate().getTime()<=i) {
 	        		data += rewardDetailList.get(j).getReward_fil();
+	        		if(j==0) {
+	        			dataList.add(data);
+		        		break;
+	        		}
 	        	}else {
 	        		dataList.add(data);
 	        		break;
 	        	}
 	        }
-	        if(i + interval >= lastRewardDate.getTime()) {
-	        	dataList.add(data+rewardDetailList.get(rewardDetailList.size()-1).getReward_fil());
-	        }
-        }}
+        }
+
+        }
+        
+        
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         userService.userVOsessionUpdate(request);
         mav.addObject("dataList",dataList);

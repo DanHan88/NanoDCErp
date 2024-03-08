@@ -182,7 +182,6 @@ $(document).on('click', '.detail_user', function() {
 			                });
 					    });
 					    
-					    // user_investment_update 버튼 클릭 시 호출되는 함수
  							 $(document).on('click', '.update_user_investment_button', function() {
 				
 							  var hw_id = $(this).val();
@@ -194,10 +193,6 @@ $(document).on('click', '.detail_user', function() {
 								$('#selectupdate_product').val(clicked.find('#update_product_name').data('user_id'));
 								$('#node_fil_update').val(clicked.find('#update_fil_invested').text());
 								$('#user_investment_update').data('hw_id', hw_id);
-			
-					
- 						        // 나머지 필요한 값들을 가져와서 처리하는 로직을 추가해야 합니다.
- 						        // 그 후 서버로 데이터를 전송하거나 다른 작업을 수행할 수 있습니다.
  						    });
  								
 							$('#user_investment_update').on('click', function() {
@@ -205,9 +200,7 @@ $(document).on('click', '.detail_user', function() {
 						       var fil_invested = $('#node_fil_update').val();
 						       var hw_product_id = $('#selectupdate_product').val();
 						       var hw_status = $('#selectBox_status_update').val();
-						       var user_hw_id = $(this).data('hw_id');
-								debugger;
-						       	   		
+						       var user_hw_id = $(this).data('hw_id');			       	   		
 							   if(hw_reg_date==""||hw_product_id==""){
 										if ($('#alert_header_user').hasClass("bg-success")) 
 										{
