@@ -158,7 +158,7 @@ public class UserController {
     }
 	//유저프로필편집
 	@GetMapping(value={"/profileEdit"})
-	 public  ModelAndView profileEdit(HttpServletRequest request,String sb) {
+	 public  ModelAndView profileEdit(HttpServletRequest request) {
 	    ModelAndView mav = new ModelAndView();
 	    HttpSession session = request.getSession();
 		    if(!userService.checkSession(request)) {
@@ -168,6 +168,21 @@ public class UserController {
 	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
 	        mav.addObject("loginVO", loginVO);
 	        mav.setViewName("views/user/userApp_profileEdit");
+	        return mav;
+	    }
+	
+	//유저프로필편집
+	@GetMapping(value={"/profileIconEdit"})
+	 public  ModelAndView profileIconEdit(HttpServletRequest request) {
+	    ModelAndView mav = new ModelAndView();
+	    HttpSession session = request.getSession();
+		    if(!userService.checkSession(request)) {
+	        	mav.setViewName("redirect:/user/login");
+	            return mav;
+	        }
+	        LoginVO loginVO = (LoginVO)session.getAttribute("user");
+	        mav.addObject("loginVO", loginVO);
+	        mav.setViewName("views/user/userApp_profileIconEdit");
 	        return mav;
 	    }
 	//유저상품
@@ -382,6 +397,16 @@ public class UserController {
 	            else{
 	            	return "비밀번호가 일치하지 않습니다";}
 	    }
+	 /*유저 프로필 편집 기능 */
+	 @ResponseBody
+	    @PostMapping(value = { "/user_profile_icon_edit" })
+	    public String user_profile_icon_edit(@RequestBody UserInfoVO userInfoVO, HttpServletRequest request) {
+		 String uvo = this.userInfoMapper.getUserPassword(userInfoVO.getUser_id());
+		 if(!userService.checkSession(request)) {
+	    		return "failed:session_closed";
+	    	}
+	        return  userService.update_user_icon(userInfoVO, request);
+	    } 
 	 /* 송금신청 */
 	 @ResponseBody
 	 @PostMapping(value={"/addNewTransaction"})

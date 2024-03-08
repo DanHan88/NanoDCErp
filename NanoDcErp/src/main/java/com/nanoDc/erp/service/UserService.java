@@ -163,6 +163,10 @@ public class UserService {
 		 	userInfoMapper.update_Password(userInfoVO);
 	    	return "success";
 	    }
+	 public String update_user_icon(UserInfoVO userInfoVO, HttpServletRequest request) {
+		 userInfoMapper.update_user_icon(userInfoVO);
+		 return "success";
+	 }
 
 	 
 	

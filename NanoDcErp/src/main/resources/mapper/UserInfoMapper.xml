@@ -13,6 +13,7 @@
 		    user.user_email,
 		    user.profile_picture_url,
 		    user.level,
+		    user.profileIcon_id,
 		    COUNT(invest.hw_id) AS investment_count,
 		    COALESCE(SUM(invest.hw_invest_fil), 0) AS total_investment_fil,
 		    (SELECT SUM(hrsd.reward_fil) from hw_reward_sharing_detail hrsd WHERE hrsd.user_id=user.user_id GROUP BY hrsd.user_id) as total_reward_fil
@@ -43,7 +44,8 @@
 			user_name,
 			user_email,
 			profile_picture_url,
-			level
+			level,
+			profileIcon_id
 		 from user_info
 		where user_email=#{user_email}
 	</select>
@@ -65,6 +67,7 @@
 		    user.user_email,
 		    user.profile_picture_url,
 		    user.level,
+		    user.profileIcon_id,
 		    COUNT(invest.hw_id) AS investment_count,
 		    COALESCE(SUM(invest.hw_invest_fil), 0) AS total_investment_fil,
 		    (SELECT SUM(hrsd.reward_fil) from hw_reward_sharing_detail hrsd WHERE hrsd.user_id=user.user_id GROUP BY hrsd.user_id) as total_reward_fil,
@@ -127,6 +130,12 @@
 		  WHERE user_id = #{user_id}
 
 	</update>
+	<update id="update_user_icon" parameterType="com.nanoDc.erp.vo.UserInfoVO">
+		  UPDATE user_info
+		  set profileIcon_id=#{profileIcon_id}
+		  WHERE user_id = #{user_id}
+
+	</update>
 	
 	<!-- INSERT -->
 	
@@ -137,14 +146,16 @@
 		 user_reg_date, 
 		 user_name, 
 		 user_email, 
-		 profile_picture_url)
+		 profile_picture_url,
+		 profileIcon_id)
 		VALUES
 		(#{phone_number}, 
 		#{user_status}, 
 		NOW(), 
 		#{user_name}, 
 		#{user_email}, 
-		#{profile_picture_url})
+		#{profile_picture_url},
+		0)
 	</insert>
 	
 	

@@ -18,5 +18,6 @@ public interface UserInfoMapper {
 	public UserInfoVO selectDetailUserInfoByUserId(int user_id);
 	public UserInfoVO selectInvestDetailInfoByUserIdAndProductId(UserInfoVO userInfoVO);
 	public void update_Password (UserInfoVO userInfoVO);
+	public void update_user_icon (UserInfoVO userInfoVO);
 	
 }

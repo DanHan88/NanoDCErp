@@ -36,10 +36,17 @@ public class UserInfoVO {
 	private double paid_fil;
 	private int hw_product_id;
 	private String new_password;
+	private int profileIcon_id;
 	
 	
     
 	
+	public int getProfileIcon_id() {
+		return profileIcon_id;
+	}
+	public void setProfileIcon_id(int profileIcon_id) {
+		this.profileIcon_id = profileIcon_id;
+	}
 	public int getHw_product_id() {
 		return hw_product_id;
 	}
