@@ -28,7 +28,7 @@ $(document).on('click', '.detail_user', function() {
 							$('#user_email').val(clickedButton.parent().parent().find('.user_email').text());
 							$('#user_phone').val(clickedButton.parent().parent().find('.user_phone').text());
 							$('#level').val(clickedButton.parent().parent().find('.level').text())
-							$('#profilePicture').attr('src', '/uploads'+clickedButton.parent().parent().attr('data-picture'));
+							//$('#profilePicture').attr('src', '/uploads'+clickedButton.parent().parent().attr('data-picture'));
 							var user_id = clickedButton.parent().parent().find('.detail_user').val();
 							$('#user_edit_1_btn').val(user_id);
 	
