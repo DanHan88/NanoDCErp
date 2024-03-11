@@ -18,7 +18,6 @@ import com.nanoDc.erp.vo.HardwareInvestmentVO;
 import com.nanoDc.erp.vo.HardwareProductVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingDetailVO;
 import com.nanoDc.erp.vo.HardwareRewardSharingVO;
-import com.nanoDc.erp.vo.InvestmentCategoryVO;
 import com.nanoDc.erp.vo.LoginVO;
 import com.nanoDc.erp.vo.TransactionVO;
 import com.nanoDc.erp.vo.UserInfoVO;
